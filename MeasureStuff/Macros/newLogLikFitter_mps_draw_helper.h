@@ -202,8 +202,8 @@ void newloglikfitter_mps_draw_helper_colz
         {
             lineXc = new TLine(param_1_min, min_point_data[1], param_1_max, min_point_data[1]);
             lineYc = new TLine(min_point_data[0], param_2_min, min_point_data[0], param_2_max);
-            lineXc->SetLineColorAlpha(kBlue, 1.0);
-            lineYc->SetLineColorAlpha(kBlue, 1.0);
+            lineXc->SetLineColorAlpha(kCyan, 1.0);
+            lineYc->SetLineColorAlpha(kCyan, 1.0);
             lineXc->SetLineWidth(2.0);
             lineYc->SetLineWidth(2.0);
 
@@ -214,8 +214,8 @@ void newloglikfitter_mps_draw_helper_colz
         {
             lineXc = new TLine(param_1_min, min_point_fake[1], param_1_max, min_point_fake[1]);
             lineYc = new TLine(min_point_fake[0], param_2_min, min_point_fake[0], param_2_max);
-            lineXc->SetLineColorAlpha(kBlue, 1.0);
-            lineYc->SetLineColorAlpha(kBlue, 1.0);
+            lineXc->SetLineColorAlpha(kCyan, 1.0);
+            lineYc->SetLineColorAlpha(kCyan, 1.0);
             lineXc->SetLineWidth(2.0);
             lineYc->SetLineWidth(2.0);
 
@@ -567,8 +567,8 @@ void newloglikfitter_mps_draw_helper
         {
             lineXc = new TLine(param_1_min, min_point_data[1], param_1_max, min_point_data[1]);
             lineYc = new TLine(min_point_data[0], param_2_min, min_point_data[0], param_2_max);
-            lineXc->SetLineColorAlpha(kBlue, 1.0);
-            lineYc->SetLineColorAlpha(kBlue, 1.0);
+            lineXc->SetLineColorAlpha(kGray + 2, 1.0);
+            lineYc->SetLineColorAlpha(kGray + 2, 1.0);
             lineXc->SetLineWidth(2.0);
             lineYc->SetLineWidth(2.0);
 
@@ -579,8 +579,8 @@ void newloglikfitter_mps_draw_helper
         {
             lineXc = new TLine(param_1_min, min_point_fake[1], param_1_max, min_point_fake[1]);
             lineYc = new TLine(min_point_fake[0], param_2_min, min_point_fake[0], param_2_max);
-            lineXc->SetLineColorAlpha(kBlue, 1.0);
-            lineYc->SetLineColorAlpha(kBlue, 1.0);
+            lineXc->SetLineColorAlpha(kGray + 2, 1.0);
+            lineYc->SetLineColorAlpha(kGray + 2, 1.0);
             lineXc->SetLineWidth(2.0);
             lineYc->SetLineWidth(2.0);
 
@@ -591,8 +591,8 @@ void newloglikfitter_mps_draw_helper
         {
             lineXc_SYSALL = new TLine(param_1_min, min_point_data_SYSALL[1], param_1_max, min_point_data_SYSALL[1]);
             lineYc_SYSALL = new TLine(min_point_data_SYSALL[0], param_2_min, min_point_data_SYSALL[0], param_2_max);
-            lineXc_SYSALL->SetLineColorAlpha(kGreen, 1.0);
-            lineYc_SYSALL->SetLineColorAlpha(kGreen, 1.0);
+            lineXc_SYSALL->SetLineColorAlpha(kGray, 1.0);
+            lineYc_SYSALL->SetLineColorAlpha(kGray, 1.0);
             lineXc_SYSALL->SetLineWidth(2.0);
             lineYc_SYSALL->SetLineWidth(2.0);
 
