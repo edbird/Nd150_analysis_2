@@ -202,8 +202,8 @@ void newloglikfitter_mps_draw_helper_colz
         {
             lineXc = new TLine(param_1_min, min_point_data[1], param_1_max, min_point_data[1]);
             lineYc = new TLine(min_point_data[0], param_2_min, min_point_data[0], param_2_max);
-            lineXc->SetLineColorAlpha(kMagenta, 1.0);
-            lineYc->SetLineColorAlpha(kMagenta, 1.0);
+            lineXc->SetLineColorAlpha(kBlue, 1.0);
+            lineYc->SetLineColorAlpha(kBlue, 1.0);
             lineXc->SetLineWidth(2.0);
             lineYc->SetLineWidth(2.0);
 
@@ -224,9 +224,6 @@ void newloglikfitter_mps_draw_helper_colz
         }
         if(mps_draw_data_sysall.mode_fake_data_flag == false)
         {
-        }
-        else
-        {
             lineXc_SYSALL = new TLine(param_1_min, min_point_data_SYSALL[1], param_1_max, min_point_data_SYSALL[1]);
             lineYc_SYSALL = new TLine(min_point_data_SYSALL[0], param_2_min, min_point_data_SYSALL[0], param_2_max);
             lineXc_SYSALL->SetLineColorAlpha(kGreen, 1.0);
@@ -236,6 +233,9 @@ void newloglikfitter_mps_draw_helper_colz
 
             lineXc_SYSALL->Draw();
             lineYc_SYSALL->Draw();
+        }
+        else
+        {
         }
 
         // draw sysnone contour
@@ -567,8 +567,8 @@ void newloglikfitter_mps_draw_helper
         {
             lineXc = new TLine(param_1_min, min_point_data[1], param_1_max, min_point_data[1]);
             lineYc = new TLine(min_point_data[0], param_2_min, min_point_data[0], param_2_max);
-            lineXc->SetLineColorAlpha(kMagenta, 1.0);
-            lineYc->SetLineColorAlpha(kMagenta, 1.0);
+            lineXc->SetLineColorAlpha(kBlue, 1.0);
+            lineYc->SetLineColorAlpha(kBlue, 1.0);
             lineXc->SetLineWidth(2.0);
             lineYc->SetLineWidth(2.0);
 
@@ -589,9 +589,6 @@ void newloglikfitter_mps_draw_helper
         }
         if(mps_draw_data_sysall.mode_fake_data_flag == false)
         {
-        }
-        else
-        {
             lineXc_SYSALL = new TLine(param_1_min, min_point_data_SYSALL[1], param_1_max, min_point_data_SYSALL[1]);
             lineYc_SYSALL = new TLine(min_point_data_SYSALL[0], param_2_min, min_point_data_SYSALL[0], param_2_max);
             lineXc_SYSALL->SetLineColorAlpha(kGreen, 1.0);
@@ -601,6 +598,9 @@ void newloglikfitter_mps_draw_helper
 
             lineXc_SYSALL->Draw();
             lineYc_SYSALL->Draw();
+        }
+        else
+        {
         }
 
         // draw sysall contour
