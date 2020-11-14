@@ -1,0 +1,48 @@
+Here is a list of backgrounds with low counts of events after 14 cuts.
+First col is the 2e directory
+bi214_feSheild 13
+ac228_feShield 0
+tl208_feShield 1
+bi214_pmt 19
+ac228_pmt 0
+tl208_pmt 13
+k40_pmt 4
+k40_scintIN 0
+pa234m_sscin 0
+bi210_sfoil 0
+bi210_swire 4
+bi210_sscin 0
+bi214_air 3
+pb214_air 0
+tl208_air 0
+pb214_mylar 20
+co60_cuTower 1
+tl208_air 0
+tl208_swire 37
+pb214_sfoil 20
+pb214_swire 19
+bi214_sscin 0
+pb214_sscin 0
+mo100_99_rot_bi214 5
+mo100_99_rot_pa234m 4
+mo100_99_rot_k40 0
+ca48_63_rot_bi214 38
+ca48_63_rot_pa234m 5
+ca48_63_rot_y90 46
+zr96_rot_bi214 14
+zr96_rot_pa234m 22
+zr96_rot_k40 7
+
+list of backgrounds that I don't recall / were not included
+ac228_sscin
+ac228_steel
+bi212_steel
+
+list of backgrounds that are included and have good (>100) statistics
+bi214_mylar (check)
+bi214_sfoil (check)
+
+
+list of backgrounds that were not included / already known to have low statistics
+
+

@@ -1,0 +1,17 @@
+bi214_air    7740    7740
+pb214_air    1    1
+bi214_sfoil    858    384
+bi214_sfoil    858    474
+pb214_sfoil    551    200
+pb214_sfoil    551    351
+bi210_sfoil    10    10
+bi214_swire    7763    220
+bi214_swire    7763    500
+bi214_swire    7763    7043
+pb214_swire    2189    144
+pb214_swire    2189    297
+pb214_swire    2189    1748
+bi210_swire    2898    2898
+bi210_sscin    1486    1486
+bi214_mylar    955    955
+pb214_mylar    596    596
