@@ -24,9 +24,21 @@ void brem()
     for(Long64_t ix = 0; ix < tree_nominal->GetEntries(); ++ ix)
     {
         tree_nominal->GetEntry(ix);
-        h_nominal->Fill(electronEnergy_nominal[0], electronEnergy_nominal[1]);
-        hSingleEnergy_nominal->Fill(electronEnergy_nominal[0]);
-        hSingleEnergy_nominal->Fill(electronEnergy_nominal[1]);
+        int lowE_index = -1;
+        int highE_index = -1;
+        if(electronEnergy_nominal[0] > electronEnergy_nominal[1])
+        {
+            highE_index = 0;
+            lowE_index = 1;
+        }
+        else
+        {
+            highE_index = 1;
+            lowE_index = 0;
+        }
+        h_nominal->Fill(electronEnergy_nominal[lowE_index], electronEnergy_nominal[highE_index]);
+        hSingleEnergy_nominal->Fill(electronEnergy_nominal[lowE_index]);
+        hSingleEnergy_nominal->Fill(electronEnergy_nominal[highE_index]);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -44,9 +56,21 @@ void brem()
     for(Long64_t ix = 0; ix < tree_Hbrem->GetEntries(); ++ ix)
     {
         tree_Hbrem->GetEntry(ix);
-        h_Hbrem->Fill(electronEnergy_Hbrem[0], electronEnergy_Hbrem[1]);
-        hSingleEnergy_Hbrem->Fill(electronEnergy_Hbrem[0]);
-        hSingleEnergy_Hbrem->Fill(electronEnergy_Hbrem[1]);
+        int lowE_index = -1;
+        int highE_index = -1;
+        if(electronEnergy_Hbrem[0] > electronEnergy_Hbrem[1])
+        {
+            highE_index = 0;
+            lowE_index = 1;
+        }
+        else
+        {
+            highE_index = 1;
+            lowE_index = 0;
+        }
+        h_Hbrem->Fill(electronEnergy_Hbrem[lowE_index], electronEnergy_Hbrem[highE_index]);
+        hSingleEnergy_Hbrem->Fill(electronEnergy_Hbrem[lowE_index]);
+        hSingleEnergy_Hbrem->Fill(electronEnergy_Hbrem[highE_index]);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -64,9 +88,21 @@ void brem()
     for(Long64_t ix = 0; ix < tree_Lbrem->GetEntries(); ++ ix)
     {
         tree_Lbrem->GetEntry(ix);
-        h_Lbrem->Fill(electronEnergy_Lbrem[0], electronEnergy_Lbrem[1]);
-        hSingleEnergy_Lbrem->Fill(electronEnergy_Lbrem[0]);
-        hSingleEnergy_Lbrem->Fill(electronEnergy_Lbrem[1]);
+        int lowE_index = -1;
+        int highE_index = -1;
+        if(electronEnergy_Lbrem[0] > electronEnergy_Lbrem[1])
+        {
+            highE_index = 0;
+            lowE_index = 1;
+        }
+        else
+        {
+            highE_index = 1;
+            lowE_index = 0;
+        }
+        h_Lbrem->Fill(electronEnergy_Lbrem[lowE_index], electronEnergy_Lbrem[highE_index]);
+        hSingleEnergy_Lbrem->Fill(electronEnergy_Lbrem[lowE_index]);
+        hSingleEnergy_Lbrem->Fill(electronEnergy_Lbrem[highE_index]);
     }
 
     ///////////////////////////////////////////////////////////////////////////

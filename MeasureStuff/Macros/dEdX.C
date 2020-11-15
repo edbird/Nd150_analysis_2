@@ -24,9 +24,21 @@ void dEdX()
     for(Long64_t ix = 0; ix < tree_nominal->GetEntries(); ++ ix)
     {
         tree_nominal->GetEntry(ix);
-        h_nominal->Fill(electronEnergy_nominal[0], electronEnergy_nominal[1]);
-        hSingleEnergy_nominal->Fill(electronEnergy_nominal[0]);
-        hSingleEnergy_nominal->Fill(electronEnergy_nominal[1]);
+        int lowE_index = -1;
+        int highE_index = -1;
+        if(electronEnergy_nominal[0] > electronEnergy_nominal[1])
+        {
+            highE_index = 0;
+            lowE_index = 1;
+        }
+        else
+        {
+            highE_index = 1;
+            lowE_index = 0;
+        }
+        h_nominal->Fill(electronEnergy_nominal[lowE_index], electronEnergy_nominal[highE_index]);
+        hSingleEnergy_nominal->Fill(electronEnergy_nominal[lowE_index]);
+        hSingleEnergy_nominal->Fill(electronEnergy_nominal[highE_index]);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -44,9 +56,21 @@ void dEdX()
     for(Long64_t ix = 0; ix < tree_HdEdX->GetEntries(); ++ ix)
     {
         tree_HdEdX->GetEntry(ix);
-        h_HdEdX->Fill(electronEnergy_HdEdX[0], electronEnergy_HdEdX[1]);
-        hSingleEnergy_HdEdX->Fill(electronEnergy_HdEdX[0]);
-        hSingleEnergy_HdEdX->Fill(electronEnergy_HdEdX[1]);
+        int lowE_index = -1;
+        int highE_index = -1;
+        if(electronEnergy_HdEdX[0] > electronEnergy_HdEdX[1])
+        {
+            highE_index = 0;
+            lowE_index = 1;
+        }
+        else
+        {
+            highE_index = 1;
+            lowE_index = 0;
+        }
+        h_HdEdX->Fill(electronEnergy_HdEdX[lowE_index], electronEnergy_HdEdX[highE_index]);
+        hSingleEnergy_HdEdX->Fill(electronEnergy_HdEdX[lowE_index]);
+        hSingleEnergy_HdEdX->Fill(electronEnergy_HdEdX[highE_index]);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -64,9 +88,21 @@ void dEdX()
     for(Long64_t ix = 0; ix < tree_LdEdX->GetEntries(); ++ ix)
     {
         tree_LdEdX->GetEntry(ix);
-        h_LdEdX->Fill(electronEnergy_LdEdX[0], electronEnergy_LdEdX[1]);
-        hSingleEnergy_LdEdX->Fill(electronEnergy_LdEdX[0]);
-        hSingleEnergy_LdEdX->Fill(electronEnergy_LdEdX[1]);
+        int lowE_index = -1;
+        int highE_index = -1;
+        if(electronEnergy_LdEdX[0] > electronEnergy_LdEdX[1])
+        {
+            highE_index = 0;
+            lowE_index = 1;
+        }
+        else
+        {
+            highE_index = 1;
+            lowE_index = 0;
+        }
+        h_LdEdX->Fill(electronEnergy_LdEdX[lowE_index], electronEnergy_LdEdX[highE_index]);
+        hSingleEnergy_LdEdX->Fill(electronEnergy_LdEdX[lowE_index]);
+        hSingleEnergy_LdEdX->Fill(electronEnergy_LdEdX[highE_index]);
     }
 
     ///////////////////////////////////////////////////////////////////////////
