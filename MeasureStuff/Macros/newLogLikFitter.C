@@ -1243,6 +1243,10 @@ void loadFiles(int i)
                     value = value_down;
                 }*/
                 value = value_up;
+                if(n == 10)
+                {
+                    value = value_down;
+                }
 
                 //systematic_offset_V_MATRIX_coeff_1D_P1[channel]->operator[](i) = value;
                 systematic_n_V_MATRIX_coeff_1D_P1[n][channel]->push_back(value);
@@ -1290,6 +1294,10 @@ void loadFiles(int i)
                     value = value_down;
                 }*/
                 value = value_up;
+                if(n == 10)
+                {
+                    value = value_down;
+                }
 
                 //systematic_offset_V_MATRIX_coeff_1D_P2[channel]->operator[](i) = value;
                 systematic_n_V_MATRIX_coeff_1D_P2[n][channel]->push_back(value);
@@ -2136,7 +2144,7 @@ void loadFiles(int i)
 
 
 
-    return 0;
+    //return 0;
 
 
 
