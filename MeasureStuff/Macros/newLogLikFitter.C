@@ -652,10 +652,6 @@ void loadFiles(int i)
     // phase space integrals
     // TODO: these were the wrong way around!
     // I need to re-run this code, plotting the MPS without fit
-    const Double_t G0_ps_integral_MeV = 0.759721E-45; //0.744684E-45;
-    const Double_t G0_ps_integral_yrinv = 0.364244E-16; //0.357034E-16;
-    const Double_t G2_ps_integral_MeV = 0.429791E-45; //0.420438E-45;
-    const Double_t G2_ps_integral_yrinv = 0.206061E-16; //0.201577E-16;
 
     xi_31_baseline = 0.0;
 
