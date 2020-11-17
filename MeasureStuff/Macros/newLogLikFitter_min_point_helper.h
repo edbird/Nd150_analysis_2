@@ -47,6 +47,8 @@ min_point_helper(
     }
     else
     {
+        V_ENABLE_SYS_stack_push();
+
         V_ENABLE_SYSALL = true;
     }
 
@@ -197,7 +199,7 @@ min_point_helper(
     }
     else
     {
-        // nothing
+        V_ENABLE_SYS_stack_pop();
     }
 
     // unswitch channels
