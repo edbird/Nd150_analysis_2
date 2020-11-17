@@ -95,6 +95,11 @@ double psiN0;
 double psiN2;
 double bb_Q;
 
+const double G0_ps_integral_MeV = 0.759721E-45; //0.744684E-45;
+const double G0_ps_integral_yrinv = 0.364244E-16; //0.357034E-16;
+const double G2_ps_integral_MeV = 0.429791E-45; //0.420438E-45;
+const double G2_ps_integral_yrinv = 0.206061E-16; //0.201577E-16;
+
 // TODO: set numberParams dynamically
 // using input file
 //static const int numberParams = 40; // NOTE: moved above
