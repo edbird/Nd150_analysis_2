@@ -333,7 +333,7 @@ void newloglikfitter_mps_draw_helper_colz
         {
             "ignore 0.1 MeV",
             "Energy Calibration 1.2 %",
-            "Efficiency",
+            "Efficiency 5.55 %",
             "ignore enrichment",
             "Energy Calibration 3 keV",
             "Foil Thickness (V)",
@@ -698,7 +698,7 @@ void newloglikfitter_mps_draw_helper
         {
             "ignore 0.1 MeV",
             "Energy Calibration 1.2 %",
-            "Efficiency",
+            "Efficiency 5.55 %",
             "ignore enrichment",
             "Energy Calibration 3 keV",
             "Foil Thickness (V)",

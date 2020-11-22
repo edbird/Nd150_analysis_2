@@ -559,11 +559,11 @@ void reweight_apply_fakedata(
                 // see file: fit_2e.C for documentation
                 ///////////////////////////////////////////////////////////////
                 double weight = 1.0;
-                if(sampleName.CompareTo("bi214_swire") == 0)
+                if(sampleName.Contains("bi214_swire"))
                 {
                     weight = radonWeight;
                 }
-                else if(sampleName.CompareTo("pb214_swire") == 0)
+                else if(sampleName.Contains("pb214_swire"))
                 {
                     weight = radonWeight;
                 }

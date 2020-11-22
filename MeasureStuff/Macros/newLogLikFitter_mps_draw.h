@@ -489,6 +489,266 @@ void newloglikfitter_mps_draw_systematics
     c_mps_after->SaveAs(c_fname_eps);
     //h_mps = nullptr;
     
+    
+    ///////////////////////////////////////////////////////////////////////////
+    // translate contour into g_A / matrix element contour
+    ///////////////////////////////////////////////////////////////////////////
+
+    TH2D *h_mps = mps_draw_data_after_sysall.h_mps;
+    const double psiN0 = G0_ps_integral_yrinv;
+    const double psiN2 = G2_ps_integral_yrinv;
+    TH2D *h_gA_MGT = new TH2D("h_gA_MGT", "h_gA_MGT",
+                              301, 1.0e-3, 5.0e-3,
+                              301, 0.0, 100.0);
+    for(Int_t j = 1; j <= h_mps->GetNbinsY(); ++ j)
+    {
+        for(Int_t i = 1; i <= h_mps->GetNbinsX(); ++ i)
+        {
+            double chi2 = h_mps->GetBinContent(i, j);
+            double xi_31 = h_mps->GetXaxis()->GetBinCenter(i);
+            double A_150Nd = h_mps->GetYaxis()->GetBinCenter(j);
+            const double A0_150Nd = 3.45e-04;
+            const double NA = 6.022e+23;
+            const double m = 36.6 * (1.0 - 0.07);
+            const double sec_to_yr = 1.0 / 31557600.0;
+            double T12 = (std::log(2.0) * NA * m) / (150.0 * A0_150Nd * A_150Nd) * sec_to_yr;
+            double value = 1.0 / ((psiN0 + xi_31 * psiN2) * T12);
+            if(value < 1.0e-3 || value > 5.0e-3)
+            {
+                std::cout << "value=" << value << " chi2=" << chi2 << std::endl;
+            }
+            
+            bool fill = true;
+            if(false)
+            {
+                const Int_t tmp_bin_ii = h_gA_MGT->GetXaxis()->FindBin(value);
+                const Int_t tmp_bin_jj = h_gA_MGT->GetYaxis()->FindBin(chi2);
+                for(Int_t jj = tmp_bin_jj + 1; jj <= h_gA_MGT->GetNbinsY(); ++ jj)
+                {
+                    double tmp = h_gA_MGT->GetBinContent(tmp_bin_ii, jj);
+                    if(tmp > 0.0)
+                    {
+                        if(jj > tmp_bin_jj)
+                        {
+                            h_gA_MGT->SetBinContent(tmp_bin_ii, jj, 0.0);
+                        }
+                    }
+                }
+                for(Int_t jj = 1; jj < tmp_bin_jj; ++ jj)
+                {
+                    double tmp = h_gA_MGT->GetBinContent(tmp_bin_ii, jj);
+                    if(tmp > 0.0)
+                    {
+                        fill = false;
+                        break;
+                    }
+                }
+            }
+            if(fill == true)
+            {
+                h_gA_MGT->Fill(value, chi2, 1.0);
+            }
+        }
+    }
+
+
+    h_gA_MGT->SetTitle("");
+    h_gA_MGT->SetStats(0);
+    h_gA_MGT->GetZaxis()->SetLabelOffset(0.005);
+    h_gA_MGT->GetXaxis()->SetLabelSize(17.0);
+    h_gA_MGT->GetXaxis()->SetLabelFont(43);
+    h_gA_MGT->GetYaxis()->SetLabelSize(17.0);
+    h_gA_MGT->GetYaxis()->SetLabelFont(43);
+    h_gA_MGT->GetZaxis()->SetLabelSize(17.0);
+    h_gA_MGT->GetZaxis()->SetLabelFont(43);
+    h_gA_MGT->GetXaxis()->SetTitleSize(18.0);
+    h_gA_MGT->GetXaxis()->SetTitleFont(43);
+    h_gA_MGT->GetYaxis()->SetTitleSize(18.0);
+    h_gA_MGT->GetYaxis()->SetTitleFont(43);
+    h_gA_MGT->GetYaxis()->SetTitle("#chi^{2}");
+    h_gA_MGT->GetXaxis()->SetTitle("g_{A}^{4} |M_{GT-1}^{2#nu}|^{2}");
+    h_gA_MGT->GetXaxis()->SetTitleOffset(1.5);
+    h_gA_MGT->GetYaxis()->SetTitleOffset(1.2);
+    h_gA_MGT->GetXaxis()->SetLabelOffset(0.01);
+    h_gA_MGT->GetYaxis()->SetLabelOffset(0.01);
+//    h_gA_MGT->
+
+    TCanvas *c_gA_MGT = new TCanvas("c_gA_MGT", "c_gA_MGT");
+    c_gA_MGT->SetTicks(2, 2);
+    c_gA_MGT->SetRightMargin(0.15);
+    c_gA_MGT->SetBottomMargin(0.15);
+    h_gA_MGT->Draw("colz");
+    c_gA_MGT->Update();
+
+
+    TPaletteAxis *palette = (TPaletteAxis*)h_gA_MGT->GetListOfFunctions()->FindObject("palette");
+    //TPaletteAxis *palette = (TPaletteAxis*)h_mps_both->GetListOfFunctions()->FindObject("palette");
+    palette->SetX1NDC(0.88 + 0.03);
+    palette->SetX2NDC(0.92 + 0.03);
+    palette->SetY1NDC(0.15);
+    palette->SetY2NDC(0.9);
+    palette->Draw();
+    gPad->Modified();
+    gPad->Update();
+    c_gA_MGT->Modified();
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // convert to MGT figure
+    ///////////////////////////////////////////////////////////////////////////
+
+    TH2D *h_gA_MGT3 = new TH2D("h_gA_MGT3", "h_gA_MGT3",
+                               50, 0.0, 0.1,
+                               50, 0.0, 10.0);
+
+    /*
+    for(Int_t i = 1; i <= h_gA_MGT->GetNbinsX(); ++ i)
+    {
+        for(Int_t j = 1; j <= h_gA_MGT->GetNbinsY(); ++ j)
+        {
+            Double_t content = h_gA_MGT->GetBinContent(i, j);
+            if(content > 0.0)
+            {
+                
+                break;
+            }
+        }
+    }
+    */
+
+    const double A_150Nd = min_point_fake[1];
+    const double xi_31 = min_point_fake[0];
+    const double A0_150Nd = 3.45e-04;
+    const double NA = 6.022e+23;
+    const double m = 36.6 * (1.0 - 0.07);
+    const double sec_to_yr = 1.0 / 31557600.0;
+    double T12 = (std::log(2.0) * NA * m) / (150.0 * A0_150Nd * A_150Nd) * sec_to_yr;
+    double value = 1.0 / ((psiN0 + xi_31 * psiN2) * T12);
+
+    for(Int_t i = 1; i <= h_gA_MGT3->GetNbinsX(); ++ i)
+    {
+        double MGT3 = h_gA_MGT3->GetXaxis()->GetBinCenter(i);
+        double value2 = value * std::pow(xi_31, 2.0);
+        double value3 = value2 / std::pow(MGT3, 2.0);
+        double gA = std::pow(value3, 1.0 / 4.0);
+        h_gA_MGT3->Fill(MGT3, gA, 1.0);
+
+        // TODO: check this calculation
+    }
+
+    TCanvas *c_gA_MGT3 = new TCanvas("c_gA_MGT3", "c_gA_MGT3");
+    h_gA_MGT3->Draw("colz");
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // convert to some new phase space
+    ///////////////////////////////////////////////////////////////////////////
+
+    double cmin = std::numeric_limits<double>::infinity();
+    double cmax = 0.0;
+    TH2D *h_new = new TH2D("h_new", "h_new", 25, 0.0, 0.2, 25, 0.0, 1.2);
+    h_new->SetStats(0);
+    h_new->SetTitle(0);
+    h_new->SetXTitle("M_{GT-3}^{2#nu}");
+    h_new->SetYTitle("g_{A}");
+    h_new->GetXaxis()->SetTitleFont(43);
+    h_new->GetXaxis()->SetTitleSize(20);
+    h_new->GetYaxis()->SetTitleFont(43);
+    h_new->GetYaxis()->SetTitleSize(20);
+    h_new->GetXaxis()->SetLabelFont(43);
+    h_new->GetXaxis()->SetLabelSize(15);
+    h_new->GetYaxis()->SetLabelFont(43);
+    h_new->GetYaxis()->SetLabelSize(15);
+
+    for(Int_t j = 1; j <= h_mps->GetNbinsY(); ++ j)
+    {
+        for(Int_t i = 1; i <= h_mps->GetNbinsX(); ++ i)
+        {
+            double xi_31 = h_mps->GetXaxis()->GetBinCenter(i);
+            double A_150Nd = h_mps->GetYaxis()->GetBinCenter(j);
+            double T12 = (std::log(2.0) * NA * m) / (150.0 * A0_150Nd * A_150Nd) * sec_to_yr;
+
+            // this is gAeff ** 4.0 * MGT-3 ** 2.0
+            double value = std::pow(xi_31, 2.0) / (T12 * (psiN0 + xi_31 * psiN2));
+
+            for(Int_t ii = 1; ii <= h_new->GetNbinsX(); ++ ii)
+            {
+                double matrix_element = h_new->GetXaxis()->GetBinCenter(ii);
+                double gAeff = value / std::pow(matrix_element, 2.0);
+                //std::cout << "gAeff=" << gAeff << std::endl;
+
+                Int_t jj = h_new->GetYaxis()->FindBin(gAeff);
+
+                //std::cout << "jj=" << jj << std::endl;
+
+                if((1 <= jj) && (jj <= 50))
+                {
+                    double chi2 = h_mps->GetBinContent(i, j);
+                    double content = h_new->GetBinContent(ii, jj);
+                    if(content == 0.0)
+                    {
+                        h_new->SetBinContent(ii, jj, chi2);
+                        if(chi2 < cmin)
+                        {
+                            cmin = chi2;
+                        }
+                        if(chi2 > cmax) cmax = chi2;
+                    }
+                    else if(chi2 < content)
+                    {
+                        h_new->SetBinContent(ii, jj, chi2);
+                        if(chi2 < cmin)
+                        {
+                            cmin = chi2;
+                        }
+                        if(chi2 > cmax) cmax = chi2;
+                    }
+                }
+            }
+        }
+    }
+
+//    h_new->SetMaximum(cmax);
+//    h_new->GetZaxis()->SetRangeUser(cmin, cmax);
+//    std::cout << cmax << std::endl;
+
+
+    TCanvas *c_new = new TCanvas("c_new", "c_new");
+    c_new->SetTicks(2, 2);
+    c_new->SetRightMargin(0.15);
+    c_new->SetBottomMargin(0.15);
+    h_new->Draw("colz");
+    c_new->Update();
+
+    TPaletteAxis *palette2 = (TPaletteAxis*)h_new->GetListOfFunctions()->FindObject("palette");
+    palette2->SetX1NDC(0.88 + 0.03);
+    palette2->SetX2NDC(0.92 + 0.03);
+    palette2->SetY1NDC(0.15);
+    palette2->SetY2NDC(0.9);
+    palette2->Draw();
+    gPad->Modified();
+    gPad->Update();
+    c_new->Modified();
+
+    TH2D *h_new_clone = (TH2D*)h_new->Clone();
+    for(Int_t j = 1; j <= h_new_clone->GetNbinsY(); ++ j)
+    {
+        for(Int_t i = 1; i <= h_new_clone->GetNbinsX(); ++ i)
+        {
+            double content = h_new_clone->GetBinContent(i, j);
+            if(content == 0.0)
+            {
+                h_new_clone->SetBinContent(i, j, std::numeric_limits<double>::infinity());
+            }
+        }
+    }
+    double clevels[2] = {cmin + 2.30, cmin + 4.61};
+    h_new_clone->SetContour(2, clevels);
+    h_new_clone->SetLineColor(kBlack);
+    h_new_clone->SetLineWidth(2.0);
+    h_new_clone->Draw("cont3same");
+
+
 }
 
 
@@ -582,6 +842,7 @@ void newloglikfitter_mps_draw_systematics_colz
     std::cout << "c_fname=" << c_fname << std::endl;
     std::cout << "is the filename legal?" << std::endl;
     std::cout << "*****************************************************" << std::endl;
+    std::cin.get();
     c_mps_after->SaveAs(c_fname_png);
     c_mps_after->SaveAs(c_fname_pdf);
     c_mps_after->SaveAs(c_fname_eps);

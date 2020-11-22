@@ -1309,7 +1309,7 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         h_ratio->GetYaxis()->SetTitleOffset(1.0);
         h_ratio->GetYaxis()->SetTitle("data / MC");
 
-        h_ratio->GetXaxis()->SetTickSize(0.06);
+        h_ratio->GetXaxis()->SetTickSize(0.1);
         h_ratio->GetYaxis()->SetTickSize(0);
 
 
@@ -1437,7 +1437,7 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         h_pull->GetYaxis()->SetTitleOffset(1.0);
         h_pull->GetYaxis()->SetTitle("#chi^{2} pull (#sigma) ");
 
-        h_pull->GetXaxis()->SetTickSize(0.05);
+        h_pull->GetXaxis()->SetTickSize(0.08);
         h_pull->GetYaxis()->SetTickSize(0);
 
         //hSig_Px->SetMarkerStyle(20);
