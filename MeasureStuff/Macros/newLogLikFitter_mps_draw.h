@@ -597,9 +597,11 @@ void newloglikfitter_mps_draw_systematics
     // convert to MGT figure
     ///////////////////////////////////////////////////////////////////////////
 
+    #if 0
     TH2D *h_gA_MGT3 = new TH2D("h_gA_MGT3", "h_gA_MGT3",
                                50, 0.0, 0.1,
                                50, 0.0, 10.0);
+    #endif
 
     /*
     for(Int_t i = 1; i <= h_gA_MGT->GetNbinsX(); ++ i)
@@ -625,6 +627,7 @@ void newloglikfitter_mps_draw_systematics
     double T12 = (std::log(2.0) * NA * m) / (150.0 * A0_150Nd * A_150Nd) * sec_to_yr;
     double value = 1.0 / ((psiN0 + xi_31 * psiN2) * T12);
 
+    #if 0
     for(Int_t i = 1; i <= h_gA_MGT3->GetNbinsX(); ++ i)
     {
         double MGT3 = h_gA_MGT3->GetXaxis()->GetBinCenter(i);
@@ -638,7 +641,7 @@ void newloglikfitter_mps_draw_systematics
 
     TCanvas *c_gA_MGT3 = new TCanvas("c_gA_MGT3", "c_gA_MGT3");
     h_gA_MGT3->Draw("colz");
-
+    #endif
 
     ///////////////////////////////////////////////////////////////////////////
     // convert to some new phase space
@@ -659,6 +662,8 @@ void newloglikfitter_mps_draw_systematics
     h_new->GetXaxis()->SetLabelSize(15);
     h_new->GetYaxis()->SetLabelFont(43);
     h_new->GetYaxis()->SetLabelSize(15);
+    h_new->GetXaxis()->CenterTitle(true);
+    h_new->GetYaxis()->CenterTitle(true);
 
     for(Int_t j = 1; j <= h_mps->GetNbinsY(); ++ j)
     {
@@ -674,7 +679,7 @@ void newloglikfitter_mps_draw_systematics
             for(Int_t ii = 1; ii <= h_new->GetNbinsX(); ++ ii)
             {
                 double matrix_element = h_new->GetXaxis()->GetBinCenter(ii);
-                double gAeff = value / std::pow(matrix_element, 2.0);
+                double gAeff = std::pow(value / std::pow(matrix_element, 2.0), 0.25);
                 //std::cout << "gAeff=" << gAeff << std::endl;
 
                 Int_t jj = h_new->GetYaxis()->FindBin(gAeff);
@@ -717,18 +722,21 @@ void newloglikfitter_mps_draw_systematics
     c_new->SetTicks(2, 2);
     c_new->SetRightMargin(0.15);
     c_new->SetBottomMargin(0.15);
-    h_new->Draw("colz");
-    c_new->Update();
+    if(0)
+    {
+        h_new->Draw("colz");
+        c_new->Update();
 
-    TPaletteAxis *palette2 = (TPaletteAxis*)h_new->GetListOfFunctions()->FindObject("palette");
-    palette2->SetX1NDC(0.88 + 0.03);
-    palette2->SetX2NDC(0.92 + 0.03);
-    palette2->SetY1NDC(0.15);
-    palette2->SetY2NDC(0.9);
-    palette2->Draw();
-    gPad->Modified();
-    gPad->Update();
-    c_new->Modified();
+        TPaletteAxis *palette2 = (TPaletteAxis*)h_new->GetListOfFunctions()->FindObject("palette");
+        palette2->SetX1NDC(0.88 + 0.03);
+        palette2->SetX2NDC(0.92 + 0.03);
+        palette2->SetY1NDC(0.15);
+        palette2->SetY2NDC(0.9);
+        palette2->Draw();
+        gPad->Modified();
+        gPad->Update();
+        c_new->Modified();
+    }
 
     TH2D *h_new_clone = (TH2D*)h_new->Clone();
     for(Int_t j = 1; j <= h_new_clone->GetNbinsY(); ++ j)
@@ -742,11 +750,49 @@ void newloglikfitter_mps_draw_systematics
             }
         }
     }
-    double clevels[2] = {cmin + 2.30, cmin + 4.61};
+
+//    TFile *fouttmp = new TFile("fouttmp.root", "RECREATE");
+//    h_new_clone->Write();
+//    fouttmp->Close();
+
+    h_new_clone->SaveAs("h_new_clone.C");
+    std::cin.get();
+
+    const double usermax = 10.0;
+    std::cout << "SetRangeUser(" << cmin << ", " << usermax << ")" << std::endl;
+    h_new_clone->GetZaxis()->SetRangeUser(cmin, usermax);
+    //double clevels[2] = {cmin + 2.30, cmin + 4.61};
+    double clevels[2] = {0.0, 1.0};
     h_new_clone->SetContour(2, clevels);
     h_new_clone->SetLineColor(kBlack);
     h_new_clone->SetLineWidth(2.0);
-    h_new_clone->Draw("cont3same");
+    if(0)
+    {
+        h_new_clone->Draw("cont3same");
+    }
+    else
+    {
+        h_new_clone->Draw("contzlist");
+    }
+
+    c_new->Update();
+
+    TObjArray *conts = (TObjArray*)gROOT->GetListOfSpecials()->FindObject("contours");
+    std::cout << "conts->GetSize()=" << conts->GetSize() << std::endl;
+
+    TList *contlevel = nullptr;
+    TGraph *contcurve = nullptr;
+
+    for(int i = 0; i < conts->GetSize(); ++ i)
+    {
+        contlevel = (TList*)conts->At(i);
+        std::cout << "Contour " << i << " has " << contlevel->GetSize() << " graphs" << std::endl;
+
+        for(int j = 0; j < contlevel->GetSize(); ++ j)
+        {
+            
+        }
+    }
 
 
 }

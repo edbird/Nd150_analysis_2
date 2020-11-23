@@ -438,6 +438,7 @@ void newloglikfitter_mps_calculate
                     xi_31_min_point = min_point[0];
                 }
                 */
+                #if 0
                 if((Nd150_A_bin_low_edge <= Nd150_A_min_point) &&
                    (Nd150_A_min_point < Nd150_A_bin_high_edge) &&
                    (xi_31_bin_low_edge <= xi_31_min_point) &&
@@ -454,6 +455,7 @@ void newloglikfitter_mps_calculate
                     draw_V_PHYS_(".");
                     DRAW_V_PHYS_ = false;
                 }
+                #endif
                 double fval_after = theFCN.operator()(params_after);
                 if((Nd150_A_bin_low_edge <= Nd150_A_min_point) &&
                    (Nd150_A_min_point < Nd150_A_bin_high_edge) &&

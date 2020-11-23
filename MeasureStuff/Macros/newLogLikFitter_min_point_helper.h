@@ -18,16 +18,33 @@ min_point_helper(
 )
 {
 
+    int restore_channel_enable_1D[number1DHists];
+    for(int i = 0; i < number1DHists; ++ i)
+    {
+        restore_channel_enable_1D[i] = channel_enable_1D[i];
+    }
+
     // switch channels
     if(fit_channel_mode == "CH0")
     {
         channel_enable_1D[0] = 1;
         channel_enable_1D[1] = 0;
+        channel_enable_1D[2] = 0;
+        channel_enable_1D[3] = 0;
     }
     else if(fit_channel_mode == "CH1")
     {
         channel_enable_1D[0] = 0;
         channel_enable_1D[1] = 1;
+        channel_enable_1D[2] = 0;
+        channel_enable_1D[3] = 0;
+    }
+    else if(fit_channel_mode == "CH2CH3")
+    {
+        channel_enable_1D[2] = 1;
+        channel_enable_1D[3] = 1;
+        channel_enable_1D[0] = 0;
+        channel_enable_1D[1] = 0;
     }
     else
     {
@@ -203,8 +220,10 @@ min_point_helper(
     }
 
     // unswitch channels
-    channel_enable_1D[0] = 0;
-    channel_enable_1D[1] = 1;
+    for(int i = 0; i < number1DHists; ++ i)
+    {
+        channel_enable_1D[i] = restore_channel_enable_1D[i];
+    }
 
     return 0;
 }

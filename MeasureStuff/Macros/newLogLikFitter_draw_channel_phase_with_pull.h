@@ -501,14 +501,14 @@ void draw_channel_phase_with_pull(
         {
             PAD_U_Y_MAX_P1_P2 = 400.0;
 
-            PAD_U_Y_MAX_P1 = 80;
+            PAD_U_Y_MAX_P1 = 100;
             PAD_U_Y_MAX_P2 = 350;
         }
         else if(channel == 3)
         {
             PAD_U_Y_MAX_P1_P2 = 900.0;
 
-            PAD_U_Y_MAX_P1 = 20;
+            PAD_U_Y_MAX_P1 = 200;
             PAD_U_Y_MAX_P2 = 800;
         }
         else if(channel == 4)
