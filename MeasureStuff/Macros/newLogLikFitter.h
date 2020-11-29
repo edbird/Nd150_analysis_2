@@ -77,8 +77,8 @@ parameter_group g_pg;
 // false = fit to real data
 // fit is done using MinimizeFCNAxialVector
 // the exact fit mode / choice of algorithm is set elsewhere
-//bool g_mode_fit_fake_data = false;
-bool g_mode_fake_data = true;
+//bool g_mode_fake_data = false;
+bool g_mode_fake_data = false;
 // this might change during program execution
 // for example, it is necessary to set this to true to fit the fake data
 // to measure systematic effects, before switching back to false to fit

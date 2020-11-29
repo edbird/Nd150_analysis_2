@@ -70,6 +70,7 @@
 #include "newLogLikFitter_mps_aux.h"
 #include "newLogLikFitter_mps_draw.h"
 #include "newLogLikFitter_mps_calculate.h"
+#include "newLogLikFitter_draw_gA.h"
 //#include "newLogLikFitter_chisquaretest.h"
 #include "newLogLikFitter_test.h"
 //#include "newLogLikFitter_preMPSfitdriver.h"
@@ -2144,7 +2145,7 @@ void loadFiles(int i)
 
 
 
-    //return 0;
+    return 0;
 
 
 
