@@ -199,6 +199,7 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
 
         // TODO: add check here to see if any disabled parameters are accessed
 
+        // TODO: NOTE: BACKGROUND_MODE_B only works with new_method
 
         bool new_method = true;
         //bool new_method = false;
@@ -348,6 +349,25 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
                                             systematic_n_V_MATRIX_coeff_1D_P1[i],
                                             systematic_n_V_MATRIX_coeff_1D_P2[i]);
             }
+
+
+            ///////////////////////////////////////////////////////////////////
+            // BACKGROUND MODE B ONLY CODE
+
+            if(BACKGROUND_MODE == BACKGROUND_MODE_B)
+            {
+                for(int b = 0; b < N_BKG_SYSTEMATICS; ++ b)
+                {
+
+                    check_alloc_V_PHYS_SYSBKG_data_helper(V_PHYS_SYSBKG_1D_P1_data[b], V_PHYS_SYSBKG_1D_P2_data[b]);
+
+                    set_V_PHYS_SYSBKG_data_helper(V_PHYS_SYSBKG_1D_P1_data[b],
+                                                  V_PHYS_SYSBKG_1D_P2_data[b],
+                                                  systematic_bkg_V_MATRIX_coeff_1D_P1[b],
+                                                  systematic_bkg_V_MATRIX_coeff_1D_P2[b]);
+
+                }
+            }
            
 
             check_alloc_V_PHYS_SYSALL_data();
@@ -471,20 +491,24 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
             //std::cout << "finished matrix calculations" << std::endl;
             
             // penalty terms section
-            double penalty_term = 0.0;
+            // only do this if BKG MODE is A
+            if(BACKGROUND_MODE == BACKGROUND_MODE_A)
+            {
+                double penalty_term = 0.0;
 
-            #if MEASURE_FUNCTION_CALL_TIME 
-            std::chrono::system_clock::time_point start_time_K = std::chrono::high_resolution_clock::now();
-            #endif
-            calculate_penalty_term(penalty_term, param);
-            #if MEASURE_FUNCTION_CALL_TIME 
-            std::chrono::system_clock::time_point end_time_K = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> runtime_microsec_K = end_time_K - start_time_K;
-            std::cout << "calculate_penalty_term(), time=" << 1.0e+06 * runtime_microsec_K.count() << " microsecond" << std::endl;
-            #endif
-            //std::cout << "penalty_term=" << penalty_term << std::endl;
+                #if MEASURE_FUNCTION_CALL_TIME 
+                std::chrono::system_clock::time_point start_time_K = std::chrono::high_resolution_clock::now();
+                #endif
+                calculate_penalty_term(penalty_term, param);
+                #if MEASURE_FUNCTION_CALL_TIME 
+                std::chrono::system_clock::time_point end_time_K = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> runtime_microsec_K = end_time_K - start_time_K;
+                std::cout << "calculate_penalty_term(), time=" << 1.0e+06 * runtime_microsec_K.count() << " microsecond" << std::endl;
+                #endif
+                //std::cout << "penalty_term=" << penalty_term << std::endl;
 
-            chi2_total += penalty_term;
+                chi2_total += penalty_term;
+            }
 
             //std::cout << "chi2_total=" << chi2_total << std::endl;
             //std::cin.get();
@@ -552,6 +576,22 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
         std::vector<double>**
     ) const;
     //
+    ///////////////////////////////////////////////////////////////////////////
+
+
+    void check_alloc_V_PHYS_SYSBKG_data_helper(
+        std::vector<double>**,
+        std::vector<double>**
+    ) const;
+
+    
+    void set_V_PHYS_SYSBKG_data_helper(
+        std::vector<double>**,
+        std::vector<double>**,
+        std::vector<double>**,
+        std::vector<double>**
+    ) const;
+
     ///////////////////////////////////////////////////////////////////////////
 
 

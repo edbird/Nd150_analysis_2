@@ -214,6 +214,25 @@ void fitBackgrounds_init(
                     theParameterState.Fix(std::string(minuit_param_name));
                 }
             }
+
+            ///////////////////////////////////////////////////////////////////////
+            // fix parameter if BACKGROUND_MODE == BACKGROUND_MODE_B
+            if(BACKGROUND_MODE == BACKGROUND_MODE_B)
+            {
+                if(paramNumber == 0)
+                {
+                    // 150Nd
+                }
+                else if(paramNumber == 1)
+                {
+                    // xi_31
+                }
+                else
+                {
+                    std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
+                    theParameterState.Fix(std::string(minuit_param_name));
+                }
+            }
         }
 
 
@@ -221,17 +240,6 @@ void fitBackgrounds_init(
         // get through to this execution block
         // if parameter is enabled, then it is either fixed or free
         // it has been copied and edited above
-
-        //if ((i != 17 ) && (i < 32) || (i > 38)  ) {
-        //if ( (i > 32) ) {
-        //  minuit->FixParameter(i);
-        //  fixed_params.push_back(i);
-        //}
-
-        //if ( i == 24 ) {
-        //  minuit->FixParameter(i);
-        //  fixed_params.push_back(i);
-        //}
     }
 
 
@@ -240,62 +248,6 @@ void fitBackgrounds_init(
         std::cout << "all parameters fixed" << std::endl;
     }
 
-    // TODO: check what parameters Summer had fixed and check the MC cuts
-    // Fix the tracker radon activities
-    //minuit->FixParameter(34);
-    //minuit->FixParameter(35);
-    //minuit->FixParameter(23);
-    // minuit->FixParameter(24);
-    /*
-    minuit->FixParameter(1);
-    minuit->FixParameter(3);
-    minuit->FixParameter(7);
-    minuit->FixParameter(11);
-    minuit->FixParameter(21);
-    minuit->FixParameter(22);
-    minuit->FixParameter(29);
-    minuit->FixParameter(30);
-    //minuit->FixParameter(31);
-    minuit->FixParameter(34);
-    minuit->FixParameter(35);
-    //minuit->FixParameter(48);
-    minuit->FixParameter(49);
-    minuit->FixParameter(50);
-    minuit->FixParameter(51);
-    minuit->FixParameter(52);
-    minuit->FixParameter(53);
-    minuit->FixParameter(54);
-
-    fixed_params.push_back(1);
-    fixed_params.push_back(3);
-    fixed_params.push_back(7);
-    fixed_params.push_back(11);
-    fixed_params.push_back(21);
-    fixed_params.push_back(22);
-    fixed_params.push_back(29);
-    fixed_params.push_back(30);
-    //fixed_params.push_back(31);
-    fixed_params.push_back(34);
-    fixed_params.push_back(35);
-    fixed_params.push_back(49);
-    fixed_params.push_back(50);
-    fixed_params.push_back(51);
-    fixed_params.push_back(52);
-    fixed_params.push_back(53);
-    fixed_params.push_back(54);
-    */
-    //fixed_params.push_back(48);
-
-
-
-
-    /*
-    if(debuglevel >= 5)
-    {
-        std::cout << "Ready to exec fix" << std::endl;
-    }
-    */
-
 
     //minuit->SetErrorDef(0.5);
     // TODO ? required ?
@@ -303,88 +255,7 @@ void fitBackgrounds_init(
     // 0.5 = negative log likelihood
     
 
-    // mnsimp()?
 
-    
-    //minuit->SetMaxIterations(50000);
-    //minuit->SetMaxIterations(1000); TODO
-    //minuit->mnexcm("SET EPS", 0.01);
-    //minuit->SetEPS(1.0e-3); // TODO
-    //give it the function to use
-    //minuit->SetFCN(logLikelihood); // done elsewhere
-    //std::cout << "calling: minuit->mnsimp()" << std::endl;
-    //minuit->mnsimp();
-    //std::cout << "calling: minuit->Migrad()" << std::endl;
-
-
-// draw 1D histograms, write chisquare values to file for range of
-// different gA values
-//    newloglikfitter_gA_chisquaretest(minuit, AdjustActs, AdjustActs_Err);
-
-    /*
-    Int_t npar = 0;
-    Double_t fval;
-    logLikelihood(npar, nullptr, fval, AdjustActs, 0);
-    std::cout << "fval=" << fval << std::endl;
-    draw(AdjustActs, AdjustActs_Err, CovMatrix, number_free_params);
-    std::cin.get();
-
-    AdjustActs[1] = 0.296 -0.1;
-    logLikelihood(npar, nullptr, fval, AdjustActs, 0);
-    std::cout << "fval=" << fval << std::endl;
-    draw(AdjustActs, AdjustActs_Err, CovMatrix, number_free_params);
-    std::cin.get();
-
-    AdjustActs[1] = 0.296 + 0.1;
-    logLikelihood(npar, nullptr, fval, AdjustActs, 0);
-    std::cout << "fval=" << fval << std::endl;
-    draw(AdjustActs, AdjustActs_Err, CovMatrix, number_free_params);
-    std::cin.get();
-    */
-
-
-    // TODO: something should go here?
-    // to set some values in the header file?
-    // they might be set elsewhere, if so remove them
-    #if 0
-    {
-        /*
-        int num_params = minuit->GetNumFreePars();
-        minuitParamCurrent = new double[num_params];
-        minuitParamInit = new double[num_params];
-        minuitParamLast = new double[num_params];
-        for(int i = 0; i < num_params; ++ i)
-        {
-            int free_param_index_ext = free_params.at(i);
-            double value, error;
-            minuit->GetParameter(free_param_index_ext, value, error);
-            int free_param_index_int = paramNumberToMinuitParamNumberMap.at(i);
-            minuitParamCurrent[free_param_index_int] = value;
-            minuitParamInit[free_param_index_int] = value;
-            minuitParamLast[free_param_index_int] = value;
-        }
-        */
-
-        minuitParamCurrent = new double[numberEnabledParams];
-        minuitParamInit = new double[numberEnabledParams];
-        minuitParamLast = new double[numberEnabledParams];
-        for(int i = 0; i < numberEnabledParams; ++ i)
-        {
-            double value, error;
-            //minuit->GetParameter(i, value, error);
-            value = theParameterState.Value(i);
-            error = theParameterState.Error(i);
-            //int j = minuitParamNumberTo
-            minuitParamCurrent[i] = value;
-            minuitParamInit[i] = value;
-            minuitParamLast[i] = value;
-
-        }
-    }
-    #endif
-
-
-    //return minuit;
 }
 
 
@@ -552,6 +423,25 @@ void fitBackgrounds_phasespace_init(
             if(FORCE_BKG_HARD == true)
             {
                 if(minuit_param_number > 1)
+                {
+                    std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
+                    theParameterState.Fix(std::string(minuit_param_name));
+                }
+            }
+
+            ///////////////////////////////////////////////////////////////////////
+            // fix parameter if BACKGROUND_MODE == BACKGROUND_MODE_B
+            if(BACKGROUND_MODE == BACKGROUND_MODE_B)
+            {
+                if(paramNumber == 0)
+                {
+                    // 150Nd
+                }
+                else if(paramNumber == 1)
+                {
+                    // xi_31
+                }
+                else
                 {
                     std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
                     theParameterState.Fix(std::string(minuit_param_name));

@@ -42,6 +42,11 @@
 #include "../include/InputNameDef.h"
 #include "../include/InputColorDef.h"
 
+
+const Int_t BACKGROUND_MODE_A = 0; // FREE (constrained) backgrounds. Do not add as systematics.
+const Int_t BACKGROUND_MODE_B = 1; // FIXED backgrounds. Add in a systematics
+const Int_t BACKGROUND_MODE = BACKGROUND_MODE_B;
+
 const Int_t MODE_PARALLEL = 1;
 
 
@@ -243,6 +248,58 @@ bool V_ENABLE_SYSn[N_SYSTEMATICS] =
     true//true  // brem (nominal)
 };
 
+const int N_BKG_SYSTEMATICS = 43;
+bool V_ENABLE_SYSBKG = true;
+
+double systematic_bkg[N_BKG_SYSTEMATICS] =
+{
+    0.0, // 1
+    0.0, // 2
+    0.0, // 3
+    0.0, // 4
+    0.0, // 
+    0.0, // 6
+    0.0, // 
+    0.0, // 8
+    0.0, // 
+    0.0, // 10
+    0.0, // 
+    0.0, // 12
+    0.0, // 
+    0.0, // 14
+    0.0, // 
+    0.0, // 16
+    0.0, // 
+    0.0, // 18
+    0.0, // 
+    0.0, // 20
+    0.0, // 
+    0.0, // 22
+    0.0, // 
+    0.0, // 24
+    0.0, // 
+    0.0, // 26
+    0.0, // 
+    0.0, // 28
+    0.0, // 
+    0.0, // 30
+    0.0, // 
+    0.0, // 32
+    0.0, // 
+    0.0, // 34
+    0.0, // 
+    0.0, // 36
+    0.0, // 
+    0.0, // 38
+    0.0, // 
+    0.0, // 40
+    0.0, // 
+    0.0, // 42
+    0.0  // 43
+};
+
+// TODO: min points
+
 //bool V_ENABLE_SYS1 = false; // constant 1.0 MeV shift
 //bool V_ENABLE_SYS2 = true; // scale factor: m = 1 % + 0.2 %
 //bool V_ENABLE_SYS3 = true; // +- 5.55 % efficiency
@@ -292,6 +349,7 @@ std::vector<bool> V_ENABLE_SYSn_stack[N_SYSTEMATICS]; //TODO anything here to in
 //std::vector<bool> V_ENABLE_SYS3_stack;
 //std::vector<bool> V_ENABLE_SYS4_stack;
 //std::vector<bool> V_ENABLE_SYS5_stack;
+std::vector<bool> V_ENABLE_SYSBKG_stack;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -314,6 +372,15 @@ void check_V_ENABLE_SYS_stack()
         }
     }
 
+    std::size_t stack_size = V_ENABLE_SYSBKG_stack.size();
+    if(V_ENABLE_SYSALL_stack_size != stack_size)
+    {
+        std::cout << "ERROR: " << __func__ << std::endl;
+        std::cout << "V_ENABLE_SYSALL_stack_size=" << V_ENABLE_SYSALL_stack_size << std::endl;
+        std::cout << "stack_size=" << stack_size << std::endl;
+        throw "V_ENABLE_SYSBKG_stack size error";
+    }
+
     return;
 }
 
@@ -327,6 +394,8 @@ void V_ENABLE_SYS_stack_push()
     {
         V_ENABLE_SYSn_stack[i].push_back(V_ENABLE_SYSn[i]);
     }
+
+    V_ENABLE_SYSBKG_stack.push_back(V_ENABLE_SYSBKG);
 
     check_V_ENABLE_SYS_stack();
 }
@@ -345,6 +414,9 @@ void V_ENABLE_SYS_stack_pop()
             V_ENABLE_SYSn[i] = V_ENABLE_SYSn_stack[i].back();
             V_ENABLE_SYSn_stack[i].pop_back();
         }
+
+        V_ENABLE_SYSBKG = V_ENABLE_SYSBKG_stack.back();
+        V_ENABLE_SYSBKG_stack.pop_back();
     }
     else
     {
@@ -475,6 +547,7 @@ double min_point_fake_sysn_l_fval[N_SYSTEMATICS] =
     0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 };
 
+// TODO: min point BKG
 
 void min_point_save(
     const std::string &min_point_fname,
@@ -575,6 +648,146 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P1[N_SYSTEMATICS][number1DHi
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
+std::vector<double> *systematic_bkg_low_1D_P1[N_BKG_SYSTEMATICS][number1DHists] =
+{
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
+};
+
+std::vector<double> *systematic_bkg_high_1D_P1[N_BKG_SYSTEMATICS][number1DHists] =
+{
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
+};
+
+std::vector<double> *systematic_bkg_V_MATRIX_coeff_1D_P1[N_BKG_SYSTEMATICS][number1DHists] =
+{
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 // systematic objects - Phase 2
@@ -636,6 +849,147 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P2[N_SYSTEMATICS][number1DHi
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
+};
+
+std::vector<double> *systematic_bkg_low_1D_P2[N_BKG_SYSTEMATICS][number1DHists] =
+{
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
+};
+
+std::vector<double> *systematic_bkg_high_1D_P2[N_BKG_SYSTEMATICS][number1DHists] =
+{
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
+};
+
+std::vector<double> *systematic_bkg_V_MATRIX_coeff_1D_P2[N_BKG_SYSTEMATICS][number1DHists] =
+{
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
 };
 
 
@@ -701,6 +1055,53 @@ std::vector<double> *V_PHYS_SYSn_1D_P1_data[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
+};
+
+std::vector<double> *V_PHYS_SYSBKG_1D_P1_data[N_BKG_SYSTEMATICS][number1DHists] =
+{
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
 };
 
 std::vector<double> *V_PHYS_SYSALL_1D_P1_data[number1DHists] = 
@@ -802,6 +1203,53 @@ std::vector<double> *V_PHYS_SYSn_1D_P2_data[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
+};
+
+std::vector<double> *V_PHYS_SYSBKG_1D_P2_data[N_BKG_SYSTEMATICS][number1DHists] =
+{
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
 };
 
 

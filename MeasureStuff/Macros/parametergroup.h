@@ -333,6 +333,8 @@ class parameter_group
     }
 
 
+    // TODO: what should I do with this when MODE_BACKGROUND = MODE_BACKGROUND_B ?
+    // probably nothing?
     void init_maps()
     {
         const int debug_level = 1;

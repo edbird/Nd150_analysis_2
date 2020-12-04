@@ -68,6 +68,15 @@ void rebuild_fake_data_systematics(const double xi_31, const double xi_31_baseli
     }
 
 
+    for(int i = 0; i < N_BKG_SYSTEMATICS; ++ i)
+    {
+        if(systematic_bkg[i] != 0.0)
+        {
+            std::cout << "systematic_bkg[" << i << "]=" << systematic_bkg[i] << std::endl;
+        }
+    }
+
+
     int debuglevel = 1;
 
     ///////////////////////////////////////////////////////////////////////////

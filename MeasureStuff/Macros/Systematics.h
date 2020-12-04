@@ -13,29 +13,17 @@ class Systematics
     Systematics()
     {
         systematic_energy_offset = 0.0;
-        systematic_energy_offset_last = -std::numeric_limits<double>::infinity();
         systematic_energy_scale = 0.0;
-        systematic_energy_scale_last = -std::numeric_limits<double>::infinity();
         systematic_efficiency = 0.0;
-        systematic_efficiency_last = -std::numeric_limits<double>::infinity();
         systematic_enrichment = 0.0;
-        systematic_enrichment_last = -std::numeric_limits<double>::infinity();
         systematic_energy_offsetsmall = 0.0;
-        systematic_energy_offsetsmall_last = -std::numeric_limits<double>::infinity();
         systematic_foil_thickness_virtual = 0.0;
-        systematic_foil_thickness_virtual_last = -std::numeric_limits<double>::infinity();
         systematic_dEdX_virtual = 0.0;
-        systematic_dEdX_virtual_last = -std::numeric_limits<double>::infinity();
         systematic_brem_virtual = 0.0;
-        systematic_brem_virtual_last = -std::numeric_limits<double>::infinity();
         systematic_foil_thickness_nominal = 0.0;
-        systematic_foil_thickness_nominal_last = -std::numeric_limits<double>::infinity();
         systematic_dEdX_nominal = 0.0;
-        systematic_dEdX_nominal_last = -std::numeric_limits<double>::infinity();
         systematic_brem_nominal = 0.0;
-        systematic_brem_nominal_last = -std::numeric_limits<double>::infinity();
         systematic_optical_correction = 0.0;
-        systematic_optical_correction_last = -std::numeric_limits<double>::infinity();
 
         aux_data_is_loaded = false;
 
@@ -169,29 +157,17 @@ class Systematics
 
 
     double systematic_energy_offset;
-    double systematic_energy_offset_last; // think not used
     double systematic_energy_scale;
-    double systematic_energy_scale_last; // think not used
     double systematic_efficiency;
-    double systematic_efficiency_last; // think not used
     double systematic_enrichment;
-    double systematic_enrichment_last; // think not used
     double systematic_energy_offsetsmall;
-    double systematic_energy_offsetsmall_last; // think not used
     double systematic_foil_thickness_virtual;
-    double systematic_foil_thickness_virtual_last;
     double systematic_dEdX_virtual;
-    double systematic_dEdX_virtual_last;
     double systematic_brem_virtual;
-    double systematic_brem_virtual_last;
     double systematic_foil_thickness_nominal;
-    double systematic_foil_thickness_nominal_last;
     double systematic_dEdX_nominal;
-    double systematic_dEdX_nominal_last;
     double systematic_brem_nominal;
-    double systematic_brem_nominal_last;
     double systematic_optical_correction;
-    double systematic_optical_correction_last;
 
     bool aux_data_is_loaded;
 

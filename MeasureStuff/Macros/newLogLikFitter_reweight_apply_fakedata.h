@@ -248,6 +248,7 @@ void reweight_apply_fakedata(
         bool paramEnabledP1 = it->second.paramEnabledP1;
         bool paramEnabledP2 = it->second.paramEnabledP2;
         double paramInitValue = it->second.paramInitValue;
+        double paramInitError = it->second.paramInitError;
 
         if(debuglevel >= 4)
         {
@@ -1081,27 +1082,27 @@ void reweight_apply_fakedata(
                 const double scale_factor = 0.36;
 
                 // P1
-            if(paramEnabledP1)
-            {
-                hTotalE_P1_tmp->Scale(scale_factor);
-                hSingleEnergy_P1_tmp->Scale(scale_factor);
-                hHighEnergy_P1_tmp->Scale(scale_factor);
-                hLowEnergy_P1_tmp->Scale(scale_factor);
-                hHighLowEnergy_P1_tmp->Scale(scale_factor);
-                hEnergySum_P1_tmp->Scale(scale_factor);
-                hEnergyDiff_P1_tmp->Scale(scale_factor);
-            }
+                if(paramEnabledP1)
+                {
+                    hTotalE_P1_tmp->Scale(scale_factor);
+                    hSingleEnergy_P1_tmp->Scale(scale_factor);
+                    hHighEnergy_P1_tmp->Scale(scale_factor);
+                    hLowEnergy_P1_tmp->Scale(scale_factor);
+                    hHighLowEnergy_P1_tmp->Scale(scale_factor);
+                    hEnergySum_P1_tmp->Scale(scale_factor);
+                    hEnergyDiff_P1_tmp->Scale(scale_factor);
+                }
                 // P2
-            if(paramEnabledP2)
-            {
-                hTotalE_P2_tmp->Scale(scale_factor);
-                hSingleEnergy_P2_tmp->Scale(scale_factor);
-                hHighEnergy_P2_tmp->Scale(scale_factor);
-                hLowEnergy_P2_tmp->Scale(scale_factor);
-                hHighLowEnergy_P2_tmp->Scale(scale_factor);
-                hEnergySum_P2_tmp->Scale(scale_factor);
-                hEnergyDiff_P2_tmp->Scale(scale_factor);
-            }
+                if(paramEnabledP2)
+                {
+                    hTotalE_P2_tmp->Scale(scale_factor);
+                    hSingleEnergy_P2_tmp->Scale(scale_factor);
+                    hHighEnergy_P2_tmp->Scale(scale_factor);
+                    hLowEnergy_P2_tmp->Scale(scale_factor);
+                    hHighLowEnergy_P2_tmp->Scale(scale_factor);
+                    hEnergySum_P2_tmp->Scale(scale_factor);
+                    hEnergyDiff_P2_tmp->Scale(scale_factor);
+                }
             }
 
             // realistic scaling for amplitude
@@ -1134,24 +1135,36 @@ void reweight_apply_fakedata(
             // P1
             if(paramEnabledP1)
             {
-            hTotalE_P1_tmp->Scale(paramInitValue);
-            hSingleEnergy_P1_tmp->Scale(paramInitValue);
-            hHighEnergy_P1_tmp->Scale(paramInitValue);
-            hLowEnergy_P1_tmp->Scale(paramInitValue);
-            hHighLowEnergy_P1_tmp->Scale(paramInitValue);
-            hEnergySum_P1_tmp->Scale(paramInitValue);
-            hEnergyDiff_P1_tmp->Scale(paramInitValue);
+                double param_scale_factor = paramInitValue;
+                if(systematic_bkg[paramNumber] != 0.0)
+                {
+                    param_scale_factor += systematic_bkg[paramNumber] * paramInitError;
+                }
+
+                hTotalE_P1_tmp->Scale(param_scale_factor);
+                hSingleEnergy_P1_tmp->Scale(param_scale_factor);
+                hHighEnergy_P1_tmp->Scale(param_scale_factor);
+                hLowEnergy_P1_tmp->Scale(param_scale_factor);
+                hHighLowEnergy_P1_tmp->Scale(param_scale_factor);
+                hEnergySum_P1_tmp->Scale(param_scale_factor);
+                hEnergyDiff_P1_tmp->Scale(param_scale_factor);
             }
             // P2
             if(paramEnabledP2)
             {
-            hTotalE_P2_tmp->Scale(paramInitValue);
-            hSingleEnergy_P2_tmp->Scale(paramInitValue);
-            hHighEnergy_P2_tmp->Scale(paramInitValue);
-            hLowEnergy_P2_tmp->Scale(paramInitValue);
-            hHighLowEnergy_P2_tmp->Scale(paramInitValue);
-            hEnergySum_P2_tmp->Scale(paramInitValue);
-            hEnergyDiff_P2_tmp->Scale(paramInitValue);
+                double param_scale_factor = paramInitValue;
+                if(systematic_bkg[paramNumber] != 0.0)
+                {
+                    param_scale_factor += systematic_bkg[paramNumber] * paramInitError;
+                }
+
+                hTotalE_P2_tmp->Scale(param_scale_factor);
+                hSingleEnergy_P2_tmp->Scale(param_scale_factor);
+                hHighEnergy_P2_tmp->Scale(param_scale_factor);
+                hLowEnergy_P2_tmp->Scale(param_scale_factor);
+                hHighLowEnergy_P2_tmp->Scale(param_scale_factor);
+                hEnergySum_P2_tmp->Scale(param_scale_factor);
+                hEnergyDiff_P2_tmp->Scale(param_scale_factor);
             }
 
             /*
