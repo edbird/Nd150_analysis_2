@@ -776,6 +776,19 @@ void loadFiles(int i)
                 systematic_n_V_MATRIX_coeff_1D_P2[i][channel] = new std::vector<double>;
             }
 
+            for(int b = 0; b < N_BKG_SYSTEMATICS; ++ b)
+            {
+                // P1
+                systematic_bkg_low_1D_P1[b][channel] = new std::vector<double>;
+                systematic_bkg_high_1D_P1[b][channel] = new std::vector<double>;
+                systematic_bkg_V_MATRIX_coeff_1D_P1[b][channel] = new std::vector<double>;
+
+                // P2
+                systematic_bkg_low_1D_P2[b][channel] = new std::vector<double>;
+                systematic_bkg_high_1D_P2[b][channel] = new std::vector<double>;
+                systematic_bkg_V_MATRIX_coeff_1D_P2[b][channel] = new std::vector<double>;
+            }
+
         }
         // check channel enabled
         //if(channel_enable_1D[channel] == 0)
