@@ -568,11 +568,27 @@ void reweight_apply_fakedata(
                 {
                     weight = radonWeight;
                 }
+                else if(sampleName.Contains("bi207"))
+                {
+                    // halflife
+                    const double T12 = 31557600. * 32.97818366312;
+                    // https://periodictable.com/Isotopes/083.207/index2.full.dm.html
+                    
+                    // lambda
+                    const double lambda = std::log(2.0) / T12;
+                    double arg = -lambda * eventTime;
+                    // I assume event time is in SI units
+                    weight = std::exp(arg);
+                }
                 else if(sampleName.Contains("bi210"))
                 {
                     // halflife
                     // https://periodictable.com/Isotopes/083.210/index.p.full.dm.html
-                    const double T21 = 86400. * 5.011574074074;
+                    //const double T21 = 86400. * 5.011574074074;
+
+                    //https://periodictable.com/Isotopes/082.210/index.p.full.dm.html
+                    const double T21 = 31557600. * 22.22856418062;
+            
                     // lambda
                     const double lambda = std::log(2.0) / T21;
                     double arg = -lambda * eventTime;
@@ -1079,8 +1095,39 @@ void reweight_apply_fakedata(
 
             if(sampleName.Contains("tl208"))
             {
-                const double scale_factor = 0.36;
+                if(!sampleName.Contains("air"))
+                {
+                    const double scale_factor = 0.36;
 
+                    // P1
+                    if(paramEnabledP1)
+                    {
+                        hTotalE_P1_tmp->Scale(scale_factor);
+                        hSingleEnergy_P1_tmp->Scale(scale_factor);
+                        hHighEnergy_P1_tmp->Scale(scale_factor);
+                        hLowEnergy_P1_tmp->Scale(scale_factor);
+                        hHighLowEnergy_P1_tmp->Scale(scale_factor);
+                        hEnergySum_P1_tmp->Scale(scale_factor);
+                        hEnergyDiff_P1_tmp->Scale(scale_factor);
+                    }
+                    // P2
+                    if(paramEnabledP2)
+                    {
+                        hTotalE_P2_tmp->Scale(scale_factor);
+                        hSingleEnergy_P2_tmp->Scale(scale_factor);
+                        hHighEnergy_P2_tmp->Scale(scale_factor);
+                        hLowEnergy_P2_tmp->Scale(scale_factor);
+                        hHighLowEnergy_P2_tmp->Scale(scale_factor);
+                        hEnergySum_P2_tmp->Scale(scale_factor);
+                        hEnergyDiff_P2_tmp->Scale(scale_factor);
+                    }
+                }
+            }
+
+            if(sampleName.Contains("bi207"))
+            {
+                const double scale_factor = 1.846;
+                
                 // P1
                 if(paramEnabledP1)
                 {
