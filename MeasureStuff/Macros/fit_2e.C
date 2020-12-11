@@ -1283,7 +1283,7 @@ void makeHistograms(
         else if(sampleName.Contains("bi207"))
         {
             // halflife
-// disabled 2020-12-11            const double T12 = 31557600. * 32.97818366312;
+            const double T12 = 31557600. * 32.97818366312;
             // https://periodictable.com/Isotopes/083.207/index2.full.dm.html
             
             // lambda
@@ -3969,7 +3969,7 @@ void scale(TFile* myFile,                       // INPUT: unscaled histograms ar
         // cd() to different TDirectory, can't be bothered with that
         // so will re-enable
         std::cout << "writing histogram with name " << hist[i]->GetName() << " at end of code which was removed" << std::endl;
-        hist[i]->Write();
+// disabled 2020-12-11       hist[i]->Write();
         // TODO: don't like that other functions write out the equivalent
         // MC histograms to file in a different place from this Write() call
         // expecially since this call to Write() is inside a block of code
