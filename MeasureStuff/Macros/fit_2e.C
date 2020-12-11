@@ -1283,7 +1283,7 @@ void makeHistograms(
         else if(sampleName.Contains("bi207"))
         {
             // halflife
-            const double T12 = 31557600. * 32.97818366312;
+// disabled 2020-12-11            const double T12 = 31557600. * 32.97818366312;
             // https://periodictable.com/Isotopes/083.207/index2.full.dm.html
             
             // lambda
@@ -2633,7 +2633,7 @@ void makeHistograms(
         else if(mode_flag == 1)
         {
             myFile->cd("rawdata/" + histogram_name);
-            it->second->Write();
+// 2020-12-11 disabled            it->second->Write();
         }
         //myFile->pwd();
         
@@ -3389,6 +3389,10 @@ void scale(TFile* myFile,                       // INPUT: unscaled histograms ar
           allInternals);
     
     #if RAWENABLE
+
+    std::cout << "RAWENABLE" << std::endl;
+    std::cin.get();
+
     scale(myFile,
           "../include/activities.txt",
           "internals/",
