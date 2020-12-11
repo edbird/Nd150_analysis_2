@@ -1270,21 +1270,37 @@ void makeHistograms(
 
 
         double weight = 1.;
-        if(sampleName.CompareTo("bi214_swire") == 0)
+        if(sampleName.Contains("bi214_swire") == 0)
         {
             weight = radonWeight;
         }
         // TODO: due to secular equlibrium, the following MAY be required
         // (unsure at present time)
-        else if(sampleName.CompareTo("pb214_swire") == 0)
+        else if(sampleName.Contains("pb214_swire") == 0)
         {
             weight = radonWeight;
+        }
+        else if(sampleName.Contains("bi207"))
+        {
+            // halflife
+            const double T12 = 31557600. * 32.97818366312;
+            // https://periodictable.com/Isotopes/083.207/index2.full.dm.html
+            
+            // lambda
+            const double lambda = std::log(2.0) / T12;
+            double arg = -lambda * eventTime;
+            // I assume event time is in SI units
+            weight = std::exp(arg);
         }
         else if(sampleName.Contains("bi210"))
         {
             // halflife
             // https://periodictable.com/Isotopes/083.210/index.p.full.dm.html
-            const double T21 = 86400. * 5.011574074074;
+            //const double T21 = 86400. * 5.011574074074;
+
+            //https://periodictable.com/Isotopes/082.210/index.p.full.dm.html
+            const double T21 = 31557600. * 22.22856418062;
+            
             // lambda
             const double lambda = std::log(2.0) / T21;
             double arg = -lambda * eventTime;
@@ -2185,8 +2201,11 @@ void makeHistograms(
         {
             if(mode_flag_2 == 1)
             {
-                if(fabs(vertexR[0] - vertexR[1]) > 4.) continue;
-                if(fabs(vertexZ[0] - vertexZ[1]) > 8.) continue;
+                if(std::abs(vertexR[0] - vertexR[1]) > 4.) continue;
+                if(std::abs(vertexZ[0] - vertexZ[1]) > 8.) continue;
+
+                //if(std::abs(vertexR[0] - vertexR[1]) > 4.0e-2) continue;
+                //if(std::abs(vertexZ[0] - vertexZ[1]) > 8.0e-2) continue;
             }
         }
         ++ cut_counter[cc]; // cut 13 (was cut 14) - delta
@@ -2925,6 +2944,7 @@ void scale(TFile* myFile,                       // INPUT: unscaled histograms ar
 
 
             tmpHist->Scale(TotalTime / sampleNGenMC[i]);
+
             if(mode_flag == 0)
             {
                 if(TString(tmpHist->GetName()).Contains("hSingleEnergy_"))
@@ -2939,7 +2959,7 @@ void scale(TFile* myFile,                       // INPUT: unscaled histograms ar
             {
                 // write into root directory to be read back by newLogLikFitter.C
                 myFile->cd("/");
-                tmpHist->Write();
+// disabled 2020-12-11                tmpHist->Write();
 
                 // write into scaled / histogram_name subdirectory
                 myFile->cd("scaled/" + histogram_name);
@@ -2972,7 +2992,7 @@ void scale(TFile* myFile,                       // INPUT: unscaled histograms ar
                 myFile->cd("scaled2/" + histogram_name);
                 TString clone_name = TString(tmpHist->GetName()) + TString("_scaled2");
                 TH1D *tmpHistClone = (TH1D*)tmpHist->Clone(clone_name);
-                tmpHistClone->Write();
+// disabled 2020-12-11                tmpHistClone->Write();
             }
 
             std::ofstream of_numberofevents("of_numberofevents.txt", std::ofstream::out | std::ofstream::app);
