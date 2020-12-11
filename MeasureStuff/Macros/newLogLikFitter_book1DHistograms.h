@@ -237,6 +237,15 @@ void book1DHistograms_helper(
             }
             //std::cout << "mc_name=" << mc_name << " scale_factor_P1=" << scale_factor_P1 << " scale_factor_P2=" << scale_factor_P2 << std::endl;
 
+
+            // 207Bi correction factor
+            if(mc_name.find("bi207") != std::string::npos)
+            {
+                scale_factor_P1 *= 1.846;
+                scale_factor_P2 *= 1.846;
+            }
+
+
             // account for 208 Tl branching ratio of 36 %
             if((mc_name.find("tl208_int_rot") != std::string::npos) ||
                (mc_name.find("tl208_feShield") != std::string::npos) || // TODO: this doesn't seem to work
