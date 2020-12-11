@@ -395,7 +395,7 @@ Int_t histogramDrawFlag[numHistograms] =
 };
 
 // draw raw data histograms as well?
-Int_t histogramDrawFlag_rawdata = 1;
+Int_t histogramDrawFlag_rawdata = 0;
 #define RAWENABLE 0
 
 // map for data structure for raw data
