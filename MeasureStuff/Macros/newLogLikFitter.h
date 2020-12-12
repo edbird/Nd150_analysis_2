@@ -45,9 +45,9 @@
 
 const Int_t BACKGROUND_MODE_A = 0; // FREE (constrained) backgrounds. Do not add as systematics.
 const Int_t BACKGROUND_MODE_B = 1; // FIXED backgrounds. Add in a systematics
-const Int_t BACKGROUND_MODE = BACKGROUND_MODE_B;
+const Int_t BACKGROUND_MODE = BACKGROUND_MODE_A;
 
-const Int_t MODE_PARALLEL = 1;
+const Int_t MODE_PARALLEL = 0;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -559,6 +559,25 @@ void min_point_save(
     ofs << min_point[0] << " " << min_point[1] << std::endl;
     ofs << min_point_fval << std::endl;
     ofs << min_point_err[0] << " " << min_point_err[1] << std::endl;
+
+    const double N_ISOTOPE = 150.0;
+    const double N_AVOGADRO = 6.022e+23;
+    const double MASS = 36.6;
+
+    const double ACTIVITY0 = 3.45e-4;
+    const double ACTIVITY = ACTIVITY0 * min_point[1];
+    const double ACTIVITY_ERR = ACTIVITY0 * min_point_err[1];
+
+    const double YEARTOSEC = 1.0 / 31557600.0;
+    const double N_AVOGADRO_YEARTOSEC = N_AVOGADRO * YEARTOSEC;
+
+    const double T12 = std::log(2.0) * (MASS  / N_ISOTOPE) * (N_AVOGADRO_YEARTOSEC / ACTIVITY);
+    const double T12_ERR = T12 * ACTIVITY_ERR / ACTIVITY; // all positive
+
+    ofs << "T12= " << T12 << " +- " << T12_ERR << std::endl;
+    ofs << "#xi_{31}= " << min_point[0] << " +- " << min_point_err[0] << std::endl;
+    ofs << "#chi^{2}= " << min_point_fval << std::endl;
+
     ofs.close();
 }
 
