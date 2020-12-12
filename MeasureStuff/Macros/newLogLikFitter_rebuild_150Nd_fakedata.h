@@ -38,6 +38,10 @@ void rebuild_fake_data_systematics(const double xi_31, const double xi_31_baseli
     {
         std::cout << "systematic_enrichment=" << gSystematics.systematic_enrichment << std::endl;
     }
+    if(gSystematics.systematic_energy_offsetsmall != 0.0)
+    {
+        std::cout << "systematic_energy_offsetsmall=" << gSystematics.systematic_energy_offsetsmall << std::endl;
+    }
     if(gSystematics.systematic_foil_thickness_virtual != 0.0)
     {
         std::cout << "systematic_foil_thickness_virtual=" << gSystematics.systematic_foil_thickness_virtual << std::endl;
