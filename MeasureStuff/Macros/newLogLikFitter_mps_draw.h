@@ -395,6 +395,58 @@ void newloglikfitter_mps_draw_loader
 
 
 
+///////////////////////////////////////////////////////////////////////////////
+// draw sysall / stat contours only
+///////////////////////////////////////////////////////////////////////////////
+
+void newloglikfitter_mps_draw_sys_only
+(
+    const int number_job_id,
+    const std::string &output_name,
+    const int start_index,
+    const int stop_index  // TODO: these may no longer make sense
+)
+{
+
+    const bool mode_fake_data_flag = g_mode_fake_data;
+
+    TString c_mps_name_base = "c_mps_final_after";
+    // fakedata / data
+    if(mode_fake_data_flag == false)
+    {
+        c_mps_name_base += "_data";
+    }
+    else if(mode_fake_data_flag == true)
+    {
+        c_mps_name_base += "_fake";
+    }
+    TString c_mps_name = c_mps_name_base;
+    
+    std::cout << "rendering: " << c_mps_name << std::endl;
+
+    // TODO: NOTE: have to change value of "stop_index" as well
+    int c_param = 0;
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // OPEN FILE
+    ///////////////////////////////////////////////////////////////////////////
+
+    std::string after_string = "after";
+
+    mpsdrawdata mps_draw_data_after_sysall;
+    mps_draw_data_after_sysall.read(output_name, after_string, true, mode_fake_data_flag);
+
+    TCanvas *c_mps_after = nullptr;
+    TString after_string_TString = TString(after_string);
+    newloglikfitter_mps_draw_helper_sys_only
+    (
+        c_mps_after,
+        mps_draw_data_after_sysall
+    );
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // new drawing function, without colz or z-axis
