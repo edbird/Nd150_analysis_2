@@ -47,8 +47,11 @@ const Int_t BACKGROUND_MODE_A = 0; // FREE (constrained) backgrounds. Do not add
 const Int_t BACKGROUND_MODE_B = 1; // FIXED backgrounds. Add in a systematics
 const Int_t BACKGROUND_MODE = BACKGROUND_MODE_A;
 
-const Int_t MODE_PARALLEL = 0;
+const Int_t MODE_PARALLEL = 1;
 
+bool g_mode_fake_data = false;
+
+bool V_ENABLE_SYSALL = false;
 
 ///////////////////////////////////////////////////////////////////////////////
 // add random variance to 150Nd MC
@@ -83,7 +86,7 @@ parameter_group g_pg;
 // fit is done using MinimizeFCNAxialVector
 // the exact fit mode / choice of algorithm is set elsewhere
 //bool g_mode_fake_data = false;
-bool g_mode_fake_data = false;
+//bool g_mode_fake_data = false;
 // this might change during program execution
 // for example, it is necessary to set this to true to fit the fake data
 // to measure systematic effects, before switching back to false to fit
@@ -230,7 +233,7 @@ bool V_ENABLE_STAT = true; // leave on
 // now that SYS are included
 
 // enable/disable systematics
-bool V_ENABLE_SYSALL = false;
+//bool V_ENABLE_SYSALL = false;
 
 const int N_SYSTEMATICS = 11;
 bool V_ENABLE_SYSn[N_SYSTEMATICS] =
