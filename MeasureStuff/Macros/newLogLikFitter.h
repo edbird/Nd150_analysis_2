@@ -53,6 +53,24 @@ bool g_mode_fake_data = false;
 
 bool V_ENABLE_SYSALL = false;
 
+
+const int N_SYSTEMATICS = 11;
+bool V_ENABLE_SYSn[N_SYSTEMATICS] =
+{
+    false,  // false    // constant 1.0 MeV shift
+    true,   // true     // scale factor: m = 1 % + 0.2 %
+    false,   // true     // +- 5.55 % efficiency
+    false,   // true     // +- 0.50 % enrichment
+    false,   // true     // +- 3 keV
+    false,   // true     // foil thickness
+    false,   // true     // dE/dX
+    false,  // false    // brem
+    false,  // false    // foil thickness (nominal)
+    false,  // false    // dE/dX (nominal)
+    false    // true     // brem (nominal)
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // add random variance to 150Nd MC
 //
@@ -235,21 +253,6 @@ bool V_ENABLE_STAT = true; // leave on
 // enable/disable systematics
 //bool V_ENABLE_SYSALL = false;
 
-const int N_SYSTEMATICS = 11;
-bool V_ENABLE_SYSn[N_SYSTEMATICS] =
-{
-    false, // constant 1.0 MeV shift
-    true,//true, // scale factor: m = 1 % + 0.2 %
-    true,//true, // +- 5.55 % efficiency
-    true,//true, // +- 0.50 % enrichment
-    true,//true, // +- 3 keV
-    true,//true, // foil thickness
-    true,//true, // dE/dX
-    false, // brem
-    false, // foil thickness (nominal)
-    false, // dE/dX (nominal)
-    true//true  // brem (nominal)
-};
 
 const int N_BKG_SYSTEMATICS = 43;
 bool V_ENABLE_SYSBKG = true;
