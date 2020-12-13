@@ -51,7 +51,7 @@ const Int_t MODE_PARALLEL = 1;
 
 bool g_mode_fake_data = false;
 
-bool V_ENABLE_SYSALL = false;
+bool V_ENABLE_SYSALL = true;
 
 
 const int N_SYSTEMATICS = 11;
