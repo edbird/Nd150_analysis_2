@@ -773,7 +773,7 @@ void newloglikfitter_mps_draw_helper_sys_only
         TH2D *h_mps_sysall = mps_draw_data_sysall.h_mps;
         
 
-        double min = mps_draw_data_sysakk.min;
+        double min = mps_draw_data_sysall.min;
         double min_x = mps_draw_data_sysall.min_x;
         double min_y = mps_draw_data_sysall.min_y;
 

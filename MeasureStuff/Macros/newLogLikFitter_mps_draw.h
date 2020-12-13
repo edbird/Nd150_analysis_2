@@ -399,7 +399,7 @@ void newloglikfitter_mps_draw_loader
 // draw sysall / stat contours only
 ///////////////////////////////////////////////////////////////////////////////
 
-void newloglikfitter_mps_draw_sys_only
+void newloglikfitter_mps_draw_systematics_sysall_only
 (
     const int number_job_id,
     const std::string &output_name,
