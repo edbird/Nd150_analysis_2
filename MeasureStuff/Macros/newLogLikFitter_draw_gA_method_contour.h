@@ -48,7 +48,39 @@ void draw_gA_method_contour()
         {
             min_fval_SYSALL = min_point_fake_SYSALL_fval;
         }
-        double clevels[3] = {min_fval_SYSALL + 2.30, min_fval_SYSALL + 4.61, min_fval_SYSALL + 9.21};
+
+
+        double min_chi2_sysall, min_x_sysall, min_y_sysall;
+        int min_i_sysall, min_j_sysall;
+        for(Int_t j = 1; j <= h_mps_sysall->GetNbinsY(); ++ j)
+        {
+            for(Int_t i = 1; i <= h_mps_sysall->GetNbinsX(); ++ i)
+            {
+                const double content = h_mps_sysall->GetBinContent(i, j);
+                const double x = h_mps_sysall->GetXaxis()->GetBinCenter(i);
+                const double y = h_mps_sysall->GetYaxis()->GetBinCenter(j);
+                if((i == 1) && (j == 1))
+                {
+                    min_chi2_sysall = content;
+                    min_x_sysall = x;
+                    min_y_sysall = y;
+                    min_i_sysall = i;
+                    min_j_sysall = j;
+                }
+                else if(content < min_chi2_sysall)
+                {
+                    min_chi2_sysall = content;
+                    min_x_sysall = x;
+                    min_y_sysall = y;
+                    min_i_sysall = i;
+                    min_j_sysall = j;
+                }
+            }
+        }
+
+
+        //double clevels[3] = {min_fval_SYSALL + 2.30, min_fval_SYSALL + 4.61, min_fval_SYSALL + 9.21};
+        double clevels_sysall[3] = {min_chi2_sysall + 2.30, min_chi2_sysall + 4.61, min_chi2_sysall + 9.21};
         h_mps_clone->SetContour(3, clevels);
         TCanvas *ctmp = new TCanvas("ctmp", "ctmp");
         h_mps_clone->Draw("CONTLIST");

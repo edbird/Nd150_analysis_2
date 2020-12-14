@@ -140,16 +140,46 @@ void newloglikfitter_mps_draw_helper_colz
         //h_mps->Draw("AXIS");
 
 
+        double min_chi2_sysall, min_x_sysall, min_y_sysall;
+        int min_i_sysall, min_j_sysall;
+        for(Int_t j = 1; j <= h_mps_sysall->GetNbinsY(); ++ j)
+        {
+            for(Int_t i = 1; i <= h_mps_sysall->GetNbinsX(); ++ i)
+            {
+                const double content = h_mps_sysall->GetBinContent(i, j);
+                const double x = h_mps_sysall->GetXaxis()->GetBinCenter(i);
+                const double y = h_mps_sysall->GetYaxis()->GetBinCenter(j);
+                if((i == 1) && (j == 1))
+                {
+                    min_chi2_sysall = content;
+                    min_x_sysall = x;
+                    min_y_sysall = y;
+                    min_i_sysall = i;
+                    min_j_sysall = j;
+                }
+                else if(content < min_chi2_sysall)
+                {
+                    min_chi2_sysall = content;
+                    min_x_sysall = x;
+                    min_y_sysall = y;
+                    min_i_sysall = i;
+                    min_j_sysall = j;
+                }
+            }
+        }
+
+
         std::cout << "min=" << min << " min_x=" << min_x << " min_y=" << min_y << std::endl;
         //double clevels[3] = {min + 1.0, min + 2.0, min + 3.0};
-        double clevels_SYSALL[3] = {min_fval_SYSALL + 2.30, min_fval_SYSALL + 4.61, min_fval_SYSALL + 9.21};
+        double clevels_sysall[3] = {min_chi2_sysall + 2.30, min_chi2_sysall + 4.61, min_chi2_sysall + 9.21};
+        //double clevels_SYSALL[3] = {min_fval_SYSALL + 2.30, min_fval_SYSALL + 4.61, min_fval_SYSALL + 9.21};
         //double clevels[3] = {2.30, 4.61, 9.21}; // true minimum is 0.0 for HSD
         //h_mps_contour->SetLineColor(kGreen); //kRed
         h_mps_sysall_contour->SetLineColor(kCyan); //kRed
         //h_mps_contour->SetLineColor(kGray + 2); //kRed
         h_mps_sysall_contour->SetLineWidth(2);
 //        h_mps_contour->SetLineStyle(0); // in drawmps.C but not used
-        h_mps_sysall_contour->SetContour(3, clevels_SYSALL);
+        h_mps_sysall_contour->SetContour(3, clevels_sysall);
 
         c_mps->Update();
         TPaletteAxis *palette = (TPaletteAxis*)h_mps_sysall->GetListOfFunctions()->FindObject("palette");
@@ -241,14 +271,46 @@ void newloglikfitter_mps_draw_helper_colz
         // draw sysnone contour
         h_mps_sysall_contour->Draw("cont3same");
 
+
+
+        double min_chi2_sysnone, min_x_sysnone, min_y_sysnone;
+        int min_i_sysnone, min_j_sysnone;
+        for(Int_t j = 1; j <= h_mps_sysnone->GetNbinsY(); ++ j)
+        {
+            for(Int_t i = 1; i <= h_mps_sysnone->GetNbinsX(); ++ i)
+            {
+                const double content = h_mps_sysnone->GetBinContent(i, j);
+                const double x = h_mps_sysnone->GetXaxis()->GetBinCenter(i);
+                const double y = h_mps_sysnone->GetYaxis()->GetBinCenter(j);
+                if((i == 1) && (j == 1))
+                {
+                    min_chi2_sysnone = content;
+                    min_x_sysnone = x;
+                    min_y_sysnone = y;
+                    min_i_sysnone = i;
+                    min_j_sysnone = j;
+                }
+                else if(content < min_chi2_sysnone)
+                {
+                    min_chi2_sysnone = content;
+                    min_x_sysnone = x;
+                    min_y_sysnone = y;
+                    min_i_sysnone = i;
+                    min_j_sysnone = j;
+                }
+            }
+        }
+
+
         // draw sysnone contour
         TH2D *h_mps_sysnone = mps_draw_data_sysnone.h_mps;
         TH2D *h_mps_sysnone_contour = (TH2D*)h_mps_sysnone->Clone("h_mps_1_0_clone_sysnone");
         h_mps_sysnone_contour->SetLineColor(kGreen);
         //h_mps_sysnone_contour->SetLineColor(kGray);
         h_mps_sysnone_contour->SetLineWidth(2);
-        double clevels[3] = {min_fval_SYSNONE + 2.30, min_fval_SYSNONE + 4.61, min_fval_SYSNONE + 9.21};
-        h_mps_sysnone_contour->SetContour(3, clevels);
+        double clevels_sysnone[3] = {min_chi2_sysnone + 2.30, min_chi2_sysnone + 4.61, min_chi2_sysnone + 9.21};
+        //double clevels[3] = {min_fval_SYSNONE + 2.30, min_fval_SYSNONE + 4.61, min_fval_SYSNONE + 9.21};
+        h_mps_sysnone_contour->SetContour(3, clevels_sysnone);
         h_mps_sysnone_contour->Draw("cont3same");
 
 
@@ -507,9 +569,42 @@ void newloglikfitter_mps_draw_helper
         h_mps_sysall->Draw("AXIS");
 
 
+
+
+        double min_chi2_sysall, min_x_sysall, min_y_sysall;
+        int min_i_sysall, min_j_sysall;
+        for(Int_t j = 1; j <= h_mps_sysall->GetNbinsY(); ++ j)
+        {
+            for(Int_t i = 1; i <= h_mps_sysall->GetNbinsX(); ++ i)
+            {
+                const double content = h_mps_sysall->GetBinContent(i, j);
+                const double x = h_mps_sysall->GetXaxis()->GetBinCenter(i);
+                const double y = h_mps_sysall->GetYaxis()->GetBinCenter(j);
+                if((i == 1) && (j == 1))
+                {
+                    min_chi2_sysall = content;
+                    min_x_sysall = x;
+                    min_y_sysall = y;
+                    min_i_sysall = i;
+                    min_j_sysall = j;
+                }
+                else if(content < min_chi2_sysall)
+                {
+                    min_chi2_sysall = content;
+                    min_x_sysall = x;
+                    min_y_sysall = y;
+                    min_i_sysall = i;
+                    min_j_sysall = j;
+                }
+            }
+        }
+
+
+
         std::cout << "min=" << min << " min_x=" << min_x << " min_y=" << min_y << std::endl;
         //double clevels[3] = {min + 1.0, min + 2.0, min + 3.0};
-        double clevels_sysall[3] = {min_fval_SYSALL + 2.30, min_fval_SYSALL + 4.61, min_fval_SYSALL + 9.21};
+        double clevels_sysall[3] = {min_chi2_sysall + 2.30, min_chi2_sysall + 4.61, min_chi2_sysall + 9.21};
+        //double clevels_sysall[3] = {min_fval_SYSALL + 2.30, min_fval_SYSALL + 4.61, min_fval_SYSALL + 9.21};
         //double clevels[3] = {2.30, 4.61, 9.21}; // true minimum is 0.0 for HSD
         //h_mps_contour->SetLineColor(kGreen); //kRed
         //h_mps_contour->SetLineColor(kCyan); //kRed
@@ -606,14 +701,47 @@ void newloglikfitter_mps_draw_helper
         // draw sysall contour
         h_mps_sysall_contour->Draw("cont3same");
 
+
+
+        double min_chi2_sysnone, min_x_sysnone, min_y_sysnone;
+        int min_i_sysnone, min_j_sysnone;
+        for(Int_t j = 1; j <= h_mps_sysnone->GetNbinsY(); ++ j)
+        {
+            for(Int_t i = 1; i <= h_mps_sysnone->GetNbinsX(); ++ i)
+            {
+                const double content = h_mps_sysnone->GetBinContent(i, j);
+                const double x = h_mps_sysnone->GetXaxis()->GetBinCenter(i);
+                const double y = h_mps_sysnone->GetYaxis()->GetBinCenter(j);
+                if((i == 1) && (j == 1))
+                {
+                    min_chi2_sysnone = content;
+                    min_x_sysnone = x;
+                    min_y_sysnone = y;
+                    min_i_sysnone = i;
+                    min_j_sysnone = j;
+                }
+                else if(content < min_chi2_sysnone)
+                {
+                    min_chi2_sysnone = content;
+                    min_x_sysnone = x;
+                    min_y_sysnone = y;
+                    min_i_sysnone = i;
+                    min_j_sysnone = j;
+                }
+            }
+        }
+
+
+
         // draw sysall contour
         TH2D *h_mps_sysnone = mps_draw_data_sysnone.h_mps;
         TH2D *h_mps_sysnone_contour = (TH2D*)h_mps_sysnone->Clone("h_mps_1_0_clone_sysnone");
         //h_mps_sysnone_contour->SetLineColor(kGreen);
         h_mps_sysnone_contour->SetLineColor(kGray + 2);
         h_mps_sysnone_contour->SetLineWidth(2);
-        double clevels[3] = {min_fval_SYSNONE + 2.30, min_fval_SYSNONE + 4.61, min_fval_SYSNONE + 9.21};
-        h_mps_sysnone_contour->SetContour(3, clevels);
+        double clevels_sysnone[3] = {min_chi2_sysnone + 2.30, min_chi2_sysnone + 4.61, min_chi2_sysnone + 9.21};
+        //double clevels[3] = {min_fval_SYSNONE + 2.30, min_fval_SYSNONE + 4.61, min_fval_SYSNONE + 9.21};
+        h_mps_sysnone_contour->SetContour(3, clevels_sysnone);
         h_mps_sysnone_contour->Draw("cont3same");
 
 
@@ -821,9 +949,39 @@ void newloglikfitter_mps_draw_helper_sys_only
         h_mps_sysall->Draw("AXIS");
 
 
+
+        double min_chi2_sysall, min_x_sysall, min_y_sysall;
+        int min_i_sysall, min_j_sysall;
+        for(Int_t j = 1; j <= h_mps_sysall->GetNbinsY(); ++ j)
+        {
+            for(Int_t i = 1; i <= h_mps_sysall->GetNbinsX(); ++ i)
+            {
+                const double content = h_mps_sysall->GetBinContent(i, j);
+                const double x = h_mps_sysall->GetXaxis()->GetBinCenter(i);
+                const double y = h_mps_sysall->GetYaxis()->GetBinCenter(j);
+                if((i == 1) && (j == 1))
+                {
+                    min_chi2_sysall = content;
+                    min_x_sysall = x;
+                    min_y_sysall = y;
+                    min_i_sysall = i;
+                    min_j_sysall = j;
+                }
+                else if(content < min_chi2_sysall)
+                {
+                    min_chi2_sysall = content;
+                    min_x_sysall = x;
+                    min_y_sysall = y;
+                    min_i_sysall = i;
+                    min_j_sysall = j;
+                }
+            }
+        }
+
+
         std::cout << "min=" << min << " min_x=" << min_x << " min_y=" << min_y << std::endl;
         //double clevels[3] = {min + 1.0, min + 2.0, min + 3.0};
-        double clevels_sysall[3] = {min_fval_SYSALL + 2.30, min_fval_SYSALL + 4.61, min_fval_SYSALL + 9.21};
+        double clevels_sysall[3] = {min_chi2_sysall + 2.30, min_chi2_sysall + 4.61, min_chi2_sysall + 9.21};
         //double clevels[3] = {2.30, 4.61, 9.21}; // true minimum is 0.0 for HSD
         //h_mps_contour->SetLineColor(kGreen); //kRed
         //h_mps_contour->SetLineColor(kCyan); //kRed
