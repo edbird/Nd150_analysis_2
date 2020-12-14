@@ -167,6 +167,7 @@ void newloglikfitter_mps_draw_helper_colz
                 }
             }
         }
+        std::cout << "min_chi2_sysall=" << min_chi2_sysall << " min_x_sysall=" << min_x_sysall << " min_y_sysall=" << min_y_sysall << std::endl;
 
 
         std::cout << "min=" << min << " min_x=" << min_x << " min_y=" << min_y << std::endl;
@@ -303,6 +304,7 @@ void newloglikfitter_mps_draw_helper_colz
                 }
             }
         }
+        std::cout << "min_chi2_sysnone=" << min_chi2_sysnone << " min_x_sysnone=" << min_x_sysnone << " min_y_sysnone=" << min_y_sysnone << std::endl;
 
 
         TH2D *h_mps_sysnone_contour = (TH2D*)h_mps_sysnone->Clone("h_mps_1_0_clone_sysnone");
@@ -599,6 +601,7 @@ void newloglikfitter_mps_draw_helper
                 }
             }
         }
+        std::cout << "min_chi2_sysall=" << min_chi2_sysall << " min_x_sysall=" << min_x_sysall << " min_y_sysall=" << min_y_sysall << std::endl;
 
 
 
@@ -734,6 +737,7 @@ void newloglikfitter_mps_draw_helper
                 }
             }
         }
+        std::cout << "min_chi2_sysnone=" << min_chi2_sysnone << " min_x_sysnone=" << min_x_sysnone << " min_y_sysnone=" << min_y_sysnone << std::endl;
 
 
 
@@ -979,6 +983,7 @@ void newloglikfitter_mps_draw_helper_sys_only
                 }
             }
         }
+        std::cout << "min_chi2_sysall=" << min_chi2_sysall << " min_x_sysall=" << min_x_sysall << " min_y_sysall=" << min_y_sysall << std::endl;
 
 
         std::cout << "min=" << min << " min_x=" << min_x << " min_y=" << min_y << std::endl;
