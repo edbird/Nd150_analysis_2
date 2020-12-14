@@ -272,6 +272,9 @@ void newloglikfitter_mps_draw_helper_colz
         h_mps_sysall_contour->Draw("cont3same");
 
 
+        // draw sysnone contour
+        TH2D *h_mps_sysnone = mps_draw_data_sysnone.h_mps;
+
 
         double min_chi2_sysnone, min_x_sysnone, min_y_sysnone;
         int min_i_sysnone, min_j_sysnone;
@@ -302,8 +305,6 @@ void newloglikfitter_mps_draw_helper_colz
         }
 
 
-        // draw sysnone contour
-        TH2D *h_mps_sysnone = mps_draw_data_sysnone.h_mps;
         TH2D *h_mps_sysnone_contour = (TH2D*)h_mps_sysnone->Clone("h_mps_1_0_clone_sysnone");
         h_mps_sysnone_contour->SetLineColor(kGreen);
         //h_mps_sysnone_contour->SetLineColor(kGray);
@@ -702,6 +703,9 @@ void newloglikfitter_mps_draw_helper
         h_mps_sysall_contour->Draw("cont3same");
 
 
+        // draw sysall contour
+        TH2D *h_mps_sysnone = mps_draw_data_sysnone.h_mps;
+
 
         double min_chi2_sysnone, min_x_sysnone, min_y_sysnone;
         int min_i_sysnone, min_j_sysnone;
@@ -733,8 +737,6 @@ void newloglikfitter_mps_draw_helper
 
 
 
-        // draw sysall contour
-        TH2D *h_mps_sysnone = mps_draw_data_sysnone.h_mps;
         TH2D *h_mps_sysnone_contour = (TH2D*)h_mps_sysnone->Clone("h_mps_1_0_clone_sysnone");
         //h_mps_sysnone_contour->SetLineColor(kGreen);
         h_mps_sysnone_contour->SetLineColor(kGray + 2);
