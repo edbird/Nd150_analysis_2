@@ -145,39 +145,39 @@ BREAK
 BREAK
 # NO EVENTS
 22  enabled     P1_enabled  P2_enabled  1.3e-3      0.2e-3      useinit     useinit     soft    RN222       bi210_sfoil                 bi210_sfoil 	                                END     # 0 events
-23  enabled     P1_enabled  P2_enabled  9.0         0.0         useinit     useinit     hard    RN222       bi210_swire                 bi210_swire 	                                END     # 5 events
-24  enabled     P1_enabled  P2_enabled  34.0        4.0         useinit     useinit     soft    RN222       bi210_sscin                 bi210_sscin 	                                END     # 0 events
+23  enabled     P1_enabled  P2_enabled  12.0        1.0         useinit     useinit     hard    RN222       bi210_swire                 bi210_swire 	                                END     # 5 events
+24  enabled     P1_enabled  P2_enabled  32.0        4.0         useinit     useinit     soft    RN222       bi210_sscin                 bi210_sscin 	                                END     # 0 events
 BREAK
-25  enabled     P1_enabled  P2_enabled  186.0	    62.0        useinit     useinit     soft    RN222       bi214_pmt                   bi214_pmt	                                    END     # 22 events
-26  enabled     P1_enabled  P2_enabled  36.0	    5.0         useinit     useinit     soft    RN222       ac228_tl208_pmt             ac228_pmt   tl208_pmt                           END     # 0 events, 18 events
-27  enabled     P1_enabled  P2_enabled  9295.0	    2691        useinit     useinit     soft    RN222       bi214_feshield              bi214_feShield	                                END     # 17 events
-28  enabled     P1_enabled  P2_enabled  1090.0      529.0       useinit     useinit     soft    RN222       ac228_tl208_feshield        ac228_feShield  tl208_feShield                  END     # 1 events, 2 events
+25  enabled     P1_enabled  P2_enabled  146.0	    53.0        useinit     useinit     soft    RN222       bi214_pmt                   bi214_pmt	                                    END     # 22 events
+26  enabled     P1_enabled  P2_enabled  30.0	    4.0         useinit     useinit     soft    RN222       ac228_tl208_pmt             ac228_pmt   tl208_pmt                           END     # 0 events, 18 events
+27  enabled     P1_enabled  P2_enabled  10673.0	    2199        useinit     useinit     soft    RN222       bi214_feshield              bi214_feShield	                                END     # 17 events
+28  enabled     P1_enabled  P2_enabled  687.0       165.0       useinit     useinit     soft    RN222       ac228_tl208_feshield        ac228_feShield  tl208_feShield                  END     # 1 events, 2 events
 BREAK
 BREAK
-29  enabled     P1_enabled  P2_enabled  3.1         0.5         useinit     useinit     soft    RN222       pa234m_sscin                pa234m_sscin                                    END     # 0 events
-30  enabled     P1_enabled  P2_enabled  60.0    	22.0        useinit     useinit     soft    RN222       co60_cutower                co60_cuTower	                                END     # 1 events
-31  enabled     P1_enabled  P2_enabled  1124.0	    93.0        useinit     useinit     soft    RN222       k40_pmt                     k40_pmt	                                        END     # 5 events
+29  enabled     P1_enabled  P2_enabled  3.0         0.4         useinit     useinit     soft    RN222       pa234m_sscin                pa234m_sscin                                    END     # 0 events
+30  enabled     P1_enabled  P2_enabled  55.0    	21.0        useinit     useinit     soft    RN222       co60_cutower                co60_cuTower	                                END     # 1 events
+31  enabled     P1_enabled  P2_enabled  1141.0	    90.0        useinit     useinit     soft    RN222       k40_pmt                     k40_pmt	                                        END     # 5 events
 32  enabled     P1_enabled  P2_enabled  16.0        4.0         useinit     useinit     soft    RN222       k40_scint                   k40_scintIN k40_scintOUT k40_scintPET           END     # 0 events
 BREAK
 #22  disabled     P1_enabled P2_enabled  1.0e-3      0.6e-3      same        same        useinit     useinit     same        same        soft    soft    bi214_sfoil     pb214_sfoil	    END # 271, 23
 #23  disabled     P1_enabled P2_enabled  1.3e-3      1.6e-3      same        same        useinit     useinit     same        same        soft    soft    bi214_swire     pb214_swire 	END
 #23  disabled     P1_enabled P2_enabled  1.3e-3      1.0e-3      same        same        useinit     useinit     same        same        soft    soft    bi214_swire     pb214_swire 	END # 328, 21
 # TODO: these do not work useinit/same problem
-33  enabled     P1_enabled  P2_disabled 8.5e-3      8.5e-4      useinit     useinit     soft    RN222       bi214_pb214_sfoil_in_P1     bi214_sfoil_IN      pb214_sfoil_IN              END
-34  enabled     P1_enabled  P2_disabled 5.3e-3      5.3e-4      useinit     useinit     soft    RN222       bi214_pb214_sfoil_out_P1    bi214_sfoil_OUT     pb214_sfoil_OUT             END
-35  enabled     P1_enabled  P2_disabled 15.3e-3     15.3e-4     useinit     useinit     soft    RN222       bi214_pb214_swire_inL0_P1   bi214_swire_INL0    pb214_swire_INL0            END
-36  enabled     P1_enabled  P2_disabled 29.9e-3     29.9e-4     useinit     useinit     soft    RN222       bi214_pb214_swire_outL0_P1  bi214_swire_OUTL0   pb214_swire_OUTL0           END
-37  enabled     P1_enabled  P2_disabled 857.5e-3    857.5e-4    useinit     useinit     soft    RN222       bi214_pb214_swire_Lg0_P1    bi214_swire_Lg0     pb214_swire_Lg0             END
+33  enabled     P1_enabled  P2_disabled 8.5e-3      3.2e-3      useinit     useinit     soft    RN222       bi214_pb214_sfoil_in_P1     bi214_sfoil_IN      pb214_sfoil_IN              END
+34  enabled     P1_enabled  P2_disabled 5.3e-3      2.9e-3      useinit     useinit     soft    RN222       bi214_pb214_sfoil_out_P1    bi214_sfoil_OUT     pb214_sfoil_OUT             END
+35  enabled     P1_enabled  P2_disabled 15.3e-3     8.7e-3      useinit     useinit     soft    RN222       bi214_pb214_swire_inL0_P1   bi214_swire_INL0    pb214_swire_INL0            END
+36  enabled     P1_enabled  P2_disabled 29.9e-3     9.7e-3      useinit     useinit     soft    RN222       bi214_pb214_swire_outL0_P1  bi214_swire_OUTL0   pb214_swire_OUTL0           END
+37  enabled     P1_enabled  P2_disabled 857.5e-3    194.9e-3    useinit     useinit     soft    RN222       bi214_pb214_swire_Lg0_P1    bi214_swire_Lg0     pb214_swire_Lg0             END
 BREAK
-38  enabled     P1_disabled P2_enabled  1.4e-3      1.4e-4      useinit     useinit     soft    RN222       bi214_pb214_sfoil_in_P2     bi214_sfoil_IN      pb214_sfoil_IN              END
-39  enabled     P1_disabled P2_enabled  1.8e-3      1.8e-4      useinit     useinit     soft    RN222       bi214_pb214_sfoil_out_P2    bi214_sfoil_OUT     pb214_sfoil_OUT             END
-40  enabled     P1_disabled P2_enabled  1.2e-3      1.2e-4      useinit     useinit     soft    RN222       bi214_pb214_swire_inL0_P2   bi214_swire_INL0    pb214_swire_INL0            END
-41  enabled     P1_disabled P2_enabled  0.4e-3      0.4e-4      useinit     useinit     soft    RN222       bi214_pb214_swire_outL0_P2  bi214_swire_OUTL0   pb214_swire_OUTL0           END
-42  enabled     P1_disabled P2_enabled  101.3e-3    101.3e-4    useinit     useinit     soft    RN222       bi214_pb214_swire_Lg0_P2    bi214_swire_Lg0     pb214_swire_Lg0             END
+38  enabled     P1_disabled P2_enabled  1.4e-3      0.7e-3      useinit     useinit     soft    RN222       bi214_pb214_sfoil_in_P2     bi214_sfoil_IN      pb214_sfoil_IN              END
+39  enabled     P1_disabled P2_enabled  1.8e-3      0.8e-3      useinit     useinit     soft    RN222       bi214_pb214_sfoil_out_P2    bi214_sfoil_OUT     pb214_sfoil_OUT             END
+40  enabled     P1_disabled P2_enabled  1.2e-3      2.0e-3      useinit     useinit     soft    RN222       bi214_pb214_swire_inL0_P2   bi214_swire_INL0    pb214_swire_INL0            END
+41  enabled     P1_disabled P2_enabled  0.4e-3      3.9e-3      useinit     useinit     soft    RN222       bi214_pb214_swire_outL0_P2  bi214_swire_OUTL0   pb214_swire_OUTL0           END
+42  enabled     P1_disabled P2_enabled  101.3e-3    58.5e-3     useinit     useinit     soft    RN222       bi214_pb214_swire_Lg0_P2    bi214_swire_Lg0     pb214_swire_Lg0             END
 # TODO
 BREAK
-43  enabled     P1_enabled  P2_disabled 557.0	    38.0        useinit     useinit     hard    RN222       bi214_pb214_air_P1          bi214_air   pb214_air                           END     # 4 events
-44  enabled     P1_enabled  P2_disabled 9.0  	    4.0         useinit     useinit     hard    RN220       tl208_air_P1                tl208_air   	                                END     # 0 events
+43  enabled     P1_enabled  P2_disabled 573.0	    36.0        useinit     useinit     hard    RN222       bi214_pb214_air_P1          bi214_air   pb214_air                           END     # 4 events
+44  enabled     P1_enabled  P2_disabled 7.0  	    4.0         useinit     useinit     hard    RN220       tl208_air_P1                tl208_air   	                                END     # 0 events
 BREAK
 BREAK
 BREAK
