@@ -294,6 +294,12 @@ class mpsdrawdata
         double min_stripe_y = 0.0;
 
 
+
+        // n_param_1, got_n_param_1
+        // n_param_2, got_n_param_2
+        TH2I *h_mps_check = nullptr;
+
+
         // reading
         std::size_t line_count = 0;
         int n_1_last = -1;
@@ -558,6 +564,13 @@ class mpsdrawdata
                                 h_mps->SetContour(1000);
                                 h_mps->GetXaxis()->SetTitle("^{150}Nd Amplitude Scale Factor");
                                 h_mps->GetYaxis()->SetTitle("#xi_{31}^{2#nu#beta#beta}");
+
+                                    
+                                // check all values read
+                                h_mps_check = new TH2I("h_mps_check", "h_mps_check",
+                                                       n_param_1, param_1_min, param_1_max,
+                                                       n_param_2, param_2_min, param_2_max); 
+                                                    
                             }
                         }
                         else
@@ -593,6 +606,13 @@ class mpsdrawdata
                                 h_mps->SetContour(1000);
                                 h_mps->GetXaxis()->SetTitle("^{150}Nd Amplitude Scale Factor");
                                 h_mps->GetYaxis()->SetTitle("#xi_{31}^{2#nu#beta#beta}");
+
+                                    
+                                // check all values read
+                                h_mps_check = new TH2I("h_mps_check", "h_mps_check",
+                                                       n_param_1, param_1_min, param_1_max,
+                                                       n_param_2, param_2_min, param_2_max); 
+
                             }
                         }
                         else
@@ -634,6 +654,7 @@ class mpsdrawdata
                     break;
                     std::cin.get();
                 }
+
                 //int n_1, n_2;
                 int n_2;
                 double fval;
@@ -691,7 +712,7 @@ class mpsdrawdata
                 {
                     if(n_1_last != -1)
                     {
-                        std::cout << "n_1=" << n_1 << " min_stripe=" << min_stripe << " min_stripe_x=" << t_param_1 << " min_stripe_y=" << min_stripe_y << std::endl;
+                        //std::cout << "n_1=" << n_1 << " min_stripe=" << min_stripe << " min_stripe_x=" << t_param_1 << " min_stripe_y=" << min_stripe_y << std::endl;
 
                         min_stripe = std::numeric_limits<double>::infinity();
                         min_stripe_y = 0.0;
@@ -731,6 +752,10 @@ class mpsdrawdata
                     // have to hope that 0.0 does not appear as a real value
                     // in the mps or the error message in below block will not
                     // be triggered
+
+                                    
+                    // check all values read
+                    h_mps_check->SetBinContent(bin_ix, bin_iy, h_mps_check->GetBinContent(bin_ix, bin_iy) + 1);
                 }
                 else
                 {
@@ -753,6 +778,19 @@ class mpsdrawdata
 
 
         ifs_resultsmatrix.close();
+
+
+        for(Int_t j = 1; j <= h_mps_check->GetNbinsY(); ++ j)
+        {
+            for(Int_t i = 1; i <= h_mps_check->GetNbinsX(); ++ i)
+            {
+                int content = h_mps_check->GetBinContent(i, j);
+                if(content != 1)
+                {
+                    std::cout << "h_mps_check: ERROR: detected " << content << " location: " << i << ", " << j << std::endl;
+                }
+            }
+        }
 
 
         ///////////////////////////////////////////////////////////////////////
