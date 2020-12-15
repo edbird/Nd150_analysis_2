@@ -210,7 +210,7 @@ void fitBackgrounds_init(
             {
                 if(minuit_param_number > 1)
                 {
-                    std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
+                    //std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
                     theParameterState.Fix(std::string(minuit_param_name));
                 }
             }
@@ -229,7 +229,7 @@ void fitBackgrounds_init(
                 }
                 else
                 {
-                    std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
+                    //std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
                     theParameterState.Fix(std::string(minuit_param_name));
                 }
             }
@@ -424,7 +424,7 @@ void fitBackgrounds_phasespace_init(
             {
                 if(minuit_param_number > 1)
                 {
-                    std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
+                    //std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
                     theParameterState.Fix(std::string(minuit_param_name));
                 }
             }
@@ -443,7 +443,7 @@ void fitBackgrounds_phasespace_init(
                 }
                 else
                 {
-                    std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
+                    //std::cout << "Fixing parameter number: " << minuit_param_number << std::endl;
                     theParameterState.Fix(std::string(minuit_param_name));
                 }
             }
