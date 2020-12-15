@@ -782,7 +782,8 @@ void loadFiles(int i)
     //const double xi_31_covariance_matrix_reweight_value = 0.0;
     const double xi_31_covariance_matrix_reweight_value = 0.7;
 
-
+    // TODO: should I set amplitude to 1.15 here?
+    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
 
 
 
@@ -822,6 +823,7 @@ void loadFiles(int i)
                 systematic_n_V_MATRIX_coeff_1D_P2[i][channel] = new std::vector<double>;
             }
 
+        /*
             for(int b = 0; b < N_BKG_SYSTEMATICS; ++ b)
             {
                 // P1
@@ -834,7 +836,7 @@ void loadFiles(int i)
                 systematic_bkg_high_1D_P2[b][channel] = new std::vector<double>;
                 systematic_bkg_V_MATRIX_coeff_1D_P2[b][channel] = new std::vector<double>;
             }
-
+        */
         }
         // check channel enabled
         //if(channel_enable_1D[channel] == 0)
@@ -1237,13 +1239,13 @@ void loadFiles(int i)
         // populate coefficients
         for(int b = 0; b < N_BKG_SYSTEMATICS; ++ b)
         {
-            systematic_bkg[b] = 1.0;
-            rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-            systematic_init_helper(&(systematic_bkg_low_1D_P1[b][0]), &(systematic_bkg_low_1D_P2[b][0]));
- 
-            systematic_bkg[b] = -1.0;
+            systematic_bkg[b] = +1.0;
             rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
             systematic_init_helper(&(systematic_bkg_high_1D_P1[b][0]), &(systematic_bkg_high_1D_P2[b][0]));
+
+            systematic_bkg[b] = -1.0;
+            rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
+            systematic_init_helper(&(systematic_bkg_low_1D_P1[b][0]), &(systematic_bkg_low_1D_P2[b][0]));
 
             systematic_bkg[b] = 0.0;
 
@@ -1416,6 +1418,13 @@ void loadFiles(int i)
 
     }
 
+    // reset systematics
+    gSystematics.reset();
+    //rebuild_fake_data_systematics(xi_31_SSD, xi_31_baseline);
+    ND150_FAKEDATA_SCALE_FACTOR = 1.0;
+    rebuild_fake_data_systematics(xi_31_systematics_reweight_value, xi_31_baseline);
+    gSystematics.reset();
+    ND150_FAKEDATA_SCALE_FACTOR = 1.0;
 
 
 
