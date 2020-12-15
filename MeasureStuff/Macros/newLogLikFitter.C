@@ -1218,7 +1218,10 @@ void loadFiles(int i)
         // alloc memory
         for(int channel = 0; channel < number1DHists; ++ channel)
         {
-            if(systematic_bkg_low_1D_P1[channel] == nullptr)
+    
+            // very weird code in this context, was copied from above loop
+
+            if(systematic_bkg_low_1D_P1[0][channel] == nullptr)
             {
                 for(int b = 0; b < N_BKG_SYSTEMATICS; ++ b)
                 {
