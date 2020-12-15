@@ -738,6 +738,11 @@ void reweight_apply_fakedata(
                         (1.0 + gSystematics.systematic_efficiency);
                 }
 
+                
+
+                ///////////////////////////////////////////////////////////////
+                // foil thickness systematic
+                ///////////////////////////////////////////////////////////////
 
                 if(gSystematics.systematic_foil_thickness_virtual != 0.0)
                 {
@@ -757,6 +762,11 @@ void reweight_apply_fakedata(
                     }
                 }
 
+
+                ///////////////////////////////////////////////////////////////
+                // energy loss systematic
+                ///////////////////////////////////////////////////////////////
+
                 if(gSystematics.systematic_dEdX_virtual != 0.0)
                 {
                     if(gSystematics.systematic_dEdX_virtual > 0.0)
@@ -774,6 +784,11 @@ void reweight_apply_fakedata(
                         weight = weight * (std::abs(gSystematics.systematic_dEdX_virtual) * content);
                     }
                 }
+
+
+                ///////////////////////////////////////////////////////////////
+                // bremsstrahlung systematic
+                ///////////////////////////////////////////////////////////////
 
                 if(gSystematics.systematic_brem_virtual != 0.0)
                 {
@@ -793,6 +808,11 @@ void reweight_apply_fakedata(
                     }
                 }
 
+
+                ///////////////////////////////////////////////////////////////
+                // foil thickness systematic
+                ///////////////////////////////////////////////////////////////
+
                 if(gSystematics.systematic_foil_thickness_nominal != 0.0)
                 {
                     if(gSystematics.systematic_foil_thickness_nominal > 0.0)
@@ -810,6 +830,11 @@ void reweight_apply_fakedata(
                         weight = weight * (std::abs(gSystematics.systematic_foil_thickness_nominal) * content);
                     }
                 }
+
+
+                ///////////////////////////////////////////////////////////////
+                // energy loss systematic
+                ///////////////////////////////////////////////////////////////
 
                 if(gSystematics.systematic_dEdX_nominal != 0.0)
                 {
@@ -829,6 +854,11 @@ void reweight_apply_fakedata(
                     }
                 }
 
+
+                ///////////////////////////////////////////////////////////////
+                // bremsstrahlung systematic
+                ///////////////////////////////////////////////////////////////
+
                 if(gSystematics.systematic_brem_nominal != 0.0)
                 {
                     if(gSystematics.systematic_brem_nominal > 0.0)
@@ -845,6 +875,18 @@ void reweight_apply_fakedata(
                         Double_t content{gSystematics.h_systematic_brem_nominal_l->GetBinContent(bin_x, bin_y)};
                         weight = weight * (std::abs(gSystematics.systematic_brem_nominal) * content);
                     }
+                }
+
+                
+                ///////////////////////////////////////////////////////////////
+                // background systematics
+                ///////////////////////////////////////////////////////////////
+
+                if(BACKGROUND_MODE == BACKGROUND_MODE_B)
+                {
+
+                    // nothing to do here
+
                 }
 
                 ///////////////////////////////////////////////////////////////
@@ -1183,9 +1225,12 @@ void reweight_apply_fakedata(
             if(paramEnabledP1)
             {
                 double param_scale_factor = paramInitValue;
-                if(systematic_bkg[paramNumber] != 0.0)
+                if(paramNumber >= 2)
                 {
-                    param_scale_factor += systematic_bkg[paramNumber] * paramInitError;
+                    if(systematic_bkg[paramNumber - 2] != 0.0)
+                    {
+                        param_scale_factor += systematic_bkg[paramNumber - 2] * paramInitError;
+                    }
                 }
 
                 hTotalE_P1_tmp->Scale(param_scale_factor);
@@ -1200,9 +1245,12 @@ void reweight_apply_fakedata(
             if(paramEnabledP2)
             {
                 double param_scale_factor = paramInitValue;
-                if(systematic_bkg[paramNumber] != 0.0)
+                if(paramNumber >= 2)
                 {
-                    param_scale_factor += systematic_bkg[paramNumber] * paramInitError;
+                    if(systematic_bkg[paramNumber - 2] != 0.0)
+                    {
+                        param_scale_factor += systematic_bkg[paramNumber - 2] * paramInitError;
+                    }
                 }
 
                 hTotalE_P2_tmp->Scale(param_scale_factor);
@@ -1292,39 +1340,5 @@ void reweight_apply_fakedata(
 
 }
 
-#if 0
-    // loop over all the parameters
-    std::map<int, file_parameter>::iterator it{g_pg.file_params.begin()};
-    for(; it != g_pg.file_params.end(); ++ it)
-    {
-        int paramNumberInt = -1;
-
-        int paramNumber = it->second.paramNumber;
-        double paramInitValue = it->second.paramInitValue;
-        double paramInitError = it->second.paramInitError;
-
-        // loop over all MC names
-        std::vector<std::string>::iterator mc_name_it{it->second.MCNameList.begin()};
-        for(; mc_name_it != it->second.MCNameList.end(); ++ mc_name_it)
-        {
-            std::string mc_name = *mc_name_it;
-            std::string histname = std::string(channel_histname_1D[channel]);
-            std::string search_object_P1 = histname + mc_name + "_P1_fit";
-            std::string search_object_P2 = histname + mc_name + "_P2_fit";
-            TH1D *tmpHist1D_P1 = nullptr;
-            TH1D *tmpHist1D_P2 = nullptr;
-
-            if(debuglevel >= 5)
-            {
-                std::cout << "search_object_P1=" << search_object_P1
-                          << " search_object_P2=" << search_object_P2 << std::endl;
-            }
-
-            paramNumberInt = g_pg.ExtToIntParamNumberMap.at(paramNumber);
-            if(debuglevel >= 5)
-            {
-                std::cout << "paramNumber=" << paramNumber << " -> " << paramNumberInt << std::endl;
-            }
-#endif
 
 #endif // NEWLOGLIKFITTER_REWEIGHT_APPLY_FAKEDATA_H
