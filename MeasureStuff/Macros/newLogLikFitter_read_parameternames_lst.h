@@ -601,7 +601,7 @@ int process_line_else(std::string& s, std::stringstream &ss)
             if(paramInitSystematicError_str.back() == '%')
             {
                 std::string tmp = paramInitSystematicError_str.substr(0, paramInitSystematicError_str.size() - 1);
-                double percent = std::stod(tmp);
+                double percent = 1.0e-2 * std::stod(tmp);
                 paramInitSystematicError = paramInitValue * percent;
                 std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
             }
