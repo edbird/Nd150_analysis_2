@@ -596,6 +596,7 @@ int process_line_else(std::string& s, std::stringstream &ss)
 
     try
     {
+        std::cout << paramInitSystematicError_str << std::endl;
         if(paramInitSystematicError_str.size() > 0)
         {
             if(paramInitSystematicError_str.back() == '%')
@@ -609,6 +610,7 @@ int process_line_else(std::string& s, std::stringstream &ss)
         else
         {
             paramInitSystematicError = std::stod(paramInitSystematicError_str);
+            std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
         }
     }
     catch(...)
