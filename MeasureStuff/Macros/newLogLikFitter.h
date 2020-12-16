@@ -45,11 +45,11 @@
 
 const Int_t BACKGROUND_MODE_A = 0; // FREE (constrained) backgrounds. Do not add as systematics.
 const Int_t BACKGROUND_MODE_B = 1; // FIXED backgrounds. Add in a systematics
-const Int_t BACKGROUND_MODE = BACKGROUND_MODE_A;
+const Int_t BACKGROUND_MODE = BACKGROUND_MODE_B;
 
-const Int_t MODE_PARALLEL = 1;
+const Int_t MODE_PARALLEL = 0;
 
-bool g_mode_fake_data = false;
+bool g_mode_fake_data = true;
 
 bool V_ENABLE_SYSALL = true;
 
