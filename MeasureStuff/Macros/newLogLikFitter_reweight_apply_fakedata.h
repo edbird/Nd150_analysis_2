@@ -249,6 +249,7 @@ void reweight_apply_fakedata(
         bool paramEnabledP2 = it->second.paramEnabledP2;
         double paramInitValue = it->second.paramInitValue;
         double paramInitError = it->second.paramInitError;
+        double paramInitSystematicError = it->second.paramInitSystematicError;
 
         if(debuglevel >= 4)
         {
@@ -535,6 +536,7 @@ void reweight_apply_fakedata(
             double bi210Weight;
             double electronEnergy[2];
             double trueElectronEnergy[2];
+            double gauss[2];
 
             inputTree->SetBranchAddress("Run", &run);
             inputTree->SetBranchAddress("eventTime", &eventTime);
@@ -542,6 +544,7 @@ void reweight_apply_fakedata(
             inputTree->SetBranchAddress("bi210Weight", &bi210Weight);
             inputTree->SetBranchAddress("electronEnergy", electronEnergy);
             inputTree->SetBranchAddress("trueElectronEnergy", trueElectronEnergy);
+            inputTree->SetBranchAddress("gauss", gauss);
 
             double el_energy_0;
             double el_energy_1;
@@ -694,6 +697,12 @@ void reweight_apply_fakedata(
                 // energy scale factor (multiply)
                 el_energy_0 = el_energy_0 * (1.0 + gSystematics.systematic_energy_scale);
                 el_energy_1 = el_energy_1 * (1.0 + gSystematics.systematic_energy_scale);
+
+                el_energy_0 = el_energy_0 * (1.0 + gSystematics.systematic_energy_scale_small);
+                el_energy_1 = el_energy_1 * (1.0 + gSystematics.systematic_energy_scale_small);
+
+                el_energy_0 = el_energy_0 * (1.0 + gSystematics.systematic_energy_gaussian_smear * gauss[0]);
+                el_energy_1 = el_energy_1 * (1.0 + gSystematics.systematic_energy_gaussian_smear * gauss[1]);
 
                 //std::cout << "gSystematics.systematic_energy_offset=" << gSystematics.systematic_energy_offset << std::endl;
                 //std::cout << "el_energy_0=" << el_energy_0 << std::endl;
@@ -1221,17 +1230,190 @@ void reweight_apply_fakedata(
             }
             */
 
+
+            double systematic_bkg = 1.0; 
+            if(sampleName.Contains("bi214_int") || sampleName.Contains("pb214_int"))
+            {
+                if(gSystematics.systematic_bkg_bi214_int != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_bi214_int > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+            }
+            else if(sampleName.Contains("bi207_int"))
+            {
+                if(gSystematics.systematic_bkg_bi207_int != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_bi207_int > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+
+            }
+            else if(sampleName.Contains("ac228_int") || sampleName.Contains("bi212_int") || sampleName.Contains("tl208_int"))
+            {
+                if(gSystematics.systematic_bkg_tl208_int != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_tl208_int > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+
+            }
+            else if(sampleName.Contains("eu152_int") || sampleName.Contains("eu154_int"))
+            {
+                if(gSystematics.systematic_bkg_eu152_int != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_eu152_int > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+
+            }
+            else if(sampleName.Contains("k40_int") || sampleName.Contains("pa234m_int"))
+            {
+                if(gSystematics.systematic_bkg_k40_int != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_k40_int > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+
+            }
+            else if(sampleName.Contains("bi214_mylar") || sampleName.Contains("pb214_mylar"))
+            {
+                if(gSystematics.systematic_bkg_mylar != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_mylar > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+
+            }
+            else if(sampleName.Contains("bi214_sfoil") || sampleName.Contains("pb214_sfoil") ||
+                    sampleName.Contains("bi214_swire") || sampleName.Contains("pb214_swire"))
+            {
+                if(gSystematics.systematic_bkg_bi214_sfoil_swire != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_bi214_sfoil_swire > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+
+            }
+            else if(sampleName.Contains("bi214_air") || sampleName.Contains("pb214_air"))
+            {
+                if(gSystematics.systematic_bkg_bi214_air != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_bi214_air > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+
+            }
+            else if(sampleName.Contains("tl208_air"))
+            {
+                if(gSystematics.systematic_bkg_tl208_air != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_tl208_air > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+
+            }
+            else if(sampleName.Contains("bi214_pmt") ||
+                    sampleName.Contains("ac228_pmt") ||
+                    sampleName.Contains("tl208_pmt") || 
+                    sampleName.Contains("bi214_fe")  ||
+                    sampleName.Contains("ac228_fe")  ||
+                    sampleName.Contains("tl208_fe")  ||
+                    sampleName.Contains("co60")      ||
+                    sampleName.Contains("pa234m_sscin") ||
+                    sampleName.Contains("k40_pmt")   ||
+                    sampleName.Contains("k40_scint"))
+            {
+                if(gSystematics.systematic_bkg_external != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_external > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+            }
+            else if(sampleName.Contains("mo100") ||
+                    sampleName.Contains("zr96") ||
+                    sampleName.Contains("ca48"))
+            {
+                if(gSystematics.systematic_bkg_neighbour != 0.0)
+                {
+                    if(gSystematics.systematic_bkg_neighbour > 0.0)
+                    {
+                        systematic_bkg = 1.0;
+                    }
+                    else
+                    {
+                        systematic_bkg = -1.0;
+                    }
+                }
+            }
+
+
+
             // P1
             if(paramEnabledP1)
             {
                 double param_scale_factor = paramInitValue;
-                if(paramNumber >= 2)
-                {
-                    if(systematic_bkg[paramNumber - 2] != 0.0)
-                    {
-                        param_scale_factor += systematic_bkg[paramNumber - 2] * paramInitError;
-                    }
-                }
+                param_scale_factor += systematic_bkg * paramInitSystematicError;
 
                 hTotalE_P1_tmp->Scale(param_scale_factor);
                 hSingleEnergy_P1_tmp->Scale(param_scale_factor);
@@ -1245,13 +1427,7 @@ void reweight_apply_fakedata(
             if(paramEnabledP2)
             {
                 double param_scale_factor = paramInitValue;
-                if(paramNumber >= 2)
-                {
-                    if(systematic_bkg[paramNumber - 2] != 0.0)
-                    {
-                        param_scale_factor += systematic_bkg[paramNumber - 2] * paramInitError;
-                    }
-                }
+                param_scale_factor += systematic_bkg * paramInitSystematicError;
 
                 hTotalE_P2_tmp->Scale(param_scale_factor);
                 hSingleEnergy_P2_tmp->Scale(param_scale_factor);

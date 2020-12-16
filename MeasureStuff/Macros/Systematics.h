@@ -12,18 +12,8 @@ class Systematics
 
     Systematics()
     {
-        systematic_energy_offset = 0.0;
-        systematic_energy_scale = 0.0;
-        systematic_efficiency = 0.0;
-        systematic_enrichment = 0.0;
-        systematic_energy_offsetsmall = 0.0;
-        systematic_foil_thickness_virtual = 0.0;
-        systematic_dEdX_virtual = 0.0;
-        systematic_brem_virtual = 0.0;
-        systematic_foil_thickness_nominal = 0.0;
-        systematic_dEdX_nominal = 0.0;
-        systematic_brem_nominal = 0.0;
-        systematic_optical_correction = 0.0;
+
+        reset();
 
         aux_data_is_loaded = false;
 
@@ -52,12 +42,30 @@ class Systematics
         systematic_efficiency = 0.0;
         systematic_enrichment = 0.0;
         systematic_energy_offsetsmall = 0.0;
+        
         systematic_foil_thickness_virtual = 0.0;
         systematic_dEdX_virtual = 0.0;
         systematic_brem_virtual = 0.0;
+        
         systematic_foil_thickness_nominal = 0.0;
         systematic_dEdX_nominal = 0.0;
         systematic_brem_nominal = 0.0;
+
+        systematic_energy_scale_small = 0.0;
+        systematic_energy_gaussian_smear = 0.0;
+
+        systematic_bkg_bi214_int = 0.0;
+        systematic_bkg_bi207_int = 0.0;
+        systematic_bkg_tl208_int = 0.0;
+        systematic_bkg_eu152_int = 0.0;
+        systematic_bkg_k40_int = 0.0;
+        systematic_bkg_mylar = 0.0;
+        systematic_bkg_bi214_sfoil_swire = 0.0;
+        systematic_bkg_bi214_air = 0.0;
+        systematic_bkg_tl208_air = 0.0;
+        systematic_bkg_external = 0.0;
+        systematic_bkg_neighbour = 0.0;
+
         systematic_optical_correction = 0.0;
     }
 
@@ -156,18 +164,38 @@ class Systematics
     }
 
 
-    double systematic_energy_offset;
-    double systematic_energy_scale;
-    double systematic_efficiency;
-    double systematic_enrichment;
-    double systematic_energy_offsetsmall;
-    double systematic_foil_thickness_virtual;
-    double systematic_dEdX_virtual;
-    double systematic_brem_virtual;
-    double systematic_foil_thickness_nominal;
-    double systematic_dEdX_nominal;
-    double systematic_brem_nominal;
-    double systematic_optical_correction;
+    // initial systematics
+    double systematic_energy_offset;                // 0.1 MeV energy offset
+    double systematic_energy_scale;                 // 1.2 % energy scale
+    double systematic_efficiency;                   // 5.55 % efficiency
+    double systematic_enrichment;                   // 0.5 % enrichment
+    double systematic_energy_offsetsmall;           // 0.3 keV energy offset
+    double systematic_foil_thickness_virtual;       // FT V
+    double systematic_dEdX_virtual;                 // DE V
+    double systematic_brem_virtual;                 // B V
+    double systematic_foil_thickness_nominal;       // FT N
+    double systematic_dEdX_nominal;                 // DE N
+    double systematic_brem_nominal;                 // B N
+
+    double systematic_energy_scale_small;           // 0.2 % energy scale
+    double systematic_energy_gaussian_smear;        // 1.0 % Gaussian smear
+
+    // background systematics
+    double systematic_bkg_bi214_int;                // 214Bi / 214Pb INT
+    double systematic_bkg_bi207_int;                // 207 Bi INT
+    double systematic_bkg_tl208_int;                // 208 Tl INT
+    double systematic_bkg_eu152_int;                // 152/154 Eu INT
+    double systematic_bkg_k40_int;                  // 40 K INT
+    double systematic_bkg_mylar;                    // 214Bi / 214Pb mylar
+    double systematic_bkg_bi214_sfoil_swire;        // 214 Bi / 214 Pb sfoil/swire
+    double systematic_bkg_bi214_air;                // 214 Bi AIR
+    double systematic_bkg_tl208_air;                // 208 Tl AIR
+    double systematic_bkg_external;                 // external (all)
+    double systematic_bkg_neighbour;                // neighbour (all)
+
+    double systematic_optical_correction;           // optical correction systematic
+
+
 
     bool aux_data_is_loaded;
 
@@ -192,16 +220,36 @@ class Systematics
 void gSystematics_print()
 {
         std::cout << "SYSTEMATICS: CONSTANT OFFSET: " << gSystematics.systematic_energy_offset << " MeV" << std::endl;
-        std::cout << "SYSTEMATICS: CONSTANT SCALE: " << gSystematics.systematic_energy_scale << " MeV" << std::endl;
-        std::cout << "SYSTEMATICS: EFFICIENCY: " << gSystematics.systematic_efficiency << "" << std::endl;
-        std::cout << "SYSTEMATICS: ENRICHMENT: " << gSystematics.systematic_enrichment << "" << std::endl;
+        std::cout << "SYSTEMATICS: CONSTANT SCALE: " << gSystematics.systematic_energy_scale << " %" << std::endl;
+        std::cout << "SYSTEMATICS: EFFICIENCY: " << gSystematics.systematic_efficiency << " %" << std::endl;
+        std::cout << "SYSTEMATICS: ENRICHMENT: " << gSystematics.systematic_enrichment << " %" << std::endl;
         std::cout << "SYSTEMATICS: OFFSETSMALL: " << gSystematics.systematic_energy_offsetsmall << " MeV" << std::endl;
+
         std::cout << "SYSTEMATICS: FOIL THICKNESS (V): " << gSystematics.systematic_foil_thickness_virtual << " " << std::endl;
         std::cout << "SYSTEMATICS: ENERGY LOSS (V): " << gSystematics.systematic_dEdX_virtual << " " << std::endl;
         std::cout << "SYSTEMATICS: BREMSSTRAHLUNG (V): " << gSystematics.systematic_brem_virtual << " " << std::endl;
+        
         std::cout << "SYSTEMATICS: FOIL THICKNESS (N): " << gSystematics.systematic_foil_thickness_nominal << " " << std::endl;
         std::cout << "SYSTEMATICS: ENERGY LOSS (N): " << gSystematics.systematic_dEdX_nominal << " " << std::endl;
         std::cout << "SYSTEMATICS: BREMSSTRAHLUNG (N): " << gSystematics.systematic_brem_nominal << " " << std::endl;
+
+        std::cout << "SYSTEMATICS: CONSTANT SCALE SMALL: " << gSystematics.systematic_energy_scale_small << " %" << std::endl;
+        std::cout << "SYSTEMATICS: ENERGY GAUSSIAN SMEAR: " << gSystematics.systematic_energy_gaussian_smear << " %" << std::endl;
+
+        std::cout << "SYSTEMATICS: BKG 214Bi/214Pb INT: " << gSystematics.systematic_bkg_bi214_int << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG 207Pb INT: " << gSystematics.systematic_bkg_bi207_int << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG 228Ac/212Bi/208Tl INT: " << gSystematics.systematic_bkg_tl208_int << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG 152Eu/154Eu INT: " << gSystematics.systematic_bkg_eu152_int << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG 40k/234mPa INT: " << gSystematics.systematic_bkg_k40_int << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG 214Bi/214Pb MYLAR: " << gSystematics.systematic_bkg_mylar << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG 214Bi/214Pb SFOIL/SWIRE: " << gSystematics.systematic_bkg_bi214_sfoil_swire << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG 214Bi/214Pb AIR: " << gSystematics.systematic_bkg_bi214_air << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG 208Tl AIR: " << gSystematics.systematic_bkg_tl208_air << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG EXTERNAL: " << gSystematics.systematic_bkg_external << " " << std::endl;
+        std::cout << "SYSTEMATICS: BKG NEIGHBOUR FOIL: " << gSystematics.systematic_bkg_neighbour << " " << std::endl;
+        
+        std::cout << "SYSTEMATICS: OPTICAL CORRECTION ??? : " << gSystematics.systematic_optical_correction << " ??? " << std::endl;
+
 }
 
 

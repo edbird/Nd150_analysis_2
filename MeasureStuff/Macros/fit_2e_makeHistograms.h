@@ -2,6 +2,9 @@
 #define FIT_2E_MAKEHISTOGRAMS_H
 
 
+TRandom3 gRNG;
+
+
 // mode_flag = 0: run function with cuts enabled (normal), write to (normal)
 //                location (/rawdata/...)
 // mode_flag = 1: run function with cuts disabled, write to location
@@ -764,6 +767,8 @@ void makeHistograms(
     double      trueElectronEnergy[2]; // TODO
     #endif
 
+    double      gauss[2];
+
 
     // these are the old variable names
     //int         nLowEClusters;
@@ -964,6 +969,8 @@ void makeHistograms(
         outputTree_small->Branch("electronEnergy"               , electronEnergy            , "electronEnergy[2]/D");
         // truth information, save in all files to maintain homogenaity
         outputTree_small->Branch("trueElectronEnergy"           , trueElectronEnergy        , "trueElectronEnergy[2]/D");
+
+        outputTree_small->Branch("gauss"                        , gauss                     , "gauss[2]/D");
     }
     #else
     if(mode_flag == 0)
@@ -993,6 +1000,7 @@ void makeHistograms(
     Long_t events = (Long_t)theTree->GetEntries();
     for(Long_t event_i = 0; event_i < events; event_i++)
     {
+
 
         bool cut = false;
         //if(event_i % 1000 == 0)
@@ -1967,6 +1975,12 @@ void makeHistograms(
             }
             else
             {
+                const double G1 = gRNG.Gaus();
+                const double G2 = gRNG.Gaus();
+
+                gauss[0] = G1;
+                gauss[1] = G2;
+
                 if(thePhase == 0)
                 {
                     //if((1869 <= run) && (run <= 3395)) cut = false;

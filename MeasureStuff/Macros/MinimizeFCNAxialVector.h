@@ -356,6 +356,7 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
 
             if(BACKGROUND_MODE == BACKGROUND_MODE_B)
             {
+                /*
                 for(int b = 0; b < N_BKG_SYSTEMATICS; ++ b)
                 {
 
@@ -367,6 +368,7 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
                                                   systematic_bkg_V_MATRIX_coeff_1D_P2[b]);
 
                 }
+                */
             }
            
 

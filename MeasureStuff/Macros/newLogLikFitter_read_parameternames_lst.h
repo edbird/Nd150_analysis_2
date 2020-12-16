@@ -465,6 +465,7 @@ int process_line_else(std::string& s, std::stringstream &ss)
 
     std::string paramInitValue_str;
     std::string paramInitError_str;
+    std::string paramInitSystematicError_str;
 
     std::string paramConstraintValue_str;
     std::string paramConstraintError_str;
@@ -484,6 +485,7 @@ int process_line_else(std::string& s, std::stringstream &ss)
 
     double paramInitValue = 0.;
     double paramInitError = 0.;
+    double paramInitSystematicError = 0.;
 
     double paramConstraintValue = 0.;
     double paramConstraintError = 0.;
@@ -514,6 +516,7 @@ int process_line_else(std::string& s, std::stringstream &ss)
            >> paramEnabledP1_str
            >> paramEnabledP2_str
            >> paramInitValue_str >> paramInitError_str
+           >> paramInitSystematicError_str
            >> paramConstraintValue_str >> paramConstraintError_str
            >> paramConstraintMode_str
            >> paramStackType_str
@@ -588,6 +591,29 @@ int process_line_else(std::string& s, std::stringstream &ss)
     catch(...)
     {
         std::cout << "ERROR: paramInitError_str=" << paramInitError_str << std::endl;
+        ret = -1;
+    }
+
+    try
+    {
+        if(paramInitSystematicError_str.size() > 0)
+        {
+            if(paramInitSystematicError_str.back() == '%')
+            {
+                std::string tmp = paramInitSystematicError_str.substr(0, paramInitSystematicError_str.size() - 1);
+                double percent = std::stod(tmp);
+                paramInitSystematicError = paramInitValue * percent;
+                std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
+            }
+        }
+        else
+        {
+            paramInitSystematicError = std::stod(paramInitSystematicError_str);
+        }
+    }
+    catch(...)
+    {
+        std::cout << "ERROR: paramInitSystematicError_str=" << paramInitSystematicError_str << std::endl;
         ret = -1;
     }
 

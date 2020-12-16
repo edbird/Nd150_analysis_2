@@ -22,6 +22,10 @@ void rebuild_fake_data_systematics(const double xi_31, const double xi_31_baseli
     std::cout << "Rebuilding fake data with systematics. Parameters:" << std::endl;
     std::cout << "xi_31=" << xi_31 << std::endl;
     std::cout << "xi_31_baseline=" << xi_31_baseline << std::endl;
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+
     if(gSystematics.systematic_energy_offset != 0.0)
     {
         std::cout << "systematic_energy_offset=" << gSystematics.systematic_energy_offset << std::endl;
@@ -42,6 +46,11 @@ void rebuild_fake_data_systematics(const double xi_31, const double xi_31_baseli
     {
         std::cout << "systematic_energy_offsetsmall=" << gSystematics.systematic_energy_offsetsmall << std::endl;
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // (V)
+
     if(gSystematics.systematic_foil_thickness_virtual != 0.0)
     {
         std::cout << "systematic_foil_thickness_virtual=" << gSystematics.systematic_foil_thickness_virtual << std::endl;
@@ -54,6 +63,11 @@ void rebuild_fake_data_systematics(const double xi_31, const double xi_31_baseli
     {
         std::cout << "systematic_bremsstrahlung_virtual=" << gSystematics.systematic_brem_virtual << std::endl;
     }
+    
+
+    ///////////////////////////////////////////////////////////////////////////
+    // (N)
+
     if(gSystematics.systematic_foil_thickness_nominal != 0.0)
     {
         std::cout << "systematic_foil_thickness_nominal=" << gSystematics.systematic_foil_thickness_nominal << std::endl;
@@ -66,19 +80,90 @@ void rebuild_fake_data_systematics(const double xi_31, const double xi_31_baseli
     {
         std::cout << "systematic_bremsstrahlung_nominal=" << gSystematics.systematic_brem_nominal << std::endl;
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // new version - energy
+
+    if(gSystematics.systematic_energy_scale_small != 0.0)
+    {
+        std::cout << "systematic_energy_scale=" << gSystematics.systematic_energy_scale_small << std::endl;
+    }
+
+    if(gSystematics.systematic_energy_gaussian_smear != 0.0)
+    {
+        std::cout << "systematic_energy_gaussian_smear=" << gSystematics.systematic_energy_gaussian_smear << std::endl;
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // background
+ 
+    if(gSystematics.systematic_bkg_bi214_int != 0.0)
+    {
+        std::cout << "systematic_bkg_bi214_int=" << gSystematics.systematic_bkg_bi214_int << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_bi207_int != 0.0)
+    {
+        std::cout << "systematic_bkg_bi207_int=" << gSystematics.systematic_bkg_bi207_int << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_tl208_int != 0.0)
+    {
+        std::cout << "systematic_bkg_tl208_int=" << gSystematics.systematic_bkg_tl208_int << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_eu152_int != 0.0)
+    {
+        std::cout << "systematic_bkg_eu152_int=" << gSystematics.systematic_bkg_eu152_int << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_k40_int != 0.0)
+    {
+        std::cout << "systematic_bkg_k40_int=" << gSystematics.systematic_bkg_k40_int << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_mylar != 0.0)
+    {
+        std::cout << "systematic_bkg_mylar=" << gSystematics.systematic_bkg_mylar << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_bi214_sfoil_swire != 0.0)
+    {
+        std::cout << "systematic_bkg_bi214_sfoil_swire=" << gSystematics.systematic_bkg_bi214_sfoil_swire << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_bi214_air != 0.0)
+    {
+        std::cout << "systematic_bkg_bi214_air=" << gSystematics.systematic_bkg_bi214_air << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_tl208_air != 0.0)
+    {
+        std::cout << "systematic_bkg_tl208_air=" << gSystematics.systematic_bkg_tl208_air << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_external != 0.0)
+    {
+        std::cout << "systematic_bkg_external=" << gSystematics.systematic_bkg_external << std::endl;
+    }
+
+    if(gSystematics.systematic_bkg_neighbour != 0.0)
+    {
+        std::cout << "systematic_bkg_neighbour=" << gSystematics.systematic_bkg_neighbour << std::endl;
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // optical correction
+
     if(gSystematics.systematic_optical_correction != 0.0)
     {
         std::cout << "systematic_optical_correction=" << gSystematics.systematic_optical_correction << std::endl;
     }
 
 
-    for(int i = 0; i < N_BKG_SYSTEMATICS; ++ i)
-    {
-        if(systematic_bkg[i] != 0.0)
-        {
-            std::cout << "systematic_bkg[" << i << "]=" << systematic_bkg[i] << std::endl;
-        }
-    }
 
 
     int debuglevel = 1;

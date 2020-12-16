@@ -307,6 +307,7 @@ MinimizeFCNAxialVector::set_V_PHYS_SYSALL_data() const
                         double sysbkg = 0.0;
                         if(BACKGROUND_MODE == BACKGROUND_MODE_B)
                         {
+                        /*
                             #if VECTOR_RANGE_CHECK
                                 for(int b = 0; b < N_BKG_SYSTEMATICS; ++ b)
                                 {
@@ -318,6 +319,7 @@ MinimizeFCNAxialVector::set_V_PHYS_SYSALL_data() const
                                     sysbkg += V_PHYS_SYSBKG_1D_P1_data[b][channel]->operator[](biny * 50 + binx);
                                 }
                             #endif
+                        */
                         }
 
                         for(int i = 0; i < N_SYSTEMATICS; ++ i)
@@ -363,6 +365,7 @@ MinimizeFCNAxialVector::set_V_PHYS_SYSALL_data() const
                         double sysbkg = 0.0;
                         if(BACKGROUND_MODE == BACKGROUND_MODE_B)
                         {
+                        /*
                             #if VECTOR_RANGE_CHECK
                                 for(int b = 0; b < N_BKG_SYSTEMATICS; ++ b)
                                 {
@@ -374,6 +377,7 @@ MinimizeFCNAxialVector::set_V_PHYS_SYSALL_data() const
                                     sysbkg += V_PHYS_SYSBKG_1D_P2_data[b][channel]->operator[](biny * 50 + binx);
                                 }
                             #endif
+                        */
                         }
                             
                         for(int i = 0; i < N_SYSTEMATICS; ++ i)

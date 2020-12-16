@@ -54,20 +54,34 @@ bool g_mode_fake_data = false;
 bool V_ENABLE_SYSALL = true;
 
 
-const int N_SYSTEMATICS = 11;
+const int N_SYSTEMATICS = 25;
 bool V_ENABLE_SYSn[N_SYSTEMATICS] =
 {
-    false,  // false    // constant 1.0 MeV shift
-    true,   // true     // scale factor: m = 1 % + 0.2 %
-    false,   // true     // +- 5.55 % efficiency
-    false,   // true     // +- 0.50 % enrichment
-    false,   // true     // +- 3 keV
-    false,   // true     // foil thickness
-    false,   // true     // dE/dX
-    false,  // false    // brem
-    false,  // false    // foil thickness (nominal)
-    false,  // false    // dE/dX (nominal)
-    false    // true     // brem (nominal)
+/* 01 */    false,  // false    // constant 1.0 MeV shift
+/* 02 */    false,  // false    // scale factor: m = 1 % + 0.2 %
+/* 03 */    false,  // true     // +- 5.55 % efficiency
+/* 04 */    false,  // true     // +- 0.50 % enrichment
+/* 05 */    false,  // true     // +- 3 keV
+/* 06 */    false,  // true     // foil thickness
+/* 07 */    false,  // true     // dE/dX
+/* 08 */    false,  // false    // brem
+/* 09 */    false,  // false    // foil thickness (nominal)
+/* 10 */    false,  // false    // dE/dX (nominal)
+/* 11 */    false,  // true     // brem (nominal)
+/* 12 */    false,  // true     // 0.2 % energy scale factor m = 0.2 %
+/* 13 */    false,  // true     // 1.0 % Gaussian smear
+/* 14 */    true,   // true     // BKG: 214Bi/214Pb (int)
+/* 15 */    true,   // true     // BKG: 207Bi (int)
+/* 16 */    true,   // true     // BKG: 228Ac/212Bi/208Tl (int)
+/* 17 */    true,   // true     // BKG: 152Eu/154Eu (int)
+/* 18 */    true,   // true     // BKG: 40K/234mPa (int)
+/* 19 */    true,   // true     // BKG: 214Bi/214Pb (mylar)
+/* 20 */    true,   // true     // BKG: 214Bi/214Pb (sfoil, swire)
+/* 21 */    true,   // true     // BKG: 214Bi/214Pb (air)
+/* 22 */    true,   // true     // BKG: 208Tl (air)
+/* 23 */    true,   // true     // BKG: EXTERNAL
+/* 24 */    true,   // true     // BKG: NEIGHBOUR
+/* 25 */    false   // true     // optical correction related systematic
 };
 
 
@@ -253,57 +267,11 @@ bool V_ENABLE_STAT = true; // leave on
 // enable/disable systematics
 //bool V_ENABLE_SYSALL = false;
 
-
+/*
 const int N_BKG_SYSTEMATICS = 43;
 bool V_ENABLE_SYSBKG = true;
 
-double systematic_bkg[N_BKG_SYSTEMATICS] =
-{
-    0.0, // 1
-    0.0, // 2
-    0.0, // 3
-    0.0, // 4
-    0.0, // 
-    0.0, // 6
-    0.0, // 
-    0.0, // 8
-    0.0, // 
-    0.0, // 10
-    0.0, // 
-    0.0, // 12
-    0.0, // 
-    0.0, // 14
-    0.0, // 
-    0.0, // 16
-    0.0, // 
-    0.0, // 18
-    0.0, // 
-    0.0, // 20
-    0.0, // 
-    0.0, // 22
-    0.0, // 
-    0.0, // 24
-    0.0, // 
-    0.0, // 26
-    0.0, // 
-    0.0, // 28
-    0.0, // 
-    0.0, // 30
-    0.0, // 
-    0.0, // 32
-    0.0, // 
-    0.0, // 34
-    0.0, // 
-    0.0, // 36
-    0.0, // 
-    0.0, // 38
-    0.0, // 
-    0.0, // 40
-    0.0, // 
-    0.0, // 42
-    0.0  // 43
-};
-
+*/
 // TODO: min points
 
 //bool V_ENABLE_SYS1 = false; // constant 1.0 MeV shift
@@ -324,17 +292,31 @@ bool recalculate_V_PHYS_SYS = true;
 
 const bool ENABLE_MIN_POINT_SYSn[N_SYSTEMATICS] =
 {
-    false, // +- 0.1 MeV
-    true, // +- 1.2 % scale
-    true, // +- 5.55 % efficiency
-    false, // +- 0.50 % enrichment (overlays 3 keV)
-    true, // +- 3 keV
-    true, // foil thickness
-    true, // energy loss (overlays bremsstrahlung)
-    false, // bremsstrahlung
-    false, // foil thickness (nominal)
-    false, // dE/dX (nominal)
-    true  // brem (nominal)
+/* 01 */    false,  // false    // constant 1.0 MeV shift
+/* 02 */    false,  // false     // scale factor: m = 1 % + 0.2 %
+/* 03 */    true,   // true     // +- 5.55 % efficiency
+/* 04 */    false,  // false     // +- 0.50 % enrichment
+/* 05 */    true,   // true     // +- 3 keV
+/* 06 */    true,   // true     // foil thickness
+/* 07 */    true,   // true     // dE/dX
+/* 08 */    false,  // false    // brem
+/* 09 */    false,  // false    // foil thickness (nominal)
+/* 10 */    false,  // false    // dE/dX (nominal)
+/* 11 */    true,   // true     // brem (nominal)
+/* 12 */    true,   // true     // 0.2 % energy scale factor m = 0.2 %
+/* 13 */    true,   // true     // 1.0 % Gaussian smear
+/* 14 */    true,   // true     // BKG: 214Bi/214Pb (int)
+/* 15 */    true,   // true     // BKG: 207Bi (int)
+/* 16 */    true,   // true     // BKG: 228Ac/212Bi/208Tl (int)
+/* 17 */    true,   // true     // BKG: 152Eu/154Eu (int)
+/* 18 */    true,   // true     // BKG: 40K/234mPa (int)
+/* 19 */    true,   // true     // BKG: 214Bi/214Pb (mylar)
+/* 20 */    true,   // true     // BKG: 214Bi/214Pb (sfoil, swire)
+/* 21 */    true,   // true     // BKG: 214Bi/214Pb (air)
+/* 22 */    true,   // true     // BKG: 208Tl (air)
+/* 23 */    true,   // true     // BKG: EXTERNAL
+/* 24 */    true,   // true     // BKG: NEIGHBOUR
+/* 25 */    false   // true     // optical correction related systematic
 };
 // enable/disable drawing of minimum points for each systematic fit
 //const bool ENABLE_MIN_POINT_SYS1 = true; // +- 0.1 MeV
@@ -390,6 +372,7 @@ void check_V_ENABLE_SYS_stack()
     return;
 }
 
+
 void V_ENABLE_SYS_stack_push()
 {
     check_V_ENABLE_SYS_stack();
@@ -401,10 +384,11 @@ void V_ENABLE_SYS_stack_push()
         V_ENABLE_SYSn_stack[i].push_back(V_ENABLE_SYSn[i]);
     }
 
-    V_ENABLE_SYSBKG_stack.push_back(V_ENABLE_SYSBKG);
+    //V_ENABLE_SYSBKG_stack.push_back(V_ENABLE_SYSBKG);
 
     check_V_ENABLE_SYS_stack();
 }
+
 
 void V_ENABLE_SYS_stack_pop()
 {
@@ -421,8 +405,8 @@ void V_ENABLE_SYS_stack_pop()
             V_ENABLE_SYSn_stack[i].pop_back();
         }
 
-        V_ENABLE_SYSBKG = V_ENABLE_SYSBKG_stack.back();
-        V_ENABLE_SYSBKG_stack.pop_back();
+        //V_ENABLE_SYSBKG = V_ENABLE_SYSBKG_stack.back();
+        //V_ENABLE_SYSBKG_stack.pop_back();
     }
     else
     {
@@ -484,73 +468,160 @@ double min_point_data_SSD_err[2] = {0.0, 0.0};
 // +- 5.55 % efficiency
 // +- 0.50 % enrichment
 // +- 3 keV
+// foil thickness (V)
+// dEdX (V)
+// brem (V)
+// foil thickness (N)
+// dEdX (N)
+// brem (N)
+// +- 0.2 % scale
+// 1.0 % Gaussian smear
+// BKG: 214Bi/214Pb (int)
+// BKG: 207Bi (int)
+// BKG: 228Ac/212Bi/208Tl (int)
+// BKG: 152Eu/154Eu (int)
+// BKG: 40K/234mPa (int)
+// BKG: 214Bi/214Pb (mylar)
+// BKG: 214Bi/214Pb (sfoil, swire)
+// BKG: 214Bi/214Pb (air)
+// BKG: 208Tl (air)
+// BKG: EXTERNAL
+// BKG: NEIGHBOUR
 
 double min_point_fake_sysn_h[N_SYSTEMATICS][2] =
 {
     {0.0, 0.0},
+    {0.0, 0.0}, // 2
     {0.0, 0.0},
+    {0.0, 0.0}, // 4
     {0.0, 0.0},
+    {0.0, 0.0}, // 6
     {0.0, 0.0},
+    {0.0, 0.0}, // 8
     {0.0, 0.0},
+    {0.0, 0.0}, // 10
     {0.0, 0.0},
+    {0.0, 0.0}, // 12
     {0.0, 0.0},
+    {0.0, 0.0}, // 14
     {0.0, 0.0},
+    {0.0, 0.0}, // 16
     {0.0, 0.0},
+    {0.0, 0.0}, // 18
     {0.0, 0.0},
+    {0.0, 0.0}, // 20
+    {0.0, 0.0},
+    {0.0, 0.0}, // 22
+    {0.0, 0.0},
+    {0.0, 0.0}, // 24
     {0.0, 0.0}
 };
 double min_point_fake_sysn_h_err[N_SYSTEMATICS][2] =
 {
     {0.0, 0.0},
+    {0.0, 0.0}, // 2
     {0.0, 0.0},
+    {0.0, 0.0}, // 4
     {0.0, 0.0},
+    {0.0, 0.0}, // 6
     {0.0, 0.0},
+    {0.0, 0.0}, // 8
     {0.0, 0.0},
+    {0.0, 0.0}, // 10
     {0.0, 0.0},
+    {0.0, 0.0}, // 12
     {0.0, 0.0},
+    {0.0, 0.0}, // 14
     {0.0, 0.0},
+    {0.0, 0.0}, // 16
     {0.0, 0.0},
+    {0.0, 0.0}, // 18
     {0.0, 0.0},
+    {0.0, 0.0}, // 20
+    {0.0, 0.0},
+    {0.0, 0.0}, // 22
+    {0.0, 0.0},
+    {0.0, 0.0}, // 24
     {0.0, 0.0}
 };
 
 double min_point_fake_sysn_h_fval[N_SYSTEMATICS] =
 {
-    0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+    0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, // 8
+    0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, // 16
+    0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, // 24
+    0.0
 };
 
 double min_point_fake_sysn_l[N_SYSTEMATICS][2] =
 {
     {0.0, 0.0},
+    {0.0, 0.0}, // 2
     {0.0, 0.0},
+    {0.0, 0.0}, // 4
     {0.0, 0.0},
+    {0.0, 0.0}, // 6
     {0.0, 0.0},
+    {0.0, 0.0}, // 8
     {0.0, 0.0},
+    {0.0, 0.0}, // 10
     {0.0, 0.0},
+    {0.0, 0.0}, // 12
     {0.0, 0.0},
+    {0.0, 0.0}, // 14
     {0.0, 0.0},
+    {0.0, 0.0}, // 16
     {0.0, 0.0},
+    {0.0, 0.0}, // 18
     {0.0, 0.0},
+    {0.0, 0.0}, // 20
+    {0.0, 0.0},
+    {0.0, 0.0}, // 22
+    {0.0, 0.0},
+    {0.0, 0.0}, // 24
     {0.0, 0.0}
 };
 double min_point_fake_sysn_l_err[N_SYSTEMATICS][2] =
 {
     {0.0, 0.0},
+    {0.0, 0.0}, // 2
     {0.0, 0.0},
+    {0.0, 0.0}, // 4
     {0.0, 0.0},
+    {0.0, 0.0}, // 6
     {0.0, 0.0},
+    {0.0, 0.0}, // 8
     {0.0, 0.0},
+    {0.0, 0.0}, // 10
     {0.0, 0.0},
+    {0.0, 0.0}, // 12
     {0.0, 0.0},
+    {0.0, 0.0}, // 14
     {0.0, 0.0},
+    {0.0, 0.0}, // 16
     {0.0, 0.0},
+    {0.0, 0.0}, // 18
     {0.0, 0.0},
+    {0.0, 0.0}, // 20
+    {0.0, 0.0},
+    {0.0, 0.0}, // 22
+    {0.0, 0.0},
+    {0.0, 0.0}, // 24
     {0.0, 0.0}
 };
 
 double min_point_fake_sysn_l_fval[N_SYSTEMATICS] =
 {
-    0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+    0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, // 8
+    0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, // 16
+    0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, // 24
+    0.0
 };
 
 // TODO: min point BKG
@@ -620,12 +691,7 @@ int min_point_load(
 
 std::vector<double> *systematic_nominal_1D_P1[number1DHists] =
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<double> *systematic_n_low_1D_P1[N_SYSTEMATICS][number1DHists] = 
@@ -633,13 +699,27 @@ std::vector<double> *systematic_n_low_1D_P1[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 4
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 8
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 12
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
@@ -648,13 +728,27 @@ std::vector<double> *systematic_n_high_1D_P1[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 4
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 8
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 12
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
@@ -663,156 +757,30 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P1[N_SYSTEMATICS][number1DHi
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 4
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 8
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 12
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
-std::vector<double> *systematic_bkg_low_1D_P1[N_BKG_SYSTEMATICS][number1DHists] =
-{
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
-};
-
-std::vector<double> *systematic_bkg_high_1D_P1[N_BKG_SYSTEMATICS][number1DHists] =
-{
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
-};
-
-std::vector<double> *systematic_bkg_V_MATRIX_coeff_1D_P1[N_BKG_SYSTEMATICS][number1DHists] =
-{
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
-};
 
 ///////////////////////////////////////////////////////////////////////////////
 // systematic objects - Phase 2
@@ -823,12 +791,7 @@ std::vector<double> *systematic_bkg_V_MATRIX_coeff_1D_P1[N_BKG_SYSTEMATICS][numb
 
 std::vector<double> *systematic_nominal_1D_P2[number1DHists] =
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<double> *systematic_n_low_1D_P2[N_SYSTEMATICS][number1DHists] = 
@@ -836,13 +799,27 @@ std::vector<double> *systematic_n_low_1D_P2[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 4
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 8
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 12
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
@@ -851,13 +828,27 @@ std::vector<double> *systematic_n_high_1D_P2[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 4
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 8
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 12
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
@@ -866,155 +857,28 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P2[N_SYSTEMATICS][number1DHi
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 4
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 8
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 12
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
-};
-
-std::vector<double> *systematic_bkg_low_1D_P2[N_BKG_SYSTEMATICS][number1DHists] =
-{
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
-};
-
-std::vector<double> *systematic_bkg_high_1D_P2[N_BKG_SYSTEMATICS][number1DHists] =
-{
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
-};
-
-std::vector<double> *systematic_bkg_V_MATRIX_coeff_1D_P2[N_BKG_SYSTEMATICS][number1DHists] =
-{
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
 };
 
 
@@ -1025,22 +889,12 @@ std::vector<double> *systematic_bkg_V_MATRIX_coeff_1D_P2[N_BKG_SYSTEMATICS][numb
 
 TMatrixD *V_PHYS_1D_P1_MATHMORE[number1DHists] =
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<bool> *V_ENABLE_BIN_1D_P1[number1DHists] =
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 // not used
@@ -1059,12 +913,7 @@ std::vector<double> *V_PHYS_1D_P1_data[number1DHists] =
 // changes depending on M
 std::vector<double> *V_PHYS_STAT_1D_P1_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<double> *V_PHYS_SYSn_1D_P1_data[N_SYSTEMATICS][number1DHists] =
@@ -1072,101 +921,49 @@ std::vector<double> *V_PHYS_SYSn_1D_P1_data[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 4
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 8
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 12
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
-std::vector<double> *V_PHYS_SYSBKG_1D_P1_data[N_BKG_SYSTEMATICS][number1DHists] =
-{
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
-};
 
 std::vector<double> *V_PHYS_SYSALL_1D_P1_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<double> *D_1D_P1_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<double> *D_minus_M_1D_P1_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<double> *M_1D_P1_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1175,22 +972,12 @@ std::vector<double> *M_1D_P1_data[number1DHists] =
 
 TMatrixD *V_PHYS_1D_P2_MATHMORE[number1DHists] =
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<bool> *V_ENABLE_BIN_1D_P2[number1DHists] =
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 /*
@@ -1207,12 +994,7 @@ std::vector<double> *V_PHYS_1D_P2_data[number1DHists] =
 
 std::vector<double> *V_PHYS_STAT_1D_P2_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<double> *V_PHYS_SYSn_1D_P2_data[N_SYSTEMATICS][number1DHists] =
@@ -1220,103 +1002,49 @@ std::vector<double> *V_PHYS_SYSn_1D_P2_data[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 4
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 8
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 12
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 16
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 20
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
-std::vector<double> *V_PHYS_SYSBKG_1D_P2_data[N_BKG_SYSTEMATICS][number1DHists] =
-{
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 1
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 2
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 3 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 4
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 6
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 8
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 10
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 12
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 14
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 16
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 18
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 20
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 22
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 24
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 26
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 28
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 30
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 32
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 34
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 36
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 38
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 40
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     // 42
-    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}      // 43
-};
-
-
 std::vector<double> *V_PHYS_SYSALL_1D_P2_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 
 std::vector<double> *D_1D_P2_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<double> *D_minus_M_1D_P2_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 std::vector<double> *M_1D_P2_data[number1DHists] = 
 {
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 

@@ -73,6 +73,7 @@ class file_parameter
         paramEnabledP1 = true;
         paramInitValue = 0.0;
         paramInitError = 0.0;
+        paramInitSystematicError = 0.0;
         paramLastValue = 0.0;
         paramConstraintValue = 0.0;
         paramConstraintError = 0.0;
@@ -157,6 +158,7 @@ class file_parameter
     bool paramEnabledP2;
     double paramInitValue;
     double paramInitError;
+    double paramInitSystematicError;
     double paramLastValue;
     //double parameter_last_value;
     //double parameter_last_error;
@@ -559,51 +561,53 @@ class parameter_group
             int paramNumber = param_index;
             if(it->second.paramEnabled == true)
             {
-            int intParamNumber = ExtToIntParamNumberMap.at(paramNumber);
-            int extParamNumber = IntToExtParamNumberMap.at(intParamNumber);
-            std::cout << "intParamNumber=" << intParamNumber << std::endl;
-            std::cout << "extParamNumber=" << extParamNumber << std::endl;
-            std::cout << "MCNameList" << std::endl;
-            for(int j = 0; j < it->second.MCNameList.size(); ++ j)
-            {
-                std::string mcname = it->second.MCNameList.at(j);
-                int mcnameparamnumber = MCNameToExtParamNumberMap.at(it->second.MCNameList.at(j));
-                std::cout << mcname << " -> " << mcnameparamnumber << std::endl;
-            }
-            std::cout << "paramNumber=" << it->second.paramNumber << std::endl;
-            std::cout << "paramEnabled=" << it->second.paramEnabled << std::endl;
-            std::cout << "paramEnabledP1=" << it->second.paramEnabledP1 << std::endl;
-            std::cout << "paramEnabledP2=" << it->second.paramEnabledP2 << std::endl;
-            std::cout << "paramInitValue=" << it->second.paramInitValue << std::endl;
-            std::cout << "paramInitError=" << it->second.paramInitError << std::endl;
-            std::cout << "paramConstraintValue=" << it->second.paramConstraintValue << std::endl;
-            std::cout << "paramConstraintError=" << it->second.paramConstraintError << std::endl;
-            std::cout << "paramConstraintMode=" << it->second.paramConstraintMode << std::endl;
-            std::cout << "paramName=" << it->second.paramName << std::endl;
-            std::cout << "paramHumanReadableName=" << it->second.paramHumanReadableName << std::endl;
-            std::cout << "*****" << std::endl;
+                int intParamNumber = ExtToIntParamNumberMap.at(paramNumber);
+                int extParamNumber = IntToExtParamNumberMap.at(intParamNumber);
+                std::cout << "intParamNumber=" << intParamNumber << std::endl;
+                std::cout << "extParamNumber=" << extParamNumber << std::endl;
+                std::cout << "MCNameList" << std::endl;
+                for(int j = 0; j < it->second.MCNameList.size(); ++ j)
+                {
+                    std::string mcname = it->second.MCNameList.at(j);
+                    int mcnameparamnumber = MCNameToExtParamNumberMap.at(it->second.MCNameList.at(j));
+                    std::cout << mcname << " -> " << mcnameparamnumber << std::endl;
+                }
+                std::cout << "paramNumber=" << it->second.paramNumber << std::endl;
+                std::cout << "paramEnabled=" << it->second.paramEnabled << std::endl;
+                std::cout << "paramEnabledP1=" << it->second.paramEnabledP1 << std::endl;
+                std::cout << "paramEnabledP2=" << it->second.paramEnabledP2 << std::endl;
+                std::cout << "paramInitValue=" << it->second.paramInitValue << std::endl;
+                std::cout << "paramInitError=" << it->second.paramInitError << std::endl;
+                std::cout << "paramInitSystematicError=" << it->second.paramInitSystematicError << std::endl;
+                std::cout << "paramConstraintValue=" << it->second.paramConstraintValue << std::endl;
+                std::cout << "paramConstraintError=" << it->second.paramConstraintError << std::endl;
+                std::cout << "paramConstraintMode=" << it->second.paramConstraintMode << std::endl;
+                std::cout << "paramName=" << it->second.paramName << std::endl;
+                std::cout << "paramHumanReadableName=" << it->second.paramHumanReadableName << std::endl;
+                std::cout << "*****" << std::endl;
             }
             else
             {
-            std::cout << "MCNameList" << std::endl;
-            for(int j = 0; j < it->second.MCNameList.size(); ++ j)
-            {
-                std::string mcname = it->second.MCNameList.at(j);
-                int mcnameparamnumber = MCNameToExtParamNumberMap.at(it->second.MCNameList.at(j));
-                std::cout << mcname << " -> " << mcnameparamnumber << std::endl;
-            }
-            std::cout << "paramNumber=" << it->second.paramNumber << std::endl;
-            std::cout << "paramEnabled=" << it->second.paramEnabled << std::endl;
-            std::cout << "paramEnabledP1=" << it->second.paramEnabledP1 << std::endl;
-            std::cout << "paramEnabledP2=" << it->second.paramEnabledP2 << std::endl;
-            std::cout << "paramInitValue=" << it->second.paramInitValue << std::endl;
-            std::cout << "paramInitError=" << it->second.paramInitError << std::endl;
-            std::cout << "paramConstraintValue=" << it->second.paramConstraintValue << std::endl;
-            std::cout << "paramConstraintError=" << it->second.paramConstraintError << std::endl;
-            std::cout << "paramConstraintMode=" << it->second.paramConstraintMode << std::endl;
-            std::cout << "paramName=" << it->second.paramName << std::endl;
-            std::cout << "paramHumanReadableName=" << it->second.paramHumanReadableName << std::endl;
-            std::cout << "*****" << std::endl;
+                std::cout << "MCNameList" << std::endl;
+                for(int j = 0; j < it->second.MCNameList.size(); ++ j)
+                {
+                    std::string mcname = it->second.MCNameList.at(j);
+                    int mcnameparamnumber = MCNameToExtParamNumberMap.at(it->second.MCNameList.at(j));
+                    std::cout << mcname << " -> " << mcnameparamnumber << std::endl;
+                }
+                std::cout << "paramNumber=" << it->second.paramNumber << std::endl;
+                std::cout << "paramEnabled=" << it->second.paramEnabled << std::endl;
+                std::cout << "paramEnabledP1=" << it->second.paramEnabledP1 << std::endl;
+                std::cout << "paramEnabledP2=" << it->second.paramEnabledP2 << std::endl;
+                std::cout << "paramInitValue=" << it->second.paramInitValue << std::endl;
+                std::cout << "paramInitError=" << it->second.paramInitError << std::endl;
+                std::cout << "paramInitSystematicError=" << it->second.paramInitSystematicError << std::endl;
+                std::cout << "paramConstraintValue=" << it->second.paramConstraintValue << std::endl;
+                std::cout << "paramConstraintError=" << it->second.paramConstraintError << std::endl;
+                std::cout << "paramConstraintMode=" << it->second.paramConstraintMode << std::endl;
+                std::cout << "paramName=" << it->second.paramName << std::endl;
+                std::cout << "paramHumanReadableName=" << it->second.paramHumanReadableName << std::endl;
+                std::cout << "*****" << std::endl;
             }
             ++ param_index;
         }
