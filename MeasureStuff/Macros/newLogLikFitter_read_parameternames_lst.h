@@ -606,11 +606,16 @@ int process_line_else(std::string& s, std::stringstream &ss)
                 paramInitSystematicError = paramInitValue * percent;
 //                std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
             }
+            else
+            {   
+                paramInitSystematicError = std::stod(paramInitSystematicError_str);
+//            std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
+            }
         }
         else
         {
-            paramInitSystematicError = std::stod(paramInitSystematicError_str);
-//            std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
+            std::cout << "ERROR: paramInitSystematicError_str=" << paramInitSystematicError_str << std::endl;
+            ret = -1
         }
     }
     catch(...)

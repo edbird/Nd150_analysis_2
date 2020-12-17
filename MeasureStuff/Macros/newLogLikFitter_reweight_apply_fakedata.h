@@ -1440,6 +1440,7 @@ void reweight_apply_fakedata(
                     if(sampleName.Contains("bi214_int"))
                     {
                         std::cout << "> param_scale_factor=" << param_scale_factor << std::endl;
+                        std::cout << "> paramInitSystematicError=" << paramInitSystematicError << std::endl;
                         std::cin.get();
                     }
                 }
