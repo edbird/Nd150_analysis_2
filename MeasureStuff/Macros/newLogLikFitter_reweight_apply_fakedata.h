@@ -1427,7 +1427,16 @@ void reweight_apply_fakedata(
             if(paramEnabledP2)
             {
                 double param_scale_factor = paramInitValue;
+                if(sampleName.Contains("bi214_int"))
+                {
+                    std::cout << "param_scale_factor=" << param_scale_factor << std::endl;
+                }
                 param_scale_factor += systematic_bkg * paramInitSystematicError;
+                if(sampleName.Contains("bi214_int"))
+                {
+                    std::cout << "> param_scale_factor=" << param_scale_factor << std::endl;
+                    std::cin.get();
+                }
 
                 hTotalE_P2_tmp->Scale(param_scale_factor);
                 hSingleEnergy_P2_tmp->Scale(param_scale_factor);
