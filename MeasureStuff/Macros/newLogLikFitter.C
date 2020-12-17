@@ -1678,6 +1678,8 @@ void loadFiles(int i)
         for(int n = 0; n < N_SYSTEMATICS; ++ n)
         {
 
+            std::cout << "n=" << n << std::endl;
+
             // PHASE 1
             for(std::size_t i = 0; i < systematic_nominal_1D_P1[channel]->size(); ++ i)
             {
