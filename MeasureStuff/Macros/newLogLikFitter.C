@@ -1683,8 +1683,6 @@ void loadFiles(int i)
         for(int n = 0; n < N_SYSTEMATICS; ++ n)
         {
 
-            std::cout << "n=" << n << std::endl;
-
             // PHASE 1
             for(std::size_t i = 0; i < systematic_nominal_1D_P1[channel]->size(); ++ i)
             {
@@ -2983,14 +2981,10 @@ void loadFiles(int i)
     gSystematics.systematic_bkg_neighbour = -1;
     ND150_FAKEDATA_SCALE_FACTOR = 1.15;
 
-    std::cout << "A" << std::endl;
-
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[23], min_point_fake_sysn_l_err[23], min_point_fake_sysn_l_fval[23],
                      "min_point_fake_SYS23L", "xifree_fake_SYS23L", "xifree",
                      xi_31_systematics_reweight_value);
-
-    std::cout << "A" << std::endl;
 
     ND150_FAKEDATA_SCALE_FACTOR = 1.0;
 
