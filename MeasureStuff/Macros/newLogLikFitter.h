@@ -337,7 +337,7 @@ std::vector<bool> V_ENABLE_SYSn_stack[N_SYSTEMATICS]; //TODO anything here to in
 //std::vector<bool> V_ENABLE_SYS3_stack;
 //std::vector<bool> V_ENABLE_SYS4_stack;
 //std::vector<bool> V_ENABLE_SYS5_stack;
-std::vector<bool> V_ENABLE_SYSBKG_stack;
+/*std::vector<bool> V_ENABLE_SYSBKG_stack;*/
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -360,6 +360,7 @@ void check_V_ENABLE_SYS_stack()
         }
     }
 
+    /*
     std::size_t stack_size = V_ENABLE_SYSBKG_stack.size();
     if(V_ENABLE_SYSALL_stack_size != stack_size)
     {
@@ -368,6 +369,7 @@ void check_V_ENABLE_SYS_stack()
         std::cout << "stack_size=" << stack_size << std::endl;
         throw "V_ENABLE_SYSBKG_stack size error";
     }
+    */
 
     return;
 }
