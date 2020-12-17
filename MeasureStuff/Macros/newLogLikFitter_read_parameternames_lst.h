@@ -615,7 +615,7 @@ int process_line_else(std::string& s, std::stringstream &ss)
         else
         {
             std::cout << "ERROR: paramInitSystematicError_str=" << paramInitSystematicError_str << std::endl;
-            ret = -1
+            ret = -1;
         }
     }
     catch(...)
