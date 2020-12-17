@@ -2,6 +2,34 @@
 #define NEWLOGLIKFITTER_DRAW_MPS_HELPER_H
 
 
+const TString legend_texts[N_SYSTEMATICS] = 
+{
+    "outdated 0.1 MeV",
+    "outdated Energy Calibration 1.2 %%",
+    "Efficiency 5.55 %",
+    "ignore enrichment",
+    "outdated Energy Calibration 3 keV",
+    "Foil Thickness (V)",
+    "Energy Loss dE/dX (V)",
+    "ignore Brem (V)",
+    "Foil Thickness (N)",
+    "Energy Loss dE/dX (N)",
+    "Brem (N)",
+    "Energy Calibration 0.2 %%",
+    "Energy Resolution 1.0 %% Gaus",
+    "^{214}Bi/^{214}Pb Internal",
+    "^{207}Bi Internal",
+    "^{228}Ac/^{212}Bi/^{208}Tl Internal",
+    "^{152}Eu/^{154}Eu",
+    "^{40}K/^{234m}Pa",
+    "^{214}Bi/^{214}Pb Mylar",
+    "^{214}Bi/^{214}Pb SFoil/SWire",
+    "^{214}Bi/^{214}Pb Air",
+    "^{228}Ac/^{212}Bi/^{208}Tl Air",
+    "External Background",
+    "Neighbour Foil Background",
+    "placeholder Optical Correction"
+};
 
 
 void newloglikfitter_mps_draw_helper_colz
@@ -394,20 +422,6 @@ void newloglikfitter_mps_draw_helper_colz
         }
 */
 
-        TString texts[N_SYSTEMATICS] = 
-        {
-            "ignore 0.1 MeV",
-            "Energy Calibration 1.2 %",
-            "Efficiency 5.55 %",
-            "ignore enrichment",
-            "Energy Calibration 3 keV",
-            "Foil Thickness (V)",
-            "Energy Loss dE/dX (V)",
-            "ignore Brem (V)",
-            "Foil Thickness (N)",
-            "Energy Loss dE/dX (N)",
-            "Brem (N)"
-        };
         TLegend *leg = new TLegend(0.03, 0.70, 0.32, 0.96);
         for(int i = 0; i < N_SYSTEMATICS; ++ i)
         {
@@ -416,7 +430,7 @@ void newloglikfitter_mps_draw_helper_colz
                 TString text;
                 text.Form("%i", i);
                 leg->AddEntry(mps_draw_data_sysall.mark_min_point_sysn_h[i],
-                              texts[i], "P");
+                              legend_texts[i], "P");
             }
         }
         leg->SetMargin(0.12);
@@ -828,7 +842,7 @@ void newloglikfitter_mps_draw_helper
         }
 */
 
-        TString texts[N_SYSTEMATICS] = 
+        /*TString texts[N_SYSTEMATICS] = 
         {
             "ignore 0.1 MeV",
             "Energy Calibration 1.2 %",
@@ -841,7 +855,7 @@ void newloglikfitter_mps_draw_helper
             "Foil Thickness (N)",
             "Energy Loss dE/dX (N)",
             "Brem (N)"
-        };
+        };*/
         TLegend *leg = new TLegend(0.03, 0.70, 0.32, 0.96);
         for(int i = 0; i < N_SYSTEMATICS; ++ i)
         {
@@ -850,7 +864,7 @@ void newloglikfitter_mps_draw_helper
                 TString text;
                 text.Form("%i", i);
                 leg->AddEntry(mps_draw_data_sysall.mark_min_point_sysn_h[i],
-                              texts[i], "P");
+                              legend_texts[i], "P");
             }
         }
         leg->SetMargin(0.12);
@@ -1138,7 +1152,8 @@ void newloglikfitter_mps_draw_helper_sys_only
             }
         }
 */
-
+        
+        /*
         TString texts[N_SYSTEMATICS] = 
         {
             "ignore 0.1 MeV",
@@ -1153,6 +1168,7 @@ void newloglikfitter_mps_draw_helper_sys_only
             "Energy Loss dE/dX (N)",
             "Brem (N)"
         };
+        */
         TLegend *leg = new TLegend(0.03, 0.70, 0.32, 0.96);
         for(int i = 0; i < N_SYSTEMATICS; ++ i)
         {
@@ -1161,7 +1177,7 @@ void newloglikfitter_mps_draw_helper_sys_only
                 TString text;
                 text.Form("%i", i);
                 leg->AddEntry(mps_draw_data_sysall.mark_min_point_sysn_h[i],
-                              texts[i], "P");
+                              legend_texts[i], "P");
             }
         }
         leg->SetMargin(0.12);
