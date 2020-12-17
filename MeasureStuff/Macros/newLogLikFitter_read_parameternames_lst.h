@@ -596,20 +596,22 @@ int process_line_else(std::string& s, std::stringstream &ss)
 
     try
     {
-//        std::cout << paramInitSystematicError_str << std::endl;
+        std::cout << paramNumber_str << std::endl;
+        std::cout << paramInitSystematicError_str << std::endl;
         if(paramInitSystematicError_str.size() > 0)
         {
             if(paramInitSystematicError_str.back() == '%')
             {
                 std::string tmp = paramInitSystematicError_str.substr(0, paramInitSystematicError_str.size() - 1);
+                std::cout << "tmp=" << tmp << std::endl;
                 double percent = 1.0e-2 * std::stod(tmp);
                 paramInitSystematicError = paramInitValue * percent;
-//                std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
+                std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
             }
             else
             {   
                 paramInitSystematicError = std::stod(paramInitSystematicError_str);
-//            std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
+                std::cout << "CHECK: paramInitSystematicError=" << paramInitSystematicError << std::endl;
             }
         }
         else
