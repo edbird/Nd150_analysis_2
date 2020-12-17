@@ -1555,6 +1555,11 @@ void loadFiles(int i)
     // TODO: optical correction
 
 
+    gSystematics.reset();
+    rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
+    systematic_init_helper(&(systematic_n_high_1D_P1[24][0]), &(systematic_n_high_1D_P2[24][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[24][0]), &(systematic_n_low_1D_P2[24][0]));
+    gSystematics.reset();
 
 
 
