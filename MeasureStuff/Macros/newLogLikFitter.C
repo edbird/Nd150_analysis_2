@@ -1683,8 +1683,11 @@ void loadFiles(int i)
             // PHASE 1
             for(std::size_t i = 0; i < systematic_nominal_1D_P1[channel]->size(); ++ i)
             {
+            std::cout << "up" << std::endl;
                 double up = systematic_n_high_1D_P1[n][channel]->at(i);
+            std::cout << "nominal" << std::endl;
                 double nominal = systematic_nominal_1D_P1[channel]->at(i);
+            std::cout << "down" << std::endl;
                 double down = systematic_n_low_1D_P1[n][channel]->at(i);
                 double value_up = up - nominal;
                 double value_down = nominal - down;
@@ -1705,8 +1708,11 @@ void loadFiles(int i)
             // PHASE 2
             for(std::size_t i = 0; i < systematic_nominal_1D_P2[channel]->size(); ++ i)
             {
+            std::cout << "up" << std::endl;
                 double up = systematic_n_high_1D_P2[n][channel]->at(i);
+            std::cout << "nominal" << std::endl;
                 double nominal = systematic_nominal_1D_P2[channel]->at(i);
+            std::cout << "down" << std::endl;
                 double down = systematic_n_low_1D_P2[n][channel]->at(i);
                 double value_up = up - nominal;
                 double value_down = nominal - down;
