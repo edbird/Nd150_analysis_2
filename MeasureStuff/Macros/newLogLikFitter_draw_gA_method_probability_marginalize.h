@@ -170,7 +170,7 @@ void draw_gA_method_probability_marginalize()
     h_prob->GetXaxis()->SetLabelOffset(0.01);
     h_prob->GetYaxis()->SetLabelOffset(0.01);
     h_prob->SetXTitle("#xi^{2#nu#beta#beta}_{31}");
-    h_prob->SetYTitle("^{150}Nd Amplitude Scale Factor (A_{0} = 3.45#times10^{-4} Bq)");
+    h_prob->SetYTitle("^{150}Nd Amplitude Scale Factor (#times 3.45#times10^{-4} Bq)");
     h_prob->Draw("colz");
     c_prob->Update();
 
@@ -494,7 +494,7 @@ void draw_gA_method_probability_marginalize()
         h_marginal_T12->GetYaxis()->SetTitleOffset(1.2);
         h_marginal_T12->GetXaxis()->SetLabelOffset(0.01);
         h_marginal_T12->GetYaxis()->SetLabelOffset(0.01);
-        h_marginal_T12->SetXTitle("^{150}Nd Amplitude Scale Factor (A_{0} = 3.45#times10^{-4} Bq)");
+        h_marginal_T12->SetXTitle("^{150}Nd Amplitude Scale Factor (#times 3.45#times10^{-4} Bq)");
         h_marginal_T12->SetYTitle("Probability Density Function p(A_{^{150}Nd})");
         std::cout << h_marginal_T12->GetBinWidth(1) << std::endl;
         std::cout << "INT (T12) = " << h_marginal_T12->Integral() * h_marginal_T12->GetBinWidth(1) << std::endl;

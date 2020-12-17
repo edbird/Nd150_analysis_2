@@ -1231,7 +1231,7 @@ void reweight_apply_fakedata(
             */
 
 
-            double systematic_bkg = 1.0; 
+            double systematic_bkg = 0.0; 
             if(sampleName.Contains("bi214_int") || sampleName.Contains("pb214_int"))
             {
                 if(gSystematics.systematic_bkg_bi214_int != 0.0)
