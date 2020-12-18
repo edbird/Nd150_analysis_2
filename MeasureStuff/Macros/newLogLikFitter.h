@@ -293,10 +293,10 @@ bool recalculate_V_PHYS_SYS = true;
 const bool ENABLE_MIN_POINT_SYSn[N_SYSTEMATICS] =
 {
 /* 01 */    false,  // false    // constant 1.0 MeV shift
-/* 02 */    false,  // false     // scale factor: m = 1 % + 0.2 %
+/* 02 */    false,  // false    // scale factor: m = 1 % + 0.2 %
 /* 03 */    true,   // true     // +- 5.55 % efficiency
-/* 04 */    false,  // false     // +- 0.50 % enrichment
-/* 05 */    true,   // true     // +- 3 keV
+/* 04 */    true,   // false    // +- 0.50 % enrichment
+/* 05 */    false,  // false    // +- 3 keV
 /* 06 */    true,   // true     // foil thickness
 /* 07 */    true,   // true     // dE/dX
 /* 08 */    false,  // false    // brem
