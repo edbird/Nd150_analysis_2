@@ -1483,7 +1483,7 @@ std::cout << "sigdraw" << std::endl;
 
             axis5->SetLabelFont(43);
             axis5->SetLabelSize(15);
-            axis5->ChangeLabel(-1, 0, 0);
+            //axis5->ChangeLabel(-1, 0, 0);
             //axis5->ChangeLabel(1, 0, 0);
             axis5->Draw();
         }
@@ -1495,7 +1495,7 @@ std::cout << "sigdraw" << std::endl;
             axis6 = new TGaxis(5.0, PAD_LL_Y_MIN_Px, 5.0, PAD_LL_Y_MAX_Px, PAD_LL_Y_MIN_Px, PAD_LL_Y_MAX_Px, 505, "+");
             axis6->SetLabelFont(43);
             axis6->SetLabelSize(0);
-            axis6->ChangeLabel(-1, 0, 0);
+            //axis6->ChangeLabel(-1, 0, 0);
             //axis6->ChangeLabel(1, 0, 0);
             axis6->Draw();
         }
