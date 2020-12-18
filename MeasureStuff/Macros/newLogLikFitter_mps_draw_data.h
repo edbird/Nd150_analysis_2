@@ -813,36 +813,88 @@ class mpsdrawdata
         
         Int_t markerstylen[N_SYSTEMATICS] = 
         {
-            50, // "+"
-            22, // triangle up
-            43, // star
-            52, // "x"
-            20, // circle
-            33, // diamond
-            23, // triangle down
-            21, // square
-            33, // diamond
-            23, // triangle down
-            34  // plus
+            50, // "+"              // const 1.0 MeV shift
+            22, // triangle up      // scale factor 1.2 %
+            43, // star             // 5.55 % eff
+            52, // "x"              // 0.5 % enrichment
+            20, // circle           // 3 keV
+            33, // diamond          // FT (V)
+            23, // triangle down    // dEdX (V)
+            21, // square           // brem (V)
+            33, // diamond          // FT (N)
+            23, // triangle down    // dEdX (N)
+            34, // plus             // brem (N)
+            22, // triangle up      // scale factor 0.2 %
+            20, // circle           // 1.0 % gaussian smear
+            20, // "+"              // BKG: 214 int
+            20, // "+"              // BKG: 207 int
+            20, // "+"              // BKG: 208 int
+            20, // "+"              // BKG: 152 int
+            20, // "+"              // BKG: 40 int
+            20, // "+"              // BKG: mylar
+            20, // "+"              // BKG: sfoil/swire
+            20, // "+"              // BKG: 214 air
+            20, // "+"              // BKG: 208 air
+            20, // "+"              // BKG: ext
+            20, // "+"              // BKG: neighbour
+            50  // "+"              // optical
         };
         Double_t markersizen[N_SYSTEMATICS] = 
         {
-            2.0, 1.5, 2.0, 2.0, 1.0, 2.0, 1.5, 1.0, 2.0, 1.5, 1.5
+            2.0,    // 1.0 MeV
+            1.5,    // 1.2 %
+            2.0,    // 5.55 %
+            2.0,    // 0.5 %
+            1.0,    // 3 keV
+            2.0,    // FT V
+            1.5,    // dEdX V
+            1.0,    // brem V
+            2.0,    // FT N
+            1.5,    // dEdX N
+            1.5,    // brem N
+            1.5,    // 0.2 %
+            1.0,    // gaussian
+            1.0,    // BKG 214 int
+            1.0,    // BKG 207 int
+            1.0,    // BKG 208 int
+            1.0,    // BKG 152 int
+            1.0,    // BKG 40 int
+            1.0,    // BKG mylar
+            1.0,    // BKG sfoil/swire
+            1.0,    // BKG 214 air
+            1.0,    // BKG 208 air
+            1.0,    // BKG ext
+            1.0,    // BKG neighbour
+            1.0     // optical
         };
         Color_t markercolorn[N_SYSTEMATICS] = 
         {
             //kRed, kOrange, kGreen, kBlue, kMagenta, kViolet, kViolet + 10
-            kBlack,         // "+"
-            kRed,           // triangle up
-            kMagenta,       // star
-            kBlack,         // "x"
-            kBlue,          // circle
-            kViolet + 1,    // diamond
-            kGreen,         // triangle down
-            kBlack,         // square
-            kAzure + 1,     // diamond
-            kViolet + 10,   // triangle down
-            kAzure + 1      // plus
+            kBlack,         // "+"              // 1.0 MeV
+            kRed,           // triangle up      // 1.2 %
+            kMagenta,       // star             // 5.55 %
+            kBlack,         // "x"              // 0.5 %
+            kBlue,          // circle           // 3 keV
+            kViolet + 1,    // diamond          // FT V
+            kGreen,         // triangle down    // dEdX V
+            kBlack,         // square           // brem V
+            kAzure + 1,     // diamond          // FT N
+            kViolet + 10,   // triangle down    // dEdX N
+            kAzure + 1,     // plus             // brem N
+            kRed,           //                  // 0.2 %
+            kRed,           //                  // gaussian
+            kBlue,          //                  // BKG 214 int
+            kBlue + 2,      //                  // BKG 207 int
+            kBlue - 7,      //                  // BKG 208 int
+            kCyan,          //                  // BKG 152 int
+            kCyan + 2,      //                  // BKG 40 int
+            kCyan - 7,      //                  // BKG mylar
+            kGreen,         //                  // BKG sfoil/swire
+            kGreen + 2,     //                  // BKG 214 air
+            kGreen - 7,     //                  // BKG 208 int
+            kMagenta,       //                  // BKG ext
+            kMagenta + 2,   //                  // BKG neighbour
+            kMagenta - 7    //                  // optical
         };
 
         for(int i = 0; i < N_SYSTEMATICS; ++ i)
