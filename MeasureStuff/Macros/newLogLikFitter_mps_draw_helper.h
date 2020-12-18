@@ -5,7 +5,7 @@
 const TString legend_texts[N_SYSTEMATICS] = 
 {
     "outdated 0.1 MeV",
-    "outdated Energy Calibration 1.2 %%",
+    "outdated Energy Calibration 1.2 \%",
     "Efficiency 5.55 %",
     "ignore enrichment",
     "outdated Energy Calibration 3 keV",
@@ -15,8 +15,8 @@ const TString legend_texts[N_SYSTEMATICS] =
     "Foil Thickness (N)",
     "Energy Loss dE/dX (N)",
     "Brem (N)",
-    "Energy Calibration 0.2 %%",
-    "Energy Resolution 1.0 %% Gaus",
+    "Energy Calibration 0.2 \%",
+    "Energy Resolution 1.0 \% Gaus",
     "^{214}Bi/^{214}Pb Internal",
     "^{207}Bi Internal",
     "^{228}Ac/^{212}Bi/^{208}Tl Internal",
