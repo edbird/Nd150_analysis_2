@@ -1413,8 +1413,8 @@ void reweight_apply_fakedata(
             if(paramEnabledP1)
             {
                 double param_scale_factor = paramInitValue;
-                param_scale_factor += systematic_bkg * paramInitSystematicError;
 
+                // scale to get default number of events
                 hTotalE_P1_tmp->Scale(param_scale_factor);
                 hSingleEnergy_P1_tmp->Scale(param_scale_factor);
                 hHighEnergy_P1_tmp->Scale(param_scale_factor);
@@ -1422,13 +1422,44 @@ void reweight_apply_fakedata(
                 hHighLowEnergy_P1_tmp->Scale(param_scale_factor);
                 hEnergySum_P1_tmp->Scale(param_scale_factor);
                 hEnergyDiff_P1_tmp->Scale(param_scale_factor);
+
+                /*
+                if(sampleName.Contains("bi214_int"))
+                {
+                    if(systematic_bkg != 0.0)
+                    {
+                        std::cout << "P1" << std::endl;
+                        std::cout << hTotalE_P1_tmp->Integral() << std::endl;
+                    }
+                }
+                */
+
+                double param_scale_factor_2 = (paramInitValue + systematic_bkg * paramInitSystematicError) / paramInitValue;
+
+                hTotalE_P1_tmp->Scale(param_scale_factor_2);
+                hSingleEnergy_P1_tmp->Scale(param_scale_factor_2);
+                hHighEnergy_P1_tmp->Scale(param_scale_factor_2);
+                hLowEnergy_P1_tmp->Scale(param_scale_factor_2);
+                hHighLowEnergy_P1_tmp->Scale(param_scale_factor_2);
+                hEnergySum_P1_tmp->Scale(param_scale_factor_2);
+                hEnergyDiff_P1_tmp->Scale(param_scale_factor_2);
+
+                /*
+                if(sampleName.Contains("bi214_int"))
+                {
+                    if(systematic_bkg != 0.0)
+                    {
+                        std::cout << hTotalE_P1_tmp->Integral() << std::endl;
+                    }
+                }
+                */
             }
             // P2
             if(paramEnabledP2)
             {
                 double param_scale_factor = paramInitValue;
-                param_scale_factor += systematic_bkg * paramInitSystematicError;
-
+                
+                // scale to get default number of events
                 hTotalE_P2_tmp->Scale(param_scale_factor);
                 hSingleEnergy_P2_tmp->Scale(param_scale_factor);
                 hHighEnergy_P2_tmp->Scale(param_scale_factor);
@@ -1436,6 +1467,37 @@ void reweight_apply_fakedata(
                 hHighLowEnergy_P2_tmp->Scale(param_scale_factor);
                 hEnergySum_P2_tmp->Scale(param_scale_factor);
                 hEnergyDiff_P2_tmp->Scale(param_scale_factor);
+
+                /*
+                if(sampleName.Contains("bi214_int"))
+                {
+                    if(systematic_bkg != 0.0)
+                    {
+                        std::cout << "P2" << std::endl;
+                        std::cout << hTotalE_P2_tmp->Integral() << std::endl;
+                    }
+                }
+                */
+
+                double param_scale_factor_2 = (paramInitValue + systematic_bkg * paramInitSystematicError) / paramInitValue;
+
+                hTotalE_P2_tmp->Scale(param_scale_factor_2);
+                hSingleEnergy_P2_tmp->Scale(param_scale_factor_2);
+                hHighEnergy_P2_tmp->Scale(param_scale_factor_2);
+                hLowEnergy_P2_tmp->Scale(param_scale_factor_2);
+                hHighLowEnergy_P2_tmp->Scale(param_scale_factor_2);
+                hEnergySum_P2_tmp->Scale(param_scale_factor_2);
+                hEnergyDiff_P2_tmp->Scale(param_scale_factor_2);
+
+                /*
+                if(sampleName.Contains("bi214_int"))
+                {
+                    if(systematic_bkg != 0.0)
+                    {
+                        std::cout << hTotalE_P2_tmp->Integral() << std::endl;
+                    }
+                }
+                */
             }
 
             /*
