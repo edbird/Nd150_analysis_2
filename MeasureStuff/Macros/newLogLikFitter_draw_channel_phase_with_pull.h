@@ -1337,11 +1337,11 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         chilatex.SetTextSize(18);
         if(channel == 0)
         {
-            chilatex.DrawLatex(0.50 + 0.05, 0.28, chilatexstr);
+            chilatex.DrawLatex(0.50 + 0.05, 0.29, chilatexstr);
         }
         else
         {
-            chilatex.DrawLatex(0.35 + 0.03, 0.28, chilatexstr);
+            chilatex.DrawLatex(0.35 + 0.03, 0.29, chilatexstr);
         }
 
 
@@ -1552,8 +1552,8 @@ std::cout << "sigdraw" << std::endl;
 
             axis5->SetLabelFont(43);
             axis5->SetLabelSize(15);
-            //axis5->ChangeLabel(-1, 0, 0);
-            //axis5->ChangeLabel(1, 0, 0);
+            axis5->ChangeLabel(-1, 0, 0);
+            axis5->ChangeLabel(1, 0, 0);
             axis5->Draw();
         }
 
