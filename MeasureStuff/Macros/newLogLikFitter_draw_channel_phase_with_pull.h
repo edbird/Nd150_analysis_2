@@ -459,22 +459,22 @@ void draw_channel_phase_with_pull(
         double PAD_U_Y_MAX_P1_P2 = 500.0;
         double PAD_L_Y_MIN_P1_P2 = 0.5;
         double PAD_L_Y_MAX_P1_P2 = 2.0;
-        double PAD_LL_Y_MIN_P1_P2 = -3.0;
-        double PAD_LL_Y_MAX_P1_P2 = 3.0;
+        double PAD_LL_Y_MIN_P1_P2 = -4.0;
+        double PAD_LL_Y_MAX_P1_P2 = 4.0;
 
         double PAD_U_Y_MIN_P1 = 0.0;
         double PAD_U_Y_MAX_P1 = 500.0;
         double PAD_L_Y_MIN_P1 = 0.5;
         double PAD_L_Y_MAX_P1 = 2.0;
-        double PAD_LL_Y_MIN_P1 = -3.0;
-        double PAD_LL_Y_MAX_P1 = 3.0;
+        double PAD_LL_Y_MIN_P1 = -4.0;
+        double PAD_LL_Y_MAX_P1 = 4.0;
 
         double PAD_U_Y_MIN_P2 = 0.0;
         double PAD_U_Y_MAX_P2 = 500.0;
         double PAD_L_Y_MIN_P2 = 0.5;
         double PAD_L_Y_MAX_P2 = 2.0;
-        double PAD_LL_Y_MIN_P2 = -3.0;
-        double PAD_LL_Y_MAX_P2 = 3.0;
+        double PAD_LL_Y_MIN_P2 = -4.0;
+        double PAD_LL_Y_MAX_P2 = 4.0;
 
         double PAD_U_Y_MIN_Px = 0.0;
         double PAD_U_Y_MAX_Px = 0.0;
@@ -1226,10 +1226,25 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         TGaxis *axis2 = nullptr;
         if(AXISMODE == 2)
         {
-            axis = new TGaxis(0.0, PAD_U_Y_MIN_Px,
+            if
+                (
+                    ((PAD_U_Y_MAX >= 50.0) && (PAD_U_Y_MAX <= 100.0))
+                    ||
+                    ((PAD_U_Y_MAX >= 500.0) && (PAD_U_Y_MAX <= 1000.0))
+                )
+            {
+                axis = new TGaxis(0.0, PAD_U_Y_MIN_Px,
+                                      0.0, PAD_U_Y_MAX_Px,
+                                      PAD_U_Y_MIN_Px, PAD_U_Y_MAX_Px,
+                                      210, "");
+            }
+            else
+            {
+                axis = new TGaxis(0.0, PAD_U_Y_MIN_Px,
                                       0.0, PAD_U_Y_MAX_Px,
                                       PAD_U_Y_MIN_Px, PAD_U_Y_MAX_Px,
                                       510, "");
+            }
             axis->SetLabelFont(43);
             axis->SetLabelSize(15);
             //axis->SetTickLength(0.05 / (0.7 * 0.9)); // TODO: think the margin is 0.1
@@ -1297,7 +1312,7 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         xilatex.SetTextSize(18);
         if(channel == 0)
         {
-            xilatex.DrawLatex(0.50, 0.55, xilatexstr);
+            xilatex.DrawLatex(0.475, 0.55, xilatexstr);
         }
         else
         {
