@@ -811,7 +811,7 @@ class mpsdrawdata
         // energy loss
         // brem (ignore)
         
-        Int_t markerstylen[N_SYSTEMATICS] = 
+        Int_t markerstylen[N_SYSTEMATICS + 1] = 
         {
             50, // "+"              // const 1.0 MeV shift
             22, // triangle up      // scale factor 1.2 %
@@ -837,9 +837,10 @@ class mpsdrawdata
             20, // "+"              // BKG: 208 air
             20, // "+"              // BKG: ext
             20, // "+"              // BKG: neighbour
+            20, // "+"              // BKG: ALL
             50  // "+"              // optical
         };
-        Double_t markersizen[N_SYSTEMATICS] = 
+        Double_t markersizen[N_SYSTEMATICS + 1] = 
         {
             2.0,    // 1.0 MeV
             1.5,    // 1.2 %
@@ -865,9 +866,10 @@ class mpsdrawdata
             1.0,    // BKG 208 air
             1.0,    // BKG ext
             1.0,    // BKG neighbour
+            1.0,    // BKG all
             1.0     // optical
         };
-        Color_t markercolorn[N_SYSTEMATICS] = 
+        Color_t markercolorn[N_SYSTEMATICS + 1] = 
         {
             //kRed, kOrange, kGreen, kBlue, kMagenta, kViolet, kViolet + 10
             kBlack,         // "+"              // 1.0 MeV
@@ -894,6 +896,7 @@ class mpsdrawdata
             kGreen - 7,     //                  // BKG 208 int
             kMagenta,       //                  // BKG ext
             kMagenta + 2,   //                  // BKG neighbour
+            kBlack,         //                  // BKG all
             kMagenta - 7    //                  // optical
         };
 
