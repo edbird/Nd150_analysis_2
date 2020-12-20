@@ -909,7 +909,15 @@ void draw_channel_phase_with_pull(
 
         canvas_Px->cd();
         //TPad *p3_Px = new TPad("pad3_" + channel_str + "_" + phase_arg_str, "pad3_" + channel_str + "_" + phase_arg_str, 0.615, 0.4, 0.855, 0.85);
-        TPad *p3_Px = new TPad("pad3_" + channel_str + "_" + phase_arg_str, "pad3_" + channel_str + "_" + phase_arg_str, 0.68 + 0.05, 0.53, 0.92 + 0.05, 0.99);
+        TPad *p3_Px = nullptr;
+        if(channel == 0)
+        {
+            p3_Px = new TPad("pad3_" + channel_str + "_" + phase_arg_str, "pad3_" + channel_str + "_" + phase_arg_str, 0.68 + 0.07, 0.53, 0.92 + 0.07, 0.99);
+        }
+        else
+        {
+            p3_Px = new TPad("pad3_" + channel_str + "_" + phase_arg_str, "pad3_" + channel_str + "_" + phase_arg_str, 0.68, 0.53, 0.92, 0.99);
+        }
         p3_Px->SetTopMargin(0.05);
         p3_Px->SetBottomMargin(0.05);
         p3_Px->SetLeftMargin(0.05);
@@ -1243,29 +1251,6 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
 //std::cout << "axis draw" << std::endl;
 
 
-        double xi_31_Px = 0.0;
-        double xi_31_err_Px = 0.0;
-        if(g_pg.get_xi_31_int_param_number() != -1)
-        {
-            int xi_31_ext_param_number = g_pg.get_xi_31_ext_param_number();
-            /*double*/ xi_31_Px = params.at(xi_31_ext_param_number);
-            xi_31_err_Px = param_errs.at(xi_31_err_Px);
-        }
-        TString xilatexstr;
-        xilatexstr.Form("#xi_{31}^{2#nu#beta#beta} = %.2f #pm %.2f", xi_31_Px, xi_31_err_Px);
-        TLatex xilatex;
-        xilatex.SetNDC();
-        xilatex.SetTextFont(63);
-        xilatex.SetTextSize(18);
-        if(channel == 0)
-        {
-            xilatex.DrawLatex(0.45, 0.55, xilatexstr);
-        }
-        else
-        {
-            xilatex.DrawLatex(0.35, 0.55, xilatexstr);
-        }
-
         double T12_Px = 0.0;
         double T12_err_Px = 0.0;
         double A_Px = 0.0;
@@ -1289,11 +1274,34 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         T12latex.SetTextSize(18);
         if(channel == 0)
         {
-            T12latex.DrawLatex(0.45, 0.75, T12latexstr);
+            T12latex.DrawLatex(0.40, 0.75, T12latexstr);
         }
         else
         {
             T12latex.DrawLatex(0.3, 0.75, T12latexstr);
+        }
+
+        double xi_31_Px = 0.0;
+        double xi_31_err_Px = 0.0;
+        if(g_pg.get_xi_31_int_param_number() != -1)
+        {
+            int xi_31_ext_param_number = g_pg.get_xi_31_ext_param_number();
+            /*double*/ xi_31_Px = params.at(xi_31_ext_param_number);
+            xi_31_err_Px = param_errs.at(xi_31_err_Px);
+        }
+        TString xilatexstr;
+        xilatexstr.Form("#xi_{31}^{2#nu#beta#beta} = %.2f #pm %.2f", xi_31_Px, xi_31_err_Px);
+        TLatex xilatex;
+        xilatex.SetNDC();
+        xilatex.SetTextFont(63);
+        xilatex.SetTextSize(18);
+        if(channel == 0)
+        {
+            xilatex.DrawLatex(0.50, 0.55, xilatexstr);
+        }
+        else
+        {
+            xilatex.DrawLatex(0.35, 0.55, xilatexstr);
         }
 
         double chi2_global = drawinputdata.chi2;
@@ -1314,11 +1322,11 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         chilatex.SetTextSize(18);
         if(channel == 0)
         {
-            chilatex.DrawLatex(0.50 + 0.05, 0.25, chilatexstr);
+            chilatex.DrawLatex(0.50 + 0.05, 0.28, chilatexstr);
         }
         else
         {
-            chilatex.DrawLatex(0.35 + 0.05, 0.25, chilatexstr);
+            chilatex.DrawLatex(0.35 + 0.03, 0.28, chilatexstr);
         }
 
 
