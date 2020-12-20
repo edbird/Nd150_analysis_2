@@ -1259,11 +1259,11 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         xilatex.SetTextSize(18);
         if(channel == 0)
         {
-            xilatex.DrawLatex(0.55, 0.65, xilatexstr);
+            xilatex.DrawLatex(0.45, 0.55, xilatexstr);
         }
         else
         {
-            xilatex.DrawLatex(0.45, 0.65, xilatexstr);
+            xilatex.DrawLatex(0.35, 0.55, xilatexstr);
         }
 
         double T12_Px = 0.0;
@@ -1289,11 +1289,11 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         T12latex.SetTextSize(18);
         if(channel == 0)
         {
-            T12latex.DrawLatex(0.55, 0.75, T12latexstr);
+            T12latex.DrawLatex(0.45, 0.75, T12latexstr);
         }
         else
         {
-            T12latex.DrawLatex(0.45, 0.75, T12latexstr);
+            T12latex.DrawLatex(0.35, 0.75, T12latexstr);
         }
 
         double chi2_global = drawinputdata.chi2;
@@ -1314,11 +1314,11 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         chilatex.SetTextSize(18);
         if(channel == 0)
         {
-            chilatex.DrawLatex(0.55, 0.40, chilatexstr);
+            chilatex.DrawLatex(0.45, 0.35, chilatexstr);
         }
         else
         {
-            chilatex.DrawLatex(0.45, 0.40, chilatexstr);
+            chilatex.DrawLatex(0.35, 0.35, chilatexstr);
         }
 
 
