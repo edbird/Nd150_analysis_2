@@ -642,7 +642,7 @@ void min_point_save(
 
     const double N_ISOTOPE = 150.0;
     const double N_AVOGADRO = 6.022e+23;
-    const double MASS = 36.6;
+    const double MASS = 36.55;
 
     const double ACTIVITY0 = 3.45e-4;
     const double ACTIVITY = ACTIVITY0 * min_point[1];
