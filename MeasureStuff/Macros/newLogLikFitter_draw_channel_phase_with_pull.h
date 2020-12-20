@@ -1244,18 +1244,57 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
 
 
         double xi_31_Px = 0.0;
+        double xi_31_err_Px = 0.0;
         if(g_pg.get_xi_31_int_param_number() != -1)
         {
             int xi_31_ext_param_number = g_pg.get_xi_31_ext_param_number();
             /*double*/ xi_31_Px = params.at(xi_31_ext_param_number);
+            xi_31_err_Px = param_errs.at(xi_31_err_Px);
         }
         TString xilatexstr;
-        xilatexstr.Form("#xi_{31}^{2#nu#beta#beta} = %.3f", xi_31_Px);
+        xilatexstr.Form("#xi_{31}^{2#nu#beta#beta} = %.2f #pm %.2f", xi_31_Px, xi_31_err_Px);
         TLatex xilatex;
         xilatex.SetNDC();
         xilatex.SetTextFont(63);
-        xilatex.SetTextSize(20);
-        xilatex.DrawLatex(0.45, 0.70, xilatexstr);
+        xilatex.SetTextSize(18);
+        if(channel == 0)
+        {
+            xilatex.DrawLatex(0.55, 0.65, xilatexstr);
+        }
+        else
+        {
+            xilatex.DrawLatex(0.45, 0.65, xilatexstr);
+        }
+
+        double T12_Px = 0.0;
+        double T12_err_Px = 0.0;
+        double A_Px = 0.0;
+        double A_err_Px = 0.0;
+        A_Px = params.at(0);
+        A_err_Px = param_errs.at(0);
+        const double MASS = 36.55;
+        const double N_ISO = 150.0;
+        const double N_AVO = 6.022e+23;
+        const double N_AVO_YEARTOSEC = N_AVO / 31557600.0;
+        const double A0 = 3.45e-4;
+        const double ACT = A0 * A_Px;
+        const double ACTERR = A0 * A_err_Px;
+        T12_Px = std::log(2.0) * (MASS / N_ISO) * (N_AVO_YEARTOSEC / ACT);
+        T12_err_Px = T12_Px * ACTERR / ACT;
+        TString T12latexstr;
+        T12latexstr.Form("T_{#frac{1}{2}}^{2#nu#beta#beta} = (%.2f #pm %.2f) #times10^{18} yr", 1e-18 * T12_Px, 1e-18 * T12_err_Px);
+        TLatex T12latex;
+        T12latex.SetNDC();
+        T12latex.SetTextFont(63);
+        T12latex.SetTextSize(18);
+        if(channel == 0)
+        {
+            T12latex.DrawLatex(0.55, 0.75, T12latexstr);
+        }
+        else
+        {
+            T12latex.DrawLatex(0.45, 0.75, T12latexstr);
+        }
 
         double chi2_global = drawinputdata.chi2;
         int nch_global = drawinputdata.nch;
@@ -1272,8 +1311,15 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         TLatex chilatex;
         chilatex.SetNDC();
         chilatex.SetTextFont(63);
-        chilatex.SetTextSize(20);
-        chilatex.DrawLatex(0.45, 0.45, chilatexstr);
+        chilatex.SetTextSize(18);
+        if(channel == 0)
+        {
+            chilatex.DrawLatex(0.55, 0.40, chilatexstr);
+        }
+        else
+        {
+            chilatex.DrawLatex(0.45, 0.40, chilatexstr);
+        }
 
 
 
