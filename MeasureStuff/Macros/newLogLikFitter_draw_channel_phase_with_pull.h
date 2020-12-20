@@ -1289,11 +1289,11 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         T12latex.SetTextSize(18);
         if(channel == 0)
         {
-            T12latex.DrawLatex(0.45, 0.75, T12latexstr);
+            T12latex.DrawLatex(0.4, 0.75, T12latexstr);
         }
         else
         {
-            T12latex.DrawLatex(0.35, 0.75, T12latexstr);
+            T12latex.DrawLatex(0.3, 0.75, T12latexstr);
         }
 
         double chi2_global = drawinputdata.chi2;
