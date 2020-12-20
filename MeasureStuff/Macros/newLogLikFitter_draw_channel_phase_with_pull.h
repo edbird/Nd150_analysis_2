@@ -1230,7 +1230,7 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
                 (
                     ((PAD_U_Y_MAX_Px >= 50.0) && (PAD_U_Y_MAX_Px <= 100.0))
                     ||
-                    ((PAD_U_Y_MAX_Px >= 500.0) && (PAD_U_Y_MAX_Px <= 1000.0))
+                    ((PAD_U_Y_MAX_Px >= 200.0) && (PAD_U_Y_MAX_Px <= 1000.0))
                 )
             {
                 axis = new TGaxis(0.0, PAD_U_Y_MIN_Px,
