@@ -2,7 +2,7 @@
 #define NEWLOGLIKFITTER_DRAW_MPS_HELPER_H
 
 
-const TString legend_texts[N_SYSTEMATICS] = 
+const TString legend_texts[N_SYSTEMATICS + 1] = 
 {
     "outdated 0.1 MeV",
     "outdated Energy Calibration 1.2 \%",
@@ -28,6 +28,7 @@ const TString legend_texts[N_SYSTEMATICS] =
     "^{228}Ac/^{212}Bi/^{208}Tl Air",
     "External Background",
     "Neighbour Foil Background",
+    "Combined Background",
     "placeholder Optical Correction"
 };
 
