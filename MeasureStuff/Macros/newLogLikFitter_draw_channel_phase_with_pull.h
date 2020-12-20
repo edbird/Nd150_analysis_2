@@ -1314,11 +1314,11 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         chilatex.SetTextSize(18);
         if(channel == 0)
         {
-            chilatex.DrawLatex(0.50, 0.30, chilatexstr);
+            chilatex.DrawLatex(0.50 + 0.05, 0.25, chilatexstr);
         }
         else
         {
-            chilatex.DrawLatex(0.35, 0.30, chilatexstr);
+            chilatex.DrawLatex(0.35 + 0.05, 0.25, chilatexstr);
         }
 
 
