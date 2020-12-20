@@ -59,17 +59,17 @@ bool V_ENABLE_SYSn[N_SYSTEMATICS] =
 {
 /* 01 */    false,  // false    // constant 1.0 MeV shift
 /* 02 */    false,  // false    // scale factor: m = 1 % + 0.2 %
-/* 03 */    false,  // true     // +- 5.55 % efficiency
-/* 04 */    false,  // true     // +- 0.50 % enrichment
+/* 03 */    true,   // true     // +- 5.55 % efficiency
+/* 04 */    true,   // true     // +- 0.50 % enrichment
 /* 05 */    false,  // true     // +- 3 keV
-/* 06 */    false,  // true     // foil thickness
-/* 07 */    false,  // true     // dE/dX
+/* 06 */    true,   // true     // foil thickness
+/* 07 */    true,   // true     // dE/dX
 /* 08 */    false,  // false    // brem
 /* 09 */    false,  // false    // foil thickness (nominal)
 /* 10 */    false,  // false    // dE/dX (nominal)
-/* 11 */    false,  // true     // brem (nominal)
-/* 12 */    false,  // true     // 0.2 % energy scale factor m = 0.2 %
-/* 13 */    false,  // true     // 1.0 % Gaussian smear
+/* 11 */    true,   // true     // brem (nominal)
+/* 12 */    true,   // true     // 0.2 % energy scale factor m = 0.2 %
+/* 13 */    true,   // true     // 1.0 % Gaussian smear
 /* 14 */    true,   // true     // BKG: 214Bi/214Pb (int)
 /* 15 */    true,   // true     // BKG: 207Bi (int)
 /* 16 */    true,   // true     // BKG: 228Ac/212Bi/208Tl (int)
@@ -290,12 +290,12 @@ bool recalculate_V_PHYS_MATHMORE = true;
 bool recalculate_V_PHYS_SYS = true;
 
 
-const bool ENABLE_MIN_POINT_SYSn[N_SYSTEMATICS] =
+const bool ENABLE_MIN_POINT_SYSn[N_SYSTEMATICS + 1] =
 {
 /* 01 */    false,  // false    // constant 1.0 MeV shift
 /* 02 */    false,  // false    // scale factor: m = 1 % + 0.2 %
 /* 03 */    true,   // true     // +- 5.55 % efficiency
-/* 04 */    true,   // false    // +- 0.50 % enrichment
+/* 04 */    false,  // false    // +- 0.50 % enrichment
 /* 05 */    false,  // false    // +- 3 keV
 /* 06 */    true,   // true     // foil thickness
 /* 07 */    true,   // true     // dE/dX
@@ -304,19 +304,20 @@ const bool ENABLE_MIN_POINT_SYSn[N_SYSTEMATICS] =
 /* 10 */    false,  // false    // dE/dX (nominal)
 /* 11 */    true,   // true     // brem (nominal)
 /* 12 */    true,   // true     // 0.2 % energy scale factor m = 0.2 %
-/* 13 */    true,   // true     // 1.0 % Gaussian smear
-/* 14 */    true,   // true     // BKG: 214Bi/214Pb (int)
-/* 15 */    true,   // true     // BKG: 207Bi (int)
-/* 16 */    true,   // true     // BKG: 228Ac/212Bi/208Tl (int)
-/* 17 */    true,   // true     // BKG: 152Eu/154Eu (int)
-/* 18 */    true,   // true     // BKG: 40K/234mPa (int)
-/* 19 */    true,   // true     // BKG: 214Bi/214Pb (mylar)
-/* 20 */    true,   // true     // BKG: 214Bi/214Pb (sfoil, swire)
-/* 21 */    true,   // true     // BKG: 214Bi/214Pb (air)
-/* 22 */    true,   // true     // BKG: 208Tl (air)
-/* 23 */    true,   // true     // BKG: EXTERNAL
-/* 24 */    true,   // true     // BKG: NEIGHBOUR
-/* 25 */    false   // true     // optical correction related systematic
+/* 13 */    false,   // true     // 1.0 % Gaussian smear
+/* 14 */    false,  // true     // BKG: 214Bi/214Pb (int)
+/* 15 */    false,  // true     // BKG: 207Bi (int)
+/* 16 */    false,  // true     // BKG: 228Ac/212Bi/208Tl (int)
+/* 17 */    false,  // true     // BKG: 152Eu/154Eu (int)
+/* 18 */    false,  // true     // BKG: 40K/234mPa (int)
+/* 19 */    false,  // true     // BKG: 214Bi/214Pb (mylar)
+/* 20 */    false,  // true     // BKG: 214Bi/214Pb (sfoil, swire)
+/* 21 */    false,  // true     // BKG: 214Bi/214Pb (air)
+/* 22 */    false,  // true     // BKG: 208Tl (air)
+/* 23 */    false,  // true     // BKG: EXTERNAL
+/* 24 */    false,  // true     // BKG: NEIGHBOUR
+/* 25 */    true,   // true     // BKG: ALL
+/* 26 */    false   // true     // optical correction related systematic
 };
 // enable/disable drawing of minimum points for each systematic fit
 //const bool ENABLE_MIN_POINT_SYS1 = true; // +- 0.1 MeV
@@ -490,7 +491,7 @@ double min_point_data_SSD_err[2] = {0.0, 0.0};
 // BKG: EXTERNAL
 // BKG: NEIGHBOUR
 
-double min_point_fake_sysn_h[N_SYSTEMATICS][2] =
+double min_point_fake_sysn_h[N_SYSTEMATICS + 1][2] =
 {
     {0.0, 0.0},
     {0.0, 0.0}, // 2
@@ -518,7 +519,7 @@ double min_point_fake_sysn_h[N_SYSTEMATICS][2] =
     {0.0, 0.0}, // 24
     {0.0, 0.0}
 };
-double min_point_fake_sysn_h_err[N_SYSTEMATICS][2] =
+double min_point_fake_sysn_h_err[N_SYSTEMATICS + 1][2] =
 {
     {0.0, 0.0},
     {0.0, 0.0}, // 2
@@ -547,7 +548,7 @@ double min_point_fake_sysn_h_err[N_SYSTEMATICS][2] =
     {0.0, 0.0}
 };
 
-double min_point_fake_sysn_h_fval[N_SYSTEMATICS] =
+double min_point_fake_sysn_h_fval[N_SYSTEMATICS + 1] =
 {
     0.0, 0.0, 0.0, 0.0,
     0.0, 0.0, 0.0, 0.0, // 8
@@ -558,7 +559,7 @@ double min_point_fake_sysn_h_fval[N_SYSTEMATICS] =
     0.0
 };
 
-double min_point_fake_sysn_l[N_SYSTEMATICS][2] =
+double min_point_fake_sysn_l[N_SYSTEMATICS + 1][2] =
 {
     {0.0, 0.0},
     {0.0, 0.0}, // 2
@@ -586,7 +587,7 @@ double min_point_fake_sysn_l[N_SYSTEMATICS][2] =
     {0.0, 0.0}, // 24
     {0.0, 0.0}
 };
-double min_point_fake_sysn_l_err[N_SYSTEMATICS][2] =
+double min_point_fake_sysn_l_err[N_SYSTEMATICS + 1][2] =
 {
     {0.0, 0.0},
     {0.0, 0.0}, // 2
@@ -615,7 +616,7 @@ double min_point_fake_sysn_l_err[N_SYSTEMATICS][2] =
     {0.0, 0.0}
 };
 
-double min_point_fake_sysn_l_fval[N_SYSTEMATICS] =
+double min_point_fake_sysn_l_fval[N_SYSTEMATICS + 1] =
 {
     0.0, 0.0, 0.0, 0.0,
     0.0, 0.0, 0.0, 0.0, // 8
