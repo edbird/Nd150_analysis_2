@@ -1305,7 +1305,32 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
             xi_31_err_Px = param_errs.at(xi_31_err_Px);
         }
         TString xilatexstr;
-        xilatexstr.Form("#xi_{31}^{2#nu#beta#beta} = %.2f #pm %.2f", xi_31_Px, xi_31_err_Px);
+        if(mode_parallel == false)
+        {
+            if(drawinputdata.serial_dir == "HSD" ||
+               drawinputdata.serial_dir == "HSD_CH0" ||
+               drawinputdata.serial_dir == "SSD")
+            {
+                xilatexstr.Form("#xi_{31}^{2#nu#beta#beta} = %.3f", xi_31_Px);
+            }
+            else
+            {
+                xilatexstr.Form("#xi_{31}^{2#nu#beta#beta} = %.2f #pm %.2f", xi_31_Px, xi_31_err_Px);
+            }
+        }
+        else if(mode_parallel == true)
+        {
+            if(drawinputdata.parallel_dir == "HSD" ||
+               drawinputdata.parallel_dir == "HSD_CH0" ||
+               drawinputdata.parallel_dir == "SSD")
+            { 
+                xilatexstr.Form("#xi_{31}^{2#nu#beta#beta} = %.3f", xi_31_Px);
+            }
+            else
+            {
+                xilatexstr.Form("#xi_{31}^{2#nu#beta#beta} = %.2f #pm %.2f", xi_31_Px, xi_31_err_Px);
+            }
+        }
         TLatex xilatex;
         xilatex.SetNDC();
         xilatex.SetTextFont(63);
