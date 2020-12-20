@@ -909,7 +909,7 @@ void draw_channel_phase_with_pull(
 
         canvas_Px->cd();
         //TPad *p3_Px = new TPad("pad3_" + channel_str + "_" + phase_arg_str, "pad3_" + channel_str + "_" + phase_arg_str, 0.615, 0.4, 0.855, 0.85);
-        TPad *p3_Px = new TPad("pad3_" + channel_str + "_" + phase_arg_str, "pad3_" + channel_str + "_" + phase_arg_str, 0.68, 0.53, 0.92, 0.99);
+        TPad *p3_Px = new TPad("pad3_" + channel_str + "_" + phase_arg_str, "pad3_" + channel_str + "_" + phase_arg_str, 0.68 + 0.05, 0.53, 0.92 + 0.05, 0.99);
         p3_Px->SetTopMargin(0.05);
         p3_Px->SetBottomMargin(0.05);
         p3_Px->SetLeftMargin(0.05);
@@ -1289,7 +1289,7 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         T12latex.SetTextSize(18);
         if(channel == 0)
         {
-            T12latex.DrawLatex(0.4, 0.75, T12latexstr);
+            T12latex.DrawLatex(0.45, 0.75, T12latexstr);
         }
         else
         {
@@ -1314,11 +1314,11 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         chilatex.SetTextSize(18);
         if(channel == 0)
         {
-            chilatex.DrawLatex(0.45, 0.35, chilatexstr);
+            chilatex.DrawLatex(0.50, 0.30, chilatexstr);
         }
         else
         {
-            chilatex.DrawLatex(0.35, 0.35, chilatexstr);
+            chilatex.DrawLatex(0.35, 0.30, chilatexstr);
         }
 
 
@@ -1604,7 +1604,7 @@ std::cout << "sigdraw" << std::endl;
             leg->AddEntry(h_data_fakedata, "Fake Data (" + Ndata_fakedata_str + ")", "EL");
         }
         leg->AddEntry(h_stack_total_MC, "Total MC (" + Nmc_Px_str + ")", "L");
-        leg->AddEntry(h_stack_2nubb, "2#nu#beta#beta", "F");
+        leg->AddEntry(h_stack_2nubb, "^{150}Nd 2#nu#beta#beta", "F");
         leg->AddEntry(h_stack_tl208_int, "^{208}Tl ^{150}Nd Foil", "F");
         leg->AddEntry(h_stack_bi214_int, "^{214}Bi ^{150}Nd Foil", "F");
         leg->AddEntry(h_stack_bi207_int, "^{207}Bi ^{150}Nd Foil", "F");
