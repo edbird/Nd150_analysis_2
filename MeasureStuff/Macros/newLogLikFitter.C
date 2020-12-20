@@ -783,6 +783,7 @@ void loadFiles(int i)
     const double xi_31_covariance_matrix_reweight_value = 0.7;
 
     // TODO: should I set amplitude to 1.15 here?
+    double ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE = 1.15;
     ND150_FAKEDATA_SCALE_FACTOR = 1.15;
 
 
@@ -2116,7 +2117,7 @@ void loadFiles(int i)
     // Systematics disabled
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake, min_point_fake_err, min_point_fake_fval,
@@ -2131,7 +2132,7 @@ void loadFiles(int i)
     // Systematics enabled
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", true, true, 2, false, -1000.0,
         min_point_fake_SYSALL, min_point_fake_SYSALL_err, min_point_fake_SYSALL_fval,
@@ -2150,7 +2151,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_offset = -0.1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[0], min_point_fake_sysn_l_err[0], min_point_fake_sysn_l_fval[0],
@@ -2167,7 +2168,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_offset = +0.1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[0], min_point_fake_sysn_h_err[0], min_point_fake_sysn_h_fval[0],
@@ -2186,7 +2187,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_scale = -0.012;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[1], min_point_fake_sysn_l_err[1], min_point_fake_sysn_l_fval[1],
@@ -2203,7 +2204,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_scale = +0.012;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[1], min_point_fake_sysn_h_err[1], min_point_fake_sysn_h_fval[1],
@@ -2222,7 +2223,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_efficiency = -5.55e-02;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[2], min_point_fake_sysn_l_err[2], min_point_fake_sysn_l_fval[2],
@@ -2239,7 +2240,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_efficiency = +5.55e-02;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[2], min_point_fake_sysn_h_err[2], min_point_fake_sysn_h_fval[2],
@@ -2258,7 +2259,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_enrichment = -0.5e-02;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[3], min_point_fake_sysn_l_err[3], min_point_fake_sysn_l_fval[3],
@@ -2275,7 +2276,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_enrichment = +0.5e-02;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[3], min_point_fake_sysn_h_err[3], min_point_fake_sysn_h_fval[3],
@@ -2294,7 +2295,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_offsetsmall = -3.0e-3;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[4], min_point_fake_sysn_l_err[4], min_point_fake_sysn_l_fval[4],
@@ -2311,7 +2312,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_offsetsmall = +3.0e-3;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[4], min_point_fake_sysn_h_err[4], min_point_fake_sysn_h_fval[4],
@@ -2330,7 +2331,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_foil_thickness_virtual = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[5], min_point_fake_sysn_l_err[5], min_point_fake_sysn_l_fval[5],
@@ -2347,7 +2348,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_foil_thickness_virtual = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[5], min_point_fake_sysn_h_err[5], min_point_fake_sysn_h_fval[5],
@@ -2366,7 +2367,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_dEdX_virtual = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[6], min_point_fake_sysn_l_err[6], min_point_fake_sysn_l_fval[6],
@@ -2383,7 +2384,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_dEdX_virtual = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[6], min_point_fake_sysn_h_err[6], min_point_fake_sysn_h_fval[6],
@@ -2402,7 +2403,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_brem_virtual = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[7], min_point_fake_sysn_l_err[7], min_point_fake_sysn_l_fval[7],
@@ -2419,7 +2420,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_brem_virtual = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[7], min_point_fake_sysn_h_err[7], min_point_fake_sysn_h_fval[7],
@@ -2438,7 +2439,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_foil_thickness_nominal = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[8], min_point_fake_sysn_l_err[8], min_point_fake_sysn_l_fval[8],
@@ -2455,7 +2456,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_foil_thickness_nominal = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[8], min_point_fake_sysn_h_err[8], min_point_fake_sysn_h_fval[8],
@@ -2474,7 +2475,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_dEdX_nominal = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[9], min_point_fake_sysn_l_err[9], min_point_fake_sysn_l_fval[9],
@@ -2491,7 +2492,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_dEdX_nominal = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[9], min_point_fake_sysn_h_err[9], min_point_fake_sysn_h_fval[9],
@@ -2510,7 +2511,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_brem_nominal = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_l[10], min_point_fake_sysn_l_err[10], min_point_fake_sysn_l_fval[10],
@@ -2527,7 +2528,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_brem_nominal = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
         min_point_fake_sysn_h[10], min_point_fake_sysn_h_err[10], min_point_fake_sysn_h_fval[10],
@@ -2555,7 +2556,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_scale_small = +0.2e-2;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[11], min_point_fake_sysn_h_err[11], min_point_fake_sysn_h_fval[11],
@@ -2571,7 +2572,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_scale_small = -0.2e-2;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[11], min_point_fake_sysn_l_err[11], min_point_fake_sysn_l_fval[11],
@@ -2589,7 +2590,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_gaussian_smear = +1.0e-2;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[12], min_point_fake_sysn_h_err[12], min_point_fake_sysn_h_fval[12],
@@ -2605,7 +2606,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_energy_gaussian_smear = -1.0e-2;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[12], min_point_fake_sysn_l_err[12], min_point_fake_sysn_l_fval[12],
@@ -2623,7 +2624,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_int = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[13], min_point_fake_sysn_h_err[13], min_point_fake_sysn_h_fval[13],
@@ -2639,7 +2640,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_int = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[13], min_point_fake_sysn_l_err[13], min_point_fake_sysn_l_fval[13],
@@ -2657,7 +2658,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_bi207_int = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[14], min_point_fake_sysn_h_err[14], min_point_fake_sysn_h_fval[14],
@@ -2673,7 +2674,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_bi207_int = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[14], min_point_fake_sysn_l_err[14], min_point_fake_sysn_l_fval[14],
@@ -2691,7 +2692,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_tl208_int = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[15], min_point_fake_sysn_h_err[15], min_point_fake_sysn_h_fval[15],
@@ -2707,7 +2708,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_tl208_int = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[15], min_point_fake_sysn_l_err[15], min_point_fake_sysn_l_fval[15],
@@ -2725,7 +2726,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_eu152_int = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[16], min_point_fake_sysn_h_err[16], min_point_fake_sysn_h_fval[16],
@@ -2741,7 +2742,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_eu152_int = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[16], min_point_fake_sysn_l_err[16], min_point_fake_sysn_l_fval[16],
@@ -2759,7 +2760,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_k40_int = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[17], min_point_fake_sysn_h_err[17], min_point_fake_sysn_h_fval[17],
@@ -2775,7 +2776,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_k40_int = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[17], min_point_fake_sysn_l_err[17], min_point_fake_sysn_l_fval[17],
@@ -2793,7 +2794,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_mylar = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[18], min_point_fake_sysn_h_err[18], min_point_fake_sysn_h_fval[18],
@@ -2809,7 +2810,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_mylar = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[18], min_point_fake_sysn_l_err[18], min_point_fake_sysn_l_fval[18],
@@ -2827,7 +2828,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_sfoil_swire = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[19], min_point_fake_sysn_h_err[19], min_point_fake_sysn_h_fval[19],
@@ -2843,7 +2844,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_sfoil_swire = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[19], min_point_fake_sysn_l_err[19], min_point_fake_sysn_l_fval[19],
@@ -2861,7 +2862,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_air = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[20], min_point_fake_sysn_h_err[20], min_point_fake_sysn_h_fval[20],
@@ -2877,7 +2878,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_air = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[20], min_point_fake_sysn_l_err[20], min_point_fake_sysn_l_fval[20],
@@ -2895,7 +2896,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_tl208_air = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[21], min_point_fake_sysn_h_err[21], min_point_fake_sysn_h_fval[21],
@@ -2911,7 +2912,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_tl208_air = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[21], min_point_fake_sysn_l_err[21], min_point_fake_sysn_l_fval[21],
@@ -2929,7 +2930,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_external = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[22], min_point_fake_sysn_h_err[22], min_point_fake_sysn_h_fval[22],
@@ -2945,7 +2946,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_external = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[22], min_point_fake_sysn_l_err[22], min_point_fake_sysn_l_fval[22],
@@ -2963,7 +2964,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_neighbour = +1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_h[23], min_point_fake_sysn_h_err[23], min_point_fake_sysn_h_fval[23],
@@ -2979,7 +2980,7 @@ void loadFiles(int i)
     ///////////////////////////////////////////////////////////////////////////
     gSystematics.reset();
     gSystematics.systematic_bkg_neighbour = -1;
-    ND150_FAKEDATA_SCALE_FACTOR = 1.15;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
 
     min_point_helper("CH1", false, true, 2, false, -1000.0,
                      min_point_fake_sysn_l[23], min_point_fake_sysn_l_err[23], min_point_fake_sysn_l_fval[23],
@@ -2988,6 +2989,59 @@ void loadFiles(int i)
 
     ND150_FAKEDATA_SCALE_FACTOR = 1.0;
 
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Construct Systematic Data Objects
+    // Systematic: Background (ALL)
+    // Systematic Value: + 1
+    ///////////////////////////////////////////////////////////////////////////
+    gSystematics.reset();
+    gSystematics.systematic_bkg_bi214_int = +1;
+    gSystematics.systematic_bkg_bi207_int = +1;
+    gSystematics.systematic_bkg_tl208_int = +1;
+    gSystematics.systematic_bkg_eu152_int = +1;
+    gSystematics.systematic_bkg_k40_int = +1;
+    gSystematics.systematic_bkg_mylar = +1;
+    gSystematics.systematic_bkg_bi214_sfoil_swire = +1;
+    gSystematics.systematic_bkg_bi214_air = +1;
+    gSystematics.systematic_bkg_tl208_air = +1;
+    gSystematics.systematic_bkg_external = +1;
+    gSystematics.systematic_bkg_neighbour = +1;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
+
+    min_point_helper("CH1", false, true, 2, false, -1000.0,
+                     min_point_fake_sysn_h[24], min_point_fake_sysn_h_err[24], min_point_fake_sysn_h_fval[24],
+                     "min_point_fake_SYS24H", "xifree_fake_SYS24H", "xifree",
+                     xi_31_systematics_reweight_value);
+
+    ND150_FAKEDATA_SCALE_FACTOR = 1.0;
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Construct Systematic Data Objects
+    // Systematic: Background (ALL)
+    // Systematic Value: - 1
+    ///////////////////////////////////////////////////////////////////////////
+    gSystematics.reset();
+    gSystematics.systematic_bkg_bi214_int = -1;
+    gSystematics.systematic_bkg_bi207_int = -1;
+    gSystematics.systematic_bkg_tl208_int = -1;
+    gSystematics.systematic_bkg_eu152_int = -1;
+    gSystematics.systematic_bkg_k40_int = -1;
+    gSystematics.systematic_bkg_mylar = -1;
+    gSystematics.systematic_bkg_bi214_sfoil_swire = -1;
+    gSystematics.systematic_bkg_bi214_air = -1;
+    gSystematics.systematic_bkg_tl208_air = -1;
+    gSystematics.systematic_bkg_external = -1;
+    gSystematics.systematic_bkg_neighbour = -1;
+    ND150_FAKEDATA_SCALE_FACTOR = ND150_FAKEDATA_SCALE_FACTOR_SYSTEMATICS_REWEIGHT_VALUE;
+
+    min_point_helper("CH1", false, true, 2, false, -1000.0,
+                     min_point_fake_sysn_l[24], min_point_fake_sysn_l_err[24], min_point_fake_sysn_l_fval[24],
+                     "min_point_fake_SYS24L", "xifree_fake_SYS24L", "xifree",
+                     xi_31_systematics_reweight_value);
+
+    ND150_FAKEDATA_SCALE_FACTOR = 1.0;
 
     // TODO: optical correction
 
@@ -3089,7 +3143,7 @@ void loadFiles(int i)
 
 
 
-    //return 0;
+    return 0;
 
 
 
