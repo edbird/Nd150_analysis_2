@@ -1337,7 +1337,7 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         chilatex.SetTextSize(18);
         if(channel == 0)
         {
-            chilatex.DrawLatex(0.50, 0.29, chilatexstr);
+            chilatex.DrawLatex(0.52, 0.29, chilatexstr);
         }
         else
         {
