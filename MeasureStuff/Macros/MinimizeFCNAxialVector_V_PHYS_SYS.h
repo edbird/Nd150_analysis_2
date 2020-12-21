@@ -12,7 +12,9 @@
 void
 MinimizeFCNAxialVector::check_alloc_V_PHYS_SYSBKG_data_helper(
     std::vector<double> *V_PHYS_SYSBKG_1D_P1_data[],
-    std::vector<double> *V_PHYS_SYSBKG_1D_P2_data[]
+    std::vector<double> *V_PHYS_SYSBKG_1D_P2_data[],
+    std::vector<double> *V_PHYS_SYSBKG_2D_P1_data[],
+    std::vector<double> *V_PHYS_SYSBKG_2D_P2_data[]
     ) const
 {
     //std::cout << __func__ << std::endl;
@@ -39,6 +41,28 @@ MinimizeFCNAxialVector::check_alloc_V_PHYS_SYSBKG_data_helper(
         }
     }
 
+    if(V_PHYS_SYSBKG_2D_P1_data[0] == nullptr)
+    {
+        //std::cout << "Alloc V_PHYS_SYSBKG (P1)" << std::endl;
+
+        for(int ch = 0; ch < number2DHists; ++ ch)
+        {
+            const Int_t NUM_BINS_XY = 12 * 12;
+            V_PHYS_SYSBKG_2D_P1_data[ch] = new std::vector<double>(NUM_BINS_XY * NUM_BINS_XY, 0.0);
+        }
+    }
+
+    if(V_PHYS_SYSBKG_2D_P2_data[0] == nullptr)
+    {
+        //std::cout << "Alloc V_PHYS_SYSBKG (P2)" << std::endl;
+
+        for(int ch = 0; ch < number2DHists; ++ ch)
+        {
+            const Int_t NUM_BINS_XY = 12 * 12;
+            V_PHYS_SYSBKG_2D_P2_data[ch] = new std::vector<double>(NUM_BINS_XY * NUM_BINS_XY, 0.0);
+        }
+    }
+
 }
 
 
@@ -46,8 +70,12 @@ void
 MinimizeFCNAxialVector::set_V_PHYS_SYSBKG_data_helper(
     std::vector<double> *V_PHYS_SYSBKG_1D_P1_data[],
     std::vector<double> *V_PHYS_SYSBKG_1D_P2_data[],
+    std::vector<double> *V_PHYS_SYSBKG_2D_P1_data[],
+    std::vector<double> *V_PHYS_SYSBKG_2D_P2_data[],
     std::vector<double> *systematic_BKG_V_MATRIX_coeff_1D_P1[],
-    std::vector<double> *systematic_BKG_V_MATRIX_coeff_1D_P2[]
+    std::vector<double> *systematic_BKG_V_MATRIX_coeff_1D_P2[],
+    std::vector<double> *systematic_BKG_V_MATRIX_coeff_2D_P1[],
+    std::vector<double> *systematic_BKG_V_MATRIX_coeff_2D_P2[]
     ) const
 {
 
@@ -102,6 +130,54 @@ MinimizeFCNAxialVector::set_V_PHYS_SYSBKG_data_helper(
                 } // binx
             } // biny
         } // channel
+
+
+        for(int ch = 0; ch < number2DHists; ++ ch)
+        {
+            const Int_t NUM_BINS_XY = 12 * 12;
+
+            // initialize elements of V_PHYS_SYS1_*
+            int channel = ch;
+
+            // TODO: symmetry optimization
+            //for(Int_t biny{0}; biny < M_1D_P1_data[channel]->size(); ++ biny)
+            for(Int_t biny{0}; biny < NUM_BINS_XY; ++ biny)
+            {
+                //for(Int_t binx{0}; binx < M_1D_P1_data[channel]->size(); ++ binx)
+                //for(Int_t binx{0}; binx < M_1D_P1_data[channel]->size(); ++ binx)
+                for(Int_t binx{0}; binx < NUM_BINS_XY; ++ binx)
+                {
+
+                    // P1
+                    {
+                        #if VECTOR_RANGE_CHECK
+                        double coeff_x = systematic_BKG_V_MATRIX_coeff_2D_P1[channel]->at(binx);
+                        double coeff_y = systematic_BKG_V_MATRIX_coeff_2D_P1[channel]->at(biny);
+                        V_PHYS_SYSBKG_2D_P1_data[channel]->at(biny * 12 * 12 + binx) = coeff_x * coeff_y;
+                        #else
+                        double coeff_x = systematic_BKG_V_MATRIX_coeff_2D_P1[channel]->operator[](binx);
+                        double coeff_y = systematic_BKG_V_MATRIX_coeff_2D_P1[channel]->operator[](biny);
+                        V_PHYS_SYSBKG_2D_P1_data[channel]->operator[](biny * 12 * 12 + binx) = coeff_x * coeff_y;
+                        #endif
+                    }
+
+                    // P2
+                    {
+                        #if VECTOR_RANGE_CHECK
+                        double coeff_x = systematic_BKG_V_MATRIX_coeff_2D_P2[channel]->at(binx);
+                        double coeff_y = systematic_BKG_V_MATRIX_coeff_2D_P2[channel]->at(biny);
+                        V_PHYS_SYSBKG_2D_P2_data[channel]->at(biny * 12 * 12 + binx) = coeff_x * coeff_y;
+                        #else
+                        double coeff_x = systematic_BKG_V_MATRIX_coeff_2D_P2[channel]->operator[](binx);
+                        double coeff_y = systematic_BKG_V_MATRIX_coeff_2D_P2[channel]->operator[](biny);
+                        V_PHYS_SYSBKG_2D_P2_data[channel]->operator[](biny * 12 * 12 + binx) = coeff_x * coeff_y;
+                        #endif
+                    }
+
+
+                } // binx
+            } // biny
+        } // channel
     }
 
 }
@@ -126,7 +202,9 @@ MinimizeFCNAxialVector::set_V_PHYS_SYSBKG_data_helper(
 void
 MinimizeFCNAxialVector::check_alloc_V_PHYS_SYSx_data_helper(
     std::vector<double> *V_PHYS_SYSx_1D_P1_data[],
-    std::vector<double> *V_PHYS_SYSx_1D_P2_data[]
+    std::vector<double> *V_PHYS_SYSx_1D_P2_data[],
+    std::vector<double> *V_PHYS_SYSx_2D_P1_data[],
+    std::vector<double> *V_PHYS_SYSx_2D_P2_data[]
     ) const
 {
     //std::cout << __func__ << std::endl;
@@ -160,8 +238,12 @@ void
 MinimizeFCNAxialVector::set_V_PHYS_SYSx_data_helper(
     std::vector<double> *V_PHYS_SYSx_1D_P1_data[],
     std::vector<double> *V_PHYS_SYSx_1D_P2_data[],
+    std::vector<double> *V_PHYS_SYSx_2D_P1_data[],
+    std::vector<double> *V_PHYS_SYSx_2D_P2_data[],
     std::vector<double> *systematic_X_V_MATRIX_coeff_1D_P1[],
-    std::vector<double> *systematic_X_V_MATRIX_coeff_1D_P2[]
+    std::vector<double> *systematic_X_V_MATRIX_coeff_1D_P2[],
+    std::vector<double> *systematic_X_V_MATRIX_coeff_2D_P1[],
+    std::vector<double> *systematic_X_V_MATRIX_coeff_2D_P2[]
     ) const
 {
 

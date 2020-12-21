@@ -118,6 +118,90 @@ MinimizeFCNAxialVector::calculate_chi2_P1(double &chi2_P1, int &nch_P1) const
 
     }
 
+
+
+    for(int channel = 0; channel < number2DHists; ++ channel)
+    {
+        if(channel_enable_2D[channel] == true)
+        {
+            //std::cout << "CALCULATE CHI2 FOR PHASE 1" << std::endl;
+
+            // calculate (M - D) x V_PHYS x Transpose(M - D)
+            //std::cout << "starting matrix calculations" << std::endl;
+            double chi2_2D_P1 = 0.0;
+
+            int l_counter = 0;
+            for(Int_t l{0}; l < M_2D_P1_data[channel]->size(); ++ l)
+            {
+                if(V_ENABLE_BIN_2D_P1[channel]->at(l) == true)
+                {
+                    // do nothing
+                }
+                else
+                {
+                    continue;
+                }
+
+                int m_counter = 0;
+                for(Int_t m{0}; m < M_2D_P1_data[channel]->size(); ++ m)
+                // transpose, should be applied to (M-D)->GetNbinsY() but this object does not exist
+                {
+                    if(V_ENABLE_BIN_2D_P1[channel]->at(m) == true)
+                    {
+                        // do nothing
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    #if VECTOR_RANGE_CHECK
+                    double D_minus_M_content_1 = D_minus_M_2D_P1_data[channel]->at(l);
+                    #else
+                    double D_minus_M_content_1 = D_minus_M_2D_P1_data[channel]->operator[](l);
+                    #endif
+                    double delta_1 = D_minus_M_content_1;
+
+                    double V_PHYS_content = 0.0;
+                    V_PHYS_content = V_PHYS_2D_P1_MATHMORE[channel]->operator[](m_counter).operator[](l_counter);
+                    
+                    #if VECTOR_RANGE_CHECK
+                    double D_minus_M_content_2 = D_minus_M_2D_P1_data[channel]->at(m);
+                    #else
+                    double D_minus_M_content_2 = D_minus_M_2D_P1_data[channel]->operator[](m);
+                    #endif
+                    double delta_2 = D_minus_M_content_2;
+                    double next = delta_1 * V_PHYS_content * delta_2;
+
+
+                    if(std::isnan(next))
+                    {
+                        std::cout << "NAN: next=" << next << " l=" << l << " m=" << m << std::endl;
+                        std::cout << V_PHYS_content << std::endl;
+                        std::cin.get();
+                    }
+                    else if(std::isinf(next))
+                    {
+                        std::cout << "INF: next=" << next << " l=" << l << " m=" << m << std::endl;
+                        std::cout << V_PHYS_content << std::endl;
+                        std::cin.get();
+                    }
+                    chi2_2D_P1 += next;
+                    
+                    ++ m_counter;
+                }
+
+                ++ l_counter;
+                ++ nch_P1;
+            }
+
+            chi2_P1 += chi2_2D_P1;
+        }
+
+    }
+
+
+
     //std::cout << "nch_P1=" << nch_P1 << std::endl;
 
 }
@@ -237,6 +321,88 @@ MinimizeFCNAxialVector::calculate_chi2_P2(double &chi2_P2, int &nch_P2) const
             //std::cout << "chi2_1D_P2=" << chi2_1D_P2 << std::endl;
         }
     }
+    
+
+
+
+    for(int channel = 0; channel < number2DHists; ++ channel)
+    {
+        if(channel_enable_2D[channel] == true)
+        {
+            //std::cout << "CALCULATE CHI2 FOR PHASE 2" << std::endl;
+
+            double chi2_2D_P2 = 0.0;
+            
+            int l_counter = 0;
+            for(Int_t l{0}; l < 12 * 12; ++ l)
+            {
+                if(V_ENABLE_BIN_2D_P2[channel]->at(l) == true)
+                {
+                    // do nothing
+                }
+                else
+                {
+                    continue;
+                }
+
+                int m_counter = 0;
+                for(Int_t m{0}; m < 12 * 12; ++ m)
+                // transpose, should be applied to (M-D)->GetNbinsY() but this object does not exist
+                {
+                    if(V_ENABLE_BIN_2D_P2[channel]->at(m) == true)
+                    {
+                        // do nothing
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    #if VECTOR_RANGE_CHECK
+                    double D_minus_M_content_1 = D_minus_M_2D_P2_data[channel]->at(l);
+                    #else
+                    double D_minus_M_content_1 = D_minus_M_2D_P2_data[channel]->operator[](l);
+                    #endif
+                    double delta_1 = D_minus_M_content_1;
+                    double V_PHYS_content = 0.0;
+
+                    V_PHYS_content = V_PHYS_2D_P2_MATHMORE[channel]->operator[](m_counter).operator[](l_counter);
+
+
+                    #if VECTOR_RANGE_CHECK
+                    double D_minus_M_content_2 = D_minus_M_2D_P2_data[channel]->at(m);
+                    #else
+                    double D_minus_M_content_2 = D_minus_M_2D_P2_data[channel]->operator[](m);
+                    #endif
+                    double delta_2 = D_minus_M_content_2;
+                    double next = delta_1 * V_PHYS_content * delta_2;
+
+                    if(std::isnan(next))
+                    {
+                        std::cout << "NAN: next=" << next << " l=" << l << " m=" << m << std::endl;
+                        std::cout << V_PHYS_content << std::endl;
+                        std::cin.get();
+                    }
+                    else if(std::isinf(next))
+                    {
+                        std::cout << "INF: next=" << next << " l=" << l << " m=" << m << std::endl;
+                        std::cout << V_PHYS_content << std::endl;
+                        std::cin.get();
+                    }
+                    chi2_2D_P2 += next;
+                    
+                    ++ m_counter;
+                }
+
+                ++ l_counter;
+                ++ nch_P2;
+            }
+
+            chi2_P2 += chi2_2D_P2;
+        }
+    }
+
+
 
     //std::cout << "nch_P2=" << nch_P2 << std::endl;
 

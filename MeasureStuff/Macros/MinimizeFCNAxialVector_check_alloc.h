@@ -93,6 +93,17 @@ MinimizeFCNAxialVector::check_alloc_V_PHYS_STAT_data() const
         */
     }
 
+    if(V_PHYS_STAT_2D_P1_data[0] == nullptr)
+    {
+        std::cout << "Alloc V_PHYS_STAT" << std::endl;
+        for(int ch = 0; ch < number2DHists; ++ ch)
+        {
+            const Int_t NUM_BINS_XY = 12 * 12;
+            V_PHYS_STAT_2D_P1_data[ch] = new std::vector<double>(NUM_BINS_XY * NUM_BINS_XY, 0.0);
+            V_PHYS_STAT_2D_P2_data[ch] = new std::vector<double>(NUM_BINS_XY * NUM_BINS_XY, 0.0);
+        }
+    }
+
 }
 
 
@@ -160,6 +171,19 @@ void MinimizeFCNAxialVector::check_alloc_D() const
         */
     }
 
+
+    if(D_2D_P1_data[0] == nullptr)
+    {
+        std::cout << "Alloc V_D" << std::endl;
+        for(int ch = 0; ch < number2DHists; ++ ch)
+        {
+            const Int_t NUM_BINS_XY = 12 * 12;
+            D_2D_P1_data[ch] = new std::vector<double>(NUM_BINS_XY, 0.0);
+            D_2D_P2_data[ch] = new std::vector<double>(NUM_BINS_XY, 0.0);
+            //std::cout << "ALLOC " << __func__ << std::endl;
+        }
+    }
+
 }
 
 
@@ -215,6 +239,21 @@ void MinimizeFCNAxialVector::check_alloc_M() const
         }
         */
     }
+
+
+    if(M_2D_P1_data[0] == nullptr)
+    {
+        // 2D
+        std::cout << "Alloc V_M" << std::endl;
+        for(int ch = 0; ch < number2DHists; ++ ch)
+        {
+            const Int_t NUM_BINS_XY = 12 * 12;
+            M_2D_P1_data[ch] = new std::vector<double>(NUM_BINS_XY, 0.0);
+            M_2D_P2_data[ch] = new std::vector<double>(NUM_BINS_XY, 0.0);
+            //std::cout << "ALLOC " << __func__ << std::endl;
+        }
+    }
+
 
 }
 
@@ -273,6 +312,21 @@ void MinimizeFCNAxialVector::check_alloc_D_minus_M() const
         */
 
     }
+
+
+    if(D_minus_M_2D_P1_data[0] == nullptr)
+    {
+        // 2D
+        std::cout << "Alloc D_minus_M" << std::endl;
+        for(int ch = 0; ch < number2DHists; ++ ch)
+        {
+            const Int_t NUM_BINS_XY = 12 * 12;
+            D_minus_M_2D_P1_data[ch] = new std::vector<double>(NUM_BINS_XY, 0.0);
+            D_minus_M_2D_P2_data[ch] = new std::vector<double>(NUM_BINS_XY, 0.0);
+        }
+
+    }
+
 
 }
 

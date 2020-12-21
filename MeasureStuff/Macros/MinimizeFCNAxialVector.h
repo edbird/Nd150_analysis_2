@@ -238,6 +238,18 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
                         V_ENABLE_BIN_1D_P2[ch]->reserve(NUM_BINS_XY); 
                     }
                 }
+
+                if(V_ENABLE_BIN_2D_P1[0] == nullptr)
+                {
+                    for(int ch = 0; ch < number2DHists; ++ ch)
+                    {
+                        V_ENABLE_BIN_2D_P1[ch] = new std::vector<bool>;
+                        V_ENABLE_BIN_2D_P2[ch] = new std::vector<bool>;
+                        const Int_t NUM_BINS_XY = 12 * 12;
+                        V_ENABLE_BIN_1D_P1[ch]->reserve(NUM_BINS_XY);
+                        V_ENABLE_BIN_1D_P2[ch]->reserve(NUM_BINS_XY);
+                    }
+                }
             //}
 
 
@@ -250,6 +262,19 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
                     {
                         V_ENABLE_BIN_1D_P1[ch]->clear();
                         V_ENABLE_BIN_1D_P2[ch]->clear();
+                    }
+                    // elements are set using push_back(), so call clear
+                    // in initialization
+                }
+
+
+                // realloc these each time
+                for(int ch = 0; ch < number2DHists; ++ ch)
+                {
+                    if(channel_enable_2D[ch] == 1)
+                    {
+                        V_ENABLE_BIN_2D_P1[ch]->clear();
+                        V_ENABLE_BIN_2D_P2[ch]->clear();
                     }
                     // elements are set using push_back(), so call clear
                     // in initialization
@@ -313,6 +338,23 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
                     }
                 }
 
+
+                for(int ch = 0; ch < number1DHists; ++ ch)
+                {
+                    const Int_t NUM_BINS_XY = 12 * 12;
+                    for(int i = 0; i < NUM_BINS_XY * NUM_BINS_XY; ++ i)
+                    {
+                        const double zero = 0.0;
+                        #if VECTOR_RANGE_CHECK
+                        V_PHYS_STAT_1D_P1_data[ch]->at(i) = zero;
+                        V_PHYS_STAT_1D_P2_data[ch]->at(i) = zero;
+                        #else
+                        V_PHYS_STAT_1D_P1_data[ch]->operator[](i) = zero;
+                        V_PHYS_STAT_1D_P2_data[ch]->operator[](i) = zero;
+                        #endif
+                    }
+                }
+
                 //  Set to zero
                 /*
                 for(int ch = 0; ch < number2DHists; ++ ch)
@@ -341,13 +383,20 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
             for(int i = 0; i < N_SYSTEMATICS; ++ i)
             {
                 // SYSn
-                check_alloc_V_PHYS_SYSx_data_helper(V_PHYS_SYSn_1D_P1_data[i], V_PHYS_SYSn_1D_P2_data[i]);
+                check_alloc_V_PHYS_SYSx_data_helper(V_PHYS_SYSn_1D_P1_data[i],
+                                                    V_PHYS_SYSn_1D_P2_data[i],
+                                                    V_PHYS_SYSn_2D_P1_data[i],
+                                                    V_PHYS_SYSn_2D_P2_data[i]);
 
                 // SYSn
                 set_V_PHYS_SYSx_data_helper(V_PHYS_SYSn_1D_P1_data[i],
                                             V_PHYS_SYSn_1D_P2_data[i],
+                                            V_PHYS_SYSn_2D_P1_data[i],
+                                            V_PHYS_SYSn_2D_P2_data[i],
                                             systematic_n_V_MATRIX_coeff_1D_P1[i],
-                                            systematic_n_V_MATRIX_coeff_1D_P2[i]);
+                                            systematic_n_V_MATRIX_coeff_1D_P2[i],
+                                            systematic_n_V_MATRIX_coeff_2D_P1[i],
+                                            systematic_n_V_MATRIX_coeff_2D_P2[i]);
             }
 
 
@@ -568,10 +617,16 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
     //
     void check_alloc_V_PHYS_SYSx_data_helper(
         std::vector<double>**,
+        std::vector<double>**,
+        std::vector<double>**,
         std::vector<double>**
     ) const;
     
     void set_V_PHYS_SYSx_data_helper(
+        std::vector<double>**,
+        std::vector<double>**,
+        std::vector<double>**,
+        std::vector<double>**,
         std::vector<double>**,
         std::vector<double>**,
         std::vector<double>**,
@@ -583,11 +638,17 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
 
     void check_alloc_V_PHYS_SYSBKG_data_helper(
         std::vector<double>**,
+        std::vector<double>**,
+        std::vector<double>**,
         std::vector<double>**
     ) const;
 
     
     void set_V_PHYS_SYSBKG_data_helper(
+        std::vector<double>**,
+        std::vector<double>**,
+        std::vector<double>**,
+        std::vector<double>**,
         std::vector<double>**,
         std::vector<double>**,
         std::vector<double>**,

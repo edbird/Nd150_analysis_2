@@ -70,6 +70,71 @@ MinimizeFCNAxialVector::set_D_minus_M() const
             }
         }
     }
+
+
+    for(int channel = 0; channel < number2DHists; ++ channel)
+    {
+        if(channel_enable_2D[channel] == 1)
+        {
+            // set D_minus_M
+            //for(Int_t binx{1}; binx <= D_1D_P1[channel]->GetNbinsX(); ++ binx)
+            for(Int_t binx{0}; binx < D_2D_P1_data[channel]->size(); ++ binx)
+            {
+                // P1
+                {
+                    //Double_t content_D = D_1D_P1[channel]->GetBinContent(binx, 1);
+                    //Double_t content_M = M_1D_P1[channel]->GetBinContent(binx, 1);
+                    #if VECTOR_RANGE_CHECK
+                    Double_t content_D = D_2D_P1_data[channel]->at(binx);
+                    Double_t content_M = M_2D_P1_data[channel]->at(binx);
+                    #else
+                    Double_t content_D = D_2D_P1_data[channel]->operator[](binx);
+                    Double_t content_M = M_2D_P1_data[channel]->operator[](binx);
+                    #endif
+                    /*
+                    if(content_D != 0.0)
+                    {
+                        std::cout << "binx=" << binx << " ~> " << content_D << " " << content_M << std::endl;
+                    }
+                    */
+                    Double_t content_D_minus_M = content_D - content_M;
+                    //D_minus_M_1D_P1[channel]->SetBinContent(binx, 1, content_D_minus_M);
+                    #if VECTOR_RANGE_CHECK
+                    D_minus_M_2D_P1_data[channel]->at(binx) = content_D_minus_M;
+                    #else
+                    D_minus_M_2D_P1_data[channel]->operator[](binx) = content_D_minus_M;
+                    #endif
+                }
+
+                // P2
+                {
+                    //Double_t content_D = D_1D_P2[channel]->GetBinContent(binx, 1);
+                    //Double_t content_M = M_1D_P2[channel]->GetBinContent(binx, 1);
+                    #if VECTOR_RANGE_CHECK
+                    Double_t content_D = D_2D_P2_data[channel]->at(binx);
+                    Double_t content_M = M_2D_P2_data[channel]->at(binx);
+                    #else
+                    Double_t content_D = D_2D_P2_data[channel]->operator[](binx);
+                    Double_t content_M = M_2D_P2_data[channel]->operator[](binx);
+                    #endif
+                    /*
+                    if(content_D != 0.0)
+                    {
+                        std::cout << "binx=" << binx << " ~> " << content_D << " " << content_M << std::endl;
+                    }
+                    */
+                    Double_t content_D_minus_M = content_D - content_M;
+                    //D_minus_M_1D_P2[channel]->SetBinContent(binx, 1, content_D_minus_M);
+                    #if VECTOR_RANGE_CHECK
+                    D_minus_M_2D_P2_data[channel]->at(binx) = content_D_minus_M;
+                    #else
+                    D_minus_M_2D_P2_data[channel]->operator[](binx) = content_D_minus_M;
+                    #endif
+                }
+            }
+        }
+    }
+
 }
 
 
