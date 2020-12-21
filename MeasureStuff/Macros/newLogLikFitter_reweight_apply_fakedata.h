@@ -165,7 +165,7 @@ void reweight_apply_fakedata(
     //std::cout << "HighLow new" << std::endl;
     hHighLowEnergy_output_P1     = new TH2D("hHighLowEnergy_" + sampleName + name_append + "_P1",
                                 TString("Phase ") + "P1" + " " + sampleName + name_append + ";Low Energy Electron Energy (MeV);High Energy Electron Energy (MeV)",
-                                50, 0.0, 5.0, 50, 0.0, 5.0);
+                                12, 0.0, 3.6, 12, 0.0, 3.6);
 
 
     ///////////////////////////////////////////////////////////////////
@@ -205,7 +205,7 @@ void reweight_apply_fakedata(
     //std::cout << "HighLow new" << std::endl;
     hHighLowEnergy_output_P2     = new TH2D("hHighLowEnergy_" + sampleName + name_append + "_P2",
                                 TString("Phase ") + "P2" + " " + sampleName + name_append + ";Low Energy Electron Energy (MeV);High Energy Electron Energy (MeV)",
-                                50, 0.0, 5.0, 50, 0.0, 5.0);
+                                12, 0.0, 3.6, 12, 0.0, 3.6);
 
 
     if(debuglevel >= 6)
@@ -436,7 +436,7 @@ void reweight_apply_fakedata(
                 //std::cout << "HighLow new" << std::endl;
                 hHighLowEnergy_P1_tmp     = new TH2D("hHighLowEnergy_" + sampleName + name_append + "_P1",
                                             TString("Phase ") + "P1" + " " + sampleName + name_append + ";Low Energy Electron Energy (MeV);High Energy Electron Energy (MeV)",
-                                            50, 0.0, 5.0, 50, 0.0, 5.0);
+                                            12, 0.0, 3.6, 12, 0.0, 3.6);
             }
 
 
@@ -484,7 +484,7 @@ void reweight_apply_fakedata(
                 //std::cout << "HighLow new" << std::endl;
                 hHighLowEnergy_P2_tmp     = new TH2D("hHighLowEnergy_" + sampleName + name_append + "_P2",
                                             TString("Phase ") + "P2" + " " + sampleName + name_append + ";Low Energy Electron Energy (MeV);High Energy Electron Energy (MeV)",
-                                            50, 0.0, 5.0, 50, 0.0, 5.0);
+                                            12, 0.0, 3.6, 12, 0.0, 3.6);
             }
 
             
