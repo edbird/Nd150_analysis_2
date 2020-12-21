@@ -413,7 +413,7 @@ void makeHistograms(
 
     hHighLowEnergy     = new TH2D("hHighLowEnergy_" + sampleName + name_sample_split_additional + name_append,
                                 "Phase " + Phase + " " + sampleName + name_sample_split_additional + name_append + " Electron Energy;Low Energy Electron Energy (MeV);High Energy Electron Energy (MeV)",
-                                50, 0.0, 5.0, 50, 0.0, 5.0);
+                                12, 0.0, 3.6, 12, 0.0, 3.6);
 
 
     hTotalClusterEnergy     = new TH1D("hTotalClusterEnergy_" + sampleName + name_sample_split_additional + name_append,
