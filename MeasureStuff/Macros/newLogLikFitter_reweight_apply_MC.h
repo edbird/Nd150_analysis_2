@@ -196,7 +196,7 @@ void reweight_apply_MC(
     //std::cout << "HighLow new" << std::endl;
     hHighLowEnergy_output_P1     = new TH2D("hHighLowEnergy_" + sampleName + name_append + "_P1_fit",
                                 TString("Phase ") + "P1" + " " + sampleName + name_append + ";Low Energy Electron Energy (MeV);High Energy Electron Energy (MeV)",
-                                50, 0.0, 5.0, 50, 0.0, 5.0);
+                                12, 0.0, 3.6, 12, 0.0, 3.6);
 
     //std::cout << "Weight new" << std::endl;
     hWeight_output_P1       = new TH1D("hWeight_" + sampleName + name_append + "_P1_fit",
@@ -243,7 +243,7 @@ void reweight_apply_MC(
     //std::cout << "HighLow new" << std::endl;
     hHighLowEnergy_output_P2     = new TH2D("hHighLowEnergy_" + sampleName + name_append + "_P2_fit",
                                 TString("Phase ") + "P2" + " " + sampleName + name_append + ";Low Energy Electron Energy (MeV);High Energy Electron Energy (MeV)",
-                                50, 0.0, 5.0, 50, 0.0, 5.0);
+                                12, 0.0, 3.6, 12, 0.0, 3.6);
 
     //std::cout << "Weight new" << std::endl;
     hWeight_output_P2       = new TH1D("hWeight_" + sampleName + name_append + "_P2_fit",
