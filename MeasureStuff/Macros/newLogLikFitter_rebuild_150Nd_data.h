@@ -223,7 +223,8 @@ void rebuild_150Nd_data()
     allDataSamples1D->Add(hEnergyDiff_P1);
 
     allDataSamples2D->Add(hHighLowEnergy_P1);
-    
+
+
     if(debuglevel >= 4)
     {
         std::cout << "adding P2 histograms" << std::endl;
@@ -234,7 +235,6 @@ void rebuild_150Nd_data()
     allDataSamples1D->Add(hLowEnergy_P2);
     allDataSamples1D->Add(hEnergySum_P2);
     allDataSamples1D->Add(hEnergyDiff_P2);
-
 
     allDataSamples2D->Add(hHighLowEnergy_P2);
 
