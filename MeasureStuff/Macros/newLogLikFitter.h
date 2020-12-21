@@ -274,11 +274,6 @@ bool V_ENABLE_SYSBKG = true;
 */
 // TODO: min points
 
-//bool V_ENABLE_SYS1 = false; // constant 1.0 MeV shift
-//bool V_ENABLE_SYS2 = true; // scale factor: m = 1 % + 0.2 %
-//bool V_ENABLE_SYS3 = true; // +- 5.55 % efficiency
-//bool V_ENABLE_SYS4 = true; // +- 0.50 % enrichment
-//bool V_ENABLE_SYS5 = true; // +- 3 keV
 
 
 // set to true to recalculate V_PHYS_MATHMORE
@@ -697,6 +692,11 @@ std::vector<double> *systematic_nominal_1D_P1[number1DHists] =
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
+std::vector<double> *systematic_nominal_2D_P1[number2DHists] =
+{
+    nullptr
+};
+
 std::vector<double> *systematic_n_low_1D_P1[N_SYSTEMATICS][number1DHists] = 
 {
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
@@ -724,6 +724,35 @@ std::vector<double> *systematic_n_low_1D_P1[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
+};
+
+std::vector<double> *systematic_n_low_2D_P1[N_SYSTEMATICS][number2DHists] =
+{
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 4
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 8
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 12
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 16
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 20
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 24
+    {nullptr}
 };
 
 std::vector<double> *systematic_n_high_1D_P1[N_SYSTEMATICS][number1DHists] = 
@@ -755,6 +784,35 @@ std::vector<double> *systematic_n_high_1D_P1[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
+std::vector<double> *systematic_n_high_2D_P1[N_SYSTEMATICS][number2DHists] =
+{
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 4
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 8
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 12
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 16
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 20
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 24
+    {nullptr}
+};
+
 std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P1[N_SYSTEMATICS][number1DHists] = 
 {
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
@@ -784,6 +842,35 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P1[N_SYSTEMATICS][number1DHi
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
+std::vector<double> *systematic_n_V_MATRIX_coeff_2D_P1[N_SYSTEMATICS][number2DHists] =
+{
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 4
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 8
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 12
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 16
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 20
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 24
+    {nullptr}
+};
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // systematic objects - Phase 2
@@ -795,6 +882,11 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P1[N_SYSTEMATICS][number1DHi
 std::vector<double> *systematic_nominal_1D_P2[number1DHists] =
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+
+std::vector<double> *systematic_nominal_2D_P2[number2DHists] =
+{
+    nullptr
 };
 
 std::vector<double> *systematic_n_low_1D_P2[N_SYSTEMATICS][number1DHists] = 
@@ -826,6 +918,35 @@ std::vector<double> *systematic_n_low_1D_P2[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
+std::vector<double> *systematic_n_low_2D_P2[N_SYSTEMATICS][number2DHists] =
+{
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 4
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 8
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 12
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 16
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 20
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 24
+    {nullptr}
+};
+
 std::vector<double> *systematic_n_high_1D_P2[N_SYSTEMATICS][number1DHists] = 
 {
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
@@ -853,6 +974,35 @@ std::vector<double> *systematic_n_high_1D_P2[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
+};
+
+std::vector<double> *systematic_n_high_2D_P2[N_SYSTEMATICS][number2DHists] =
+{
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 4
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 8
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 12
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 16
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 20
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 24
+    {nullptr}
 };
 
 std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P2[N_SYSTEMATICS][number1DHists] = 
@@ -884,6 +1034,35 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P2[N_SYSTEMATICS][number1DHi
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
+std::vector<double> *systematic_n_V_MATRIX_coeff_2D_P2[N_SYSTEMATICS][number2DHists] =
+{
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 4
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 8
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 12
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 16
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 20
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 24
+    {nullptr}
+};
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -895,9 +1074,19 @@ TMatrixD *V_PHYS_1D_P1_MATHMORE[number1DHists] =
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
+TMatrixD *V_PHYS_2D_P1_MATHMORE[number2DHists] =
+{
+    nullptr
+};
+
 std::vector<bool> *V_ENABLE_BIN_1D_P1[number1DHists] =
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+
+std::vector<bool> *V_ENABLE_BIN_2D_P1[number2DHists] =
+{
+    nullptr
 };
 
 // not used
@@ -917,6 +1106,11 @@ std::vector<double> *V_PHYS_1D_P1_data[number1DHists] =
 std::vector<double> *V_PHYS_STAT_1D_P1_data[number1DHists] = 
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+
+std::vector<double> *V_PHYS_STAT_2D_P1_data[number2DHists] = 
+{
+    nullptr
 };
 
 std::vector<double> *V_PHYS_SYSn_1D_P1_data[N_SYSTEMATICS][number1DHists] =
@@ -948,10 +1142,44 @@ std::vector<double> *V_PHYS_SYSn_1D_P1_data[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
+std::vector<double> *V_PHYS_SYSn_2D_P1_data[N_SYSTEMATICS][number2DHists] =
+{
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 4
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 8
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 12
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 16
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 20
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 24
+    {nullptr}
+};
+
 
 std::vector<double> *V_PHYS_SYSALL_1D_P1_data[number1DHists] = 
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+
+std::vector<double> *V_PHYS_SYSALL_2D_P1_data[number2DHists] = 
+{
+    nullptr
 };
 
 std::vector<double> *D_1D_P1_data[number1DHists] = 
@@ -959,14 +1187,29 @@ std::vector<double> *D_1D_P1_data[number1DHists] =
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
+std::vector<double> *D_2D_P1_data[number2DHists] = 
+{
+    nullptr
+};
+
 std::vector<double> *D_minus_M_1D_P1_data[number1DHists] = 
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
+std::vector<double> *D_minus_M_2D_P1_data[number2DHists] = 
+{
+    nullptr
+};
+
 std::vector<double> *M_1D_P1_data[number1DHists] = 
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+
+std::vector<double> *M_2D_P1_data[number2DHists] = 
+{
+    nullptr
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -978,9 +1221,19 @@ TMatrixD *V_PHYS_1D_P2_MATHMORE[number1DHists] =
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
+TMatrixD *V_PHYS_2D_P2_MATHMORE[number2DHists] =
+{
+    nullptr
+};
+
 std::vector<bool> *V_ENABLE_BIN_1D_P2[number1DHists] =
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+
+std::vector<bool> *V_ENABLE_BIN_2D_P2[number2DHists] =
+{
+    nullptr
 };
 
 /*
@@ -998,6 +1251,11 @@ std::vector<double> *V_PHYS_1D_P2_data[number1DHists] =
 std::vector<double> *V_PHYS_STAT_1D_P2_data[number1DHists] = 
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+
+std::vector<double> *V_PHYS_STAT_2D_P2_data[number2DHists] = 
+{
+    nullptr
 };
 
 std::vector<double> *V_PHYS_SYSn_1D_P2_data[N_SYSTEMATICS][number1DHists] =
@@ -1029,9 +1287,43 @@ std::vector<double> *V_PHYS_SYSn_1D_P2_data[N_SYSTEMATICS][number1DHists] =
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
+std::vector<double> *V_PHYS_SYSn_2D_P2_data[N_SYSTEMATICS][number2DHists] =
+{
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 4
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 8
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 12
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 16
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 20
+    {nullptr},
+    {nullptr},
+    {nullptr},
+    {nullptr}, // 24
+    {nullptr}
+};
+
 std::vector<double> *V_PHYS_SYSALL_1D_P2_data[number1DHists] = 
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+
+std::vector<double> *V_PHYS_SYSALL_2D_P2_data[number2DHists] = 
+{
+    nullptr
 };
 
 
@@ -1040,14 +1332,29 @@ std::vector<double> *D_1D_P2_data[number1DHists] =
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
+std::vector<double> *D_2D_P2_data[number2DHists] = 
+{
+    nullptr
+};
+
 std::vector<double> *D_minus_M_1D_P2_data[number1DHists] = 
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
+std::vector<double> *D_minus_M_2D_P2_data[number2DHists] = 
+{
+    nullptr
+};
+
 std::vector<double> *M_1D_P2_data[number1DHists] = 
 {
     nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+
+std::vector<double> *M_2D_P2_data[number2DHists] = 
+{
+    nullptr
 };
 
 
