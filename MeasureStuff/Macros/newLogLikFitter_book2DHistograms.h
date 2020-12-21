@@ -40,7 +40,49 @@ void book2DHistograms_helper(
 
         if(success == true)
         {
-            scale_factor_P1 = g_pg.file_params.at(param_number_P1).paramInitValue;
+            if(param_number_P1 != -1)
+            {
+                scale_factor_P1 = g_pg.file_params.at(param_number_P1).paramInitValue;
+            }
+            else
+            {
+                //if(mc_name.find("air") == std::string::npos)
+                //{
+                    std::cout << "WARNING: param_number_P1=" << param_number_P1 << std::endl;
+                    std::cout << "mc_name=" << mc_name << std::endl;
+                //}
+                //else
+                //{
+                    // ignore anything containing "air"
+                //}
+            }
+
+            if(param_number_P2 != -1)
+            {
+                scale_factor_P2 = g_pg.file_params.at(param_number_P1).paramInitValue;
+            }
+            else
+            {
+                if(mc_name.find("air") == std::string::npos)
+                {
+                    std::cout << "WARNING: param_number_P2=" << param_number_P2 << std::endl;
+                    std::cout << "mc_name=" << mc_name << std::endl;
+                }
+                else
+                {
+                    // ignore anything containing "air"
+                    // only for P1
+                }
+            }
+
+            
+            // 207Bi correction factor
+            if(mc_name.find("bi207") != std::string::npos)
+            {
+                scale_factor_P1 *= 1.846;
+                scale_factor_P2 *= 1.846;
+            }
+
 
             // account for 208 Tl branching ratio of 36 %
             if((mc_name.find("tl208_int_rot") != std::string::npos) ||
@@ -97,7 +139,7 @@ void book2DHistograms_helper(
                 // this section just LOADS histograms from file and we want to LOAD
                 // the default (not reweighted) nd150 spectra
 
-                if(param_number_P1 == 1)
+                if((param_number_P1 == 1) || (param_number_P2 == 1))
                 {
                     std::cout << "ERROR" << std::endl;
                     throw std::runtime_error("param_number_P1=1");
@@ -121,7 +163,7 @@ void book2DHistograms_helper(
                 // this section just LOADS histograms from file and we want to LOAD
                 // the default (not reweighted) nd150 spectra
 
-                if(param_number_P2 == 1)
+                if((param_number_P1 == 1) || (param_number_P2 == 1))
                 {
                     std::cout << "ERROR" << std::endl;
                     throw std::runtime_error("param_number_P2=1");
@@ -370,8 +412,8 @@ void book2DHistograms(Int_t channel_counter, TString theChannel, TString theHist
         // TODO: try catch block
         std::string new_name_P1(theHistogram + DataFile + "_P1"); // TODO: probably need a different new_name for P1 and P2
         std::string new_name_P2(theHistogram + DataFile + "_P2"); // TODO: probably need a different new_name for P1 and P2 check works
-        TH1D *tmpHist_P1 = (TH1D*)aFileP1->Get(fullname.c_str())->Clone(new_name_P1.c_str());
-        TH1D *tmpHist_P2 = (TH1D*)aFileP2->Get(fullname.c_str())->Clone(new_name_P2.c_str());
+        TH2D *tmpHist_P1 = (TH2D*)aFileP1->Get(fullname.c_str())->Clone(new_name_P1.c_str());
+        TH2D *tmpHist_P2 = (TH2D*)aFileP2->Get(fullname.c_str())->Clone(new_name_P2.c_str());
         //TH1D *tmpHist = (TH1D*)aFile->Get(fullname.c_str())->Clone();
         if(debuglevel >= 3)
         {

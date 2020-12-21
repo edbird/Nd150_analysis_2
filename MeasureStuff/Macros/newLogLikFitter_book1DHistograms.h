@@ -205,18 +205,20 @@ void book1DHistograms_helper(
             }
             else
             {
-                if(mc_name.find("air") == std::string::npos)
-                {
+                //if(mc_name.find("air") == std::string::npos)
+                //{
                     std::cout << "WARNING: param_number_P1=" << param_number_P1 << std::endl;
                     std::cout << "mc_name=" << mc_name << std::endl;
-                }
-                else
-                {
+                //}
+                //else
+                //{
                     // ignore anything which contains "air"
                     // these things are only for P1
-                }
+                //}
                 // this is typically things such as bi214_air, which is ZERO for P2
             }
+
+
             if(param_number_P2 != -1)
             {
                 scale_factor_P2 = g_pg.file_params.at(param_number_P2).paramInitValue;   
