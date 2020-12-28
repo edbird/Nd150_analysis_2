@@ -12,8 +12,8 @@ const TString legend_texts[N_SYSTEMATICS + 1] =
     "Foil Thickness (V)",
     "Energy Loss dE/dX (V)",
     "ignore Brem (V)",
-    "Foil Thickness (N)",
-    "Energy Loss dE/dX (N)",
+    "ignore Foil Thickness (N)",
+    "ignore Energy Loss dE/dX (N)",
     "Brem (N)",
     "Energy Calibration 0.2 \%",
     "Energy Resolution 1.0 \% Gaus",
@@ -29,7 +29,7 @@ const TString legend_texts[N_SYSTEMATICS + 1] =
     "External Background",
     "Neighbour Foil Background",
     "Combined Background",
-    "placeholder Optical Correction"
+    "QLNL Correction"
 };
 
 
@@ -350,7 +350,7 @@ void newloglikfitter_mps_draw_helper_colz
         // PLOT MARKERS FOR SYSTEMATICS BEST FIT POINTS
         ///////////////////////////////////////////////////////////////////////
 
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             if(ENABLE_MIN_POINT_SYSn[i] == true)
             {
@@ -424,7 +424,7 @@ void newloglikfitter_mps_draw_helper_colz
 */
 
         TLegend *leg = new TLegend(0.03, 0.70, 0.32, 0.96);
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             if(ENABLE_MIN_POINT_SYSn[i] == true)
             {
@@ -770,7 +770,7 @@ void newloglikfitter_mps_draw_helper
         // PLOT MARKERS FOR SYSTEMATICS BEST FIT POINTS
         ///////////////////////////////////////////////////////////////////////
 
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             if(ENABLE_MIN_POINT_SYSn[i] == true)
             {
@@ -858,7 +858,7 @@ void newloglikfitter_mps_draw_helper
             "Brem (N)"
         };*/
         TLegend *leg = new TLegend(0.03, 0.70, 0.32, 0.96);
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             if(ENABLE_MIN_POINT_SYSn[i] == true)
             {
@@ -1081,7 +1081,7 @@ void newloglikfitter_mps_draw_helper_sys_only
         // PLOT MARKERS FOR SYSTEMATICS BEST FIT POINTS
         ///////////////////////////////////////////////////////////////////////
 
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             if(ENABLE_MIN_POINT_SYSn[i] == true)
             {
@@ -1171,7 +1171,7 @@ void newloglikfitter_mps_draw_helper_sys_only
         };
         */
         TLegend *leg = new TLegend(0.03, 0.70, 0.32, 0.96);
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             if(ENABLE_MIN_POINT_SYSn[i] == true)
             {

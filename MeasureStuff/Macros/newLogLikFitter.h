@@ -81,7 +81,7 @@ bool V_ENABLE_SYSn[N_SYSTEMATICS] =
 /* 22 */    true,   // true     // BKG: 208Tl (air)
 /* 23 */    true,   // true     // BKG: EXTERNAL
 /* 24 */    true,   // true     // BKG: NEIGHBOUR
-/* 25 */    false   // true     // optical correction related systematic
+/* 25 */    true,   // true     // optical correction related systematic
 };
 
 
@@ -299,7 +299,7 @@ const bool ENABLE_MIN_POINT_SYSn[N_SYSTEMATICS + 1] =
 /* 10 */    false,  // false    // dE/dX (nominal)
 /* 11 */    true,   // true     // brem (nominal)
 /* 12 */    true,   // true     // 0.2 % energy scale factor m = 0.2 %
-/* 13 */    false,   // true     // 1.0 % Gaussian smear
+/* 13 */    true,   // true     // 1.0 % Gaussian smear
 /* 14 */    false,  // true     // BKG: 214Bi/214Pb (int)
 /* 15 */    false,  // true     // BKG: 207Bi (int)
 /* 16 */    false,  // true     // BKG: 228Ac/212Bi/208Tl (int)
@@ -312,7 +312,7 @@ const bool ENABLE_MIN_POINT_SYSn[N_SYSTEMATICS + 1] =
 /* 23 */    false,  // true     // BKG: EXTERNAL
 /* 24 */    false,  // true     // BKG: NEIGHBOUR
 /* 25 */    true,   // true     // BKG: ALL
-/* 26 */    false   // true     // optical correction related systematic
+/* 26 */    true    // true     // optical correction related systematic
 };
 // enable/disable drawing of minimum points for each systematic fit
 //const bool ENABLE_MIN_POINT_SYS1 = true; // +- 0.1 MeV
@@ -512,7 +512,8 @@ double min_point_fake_sysn_h[N_SYSTEMATICS + 1][2] =
     {0.0, 0.0}, // 22
     {0.0, 0.0},
     {0.0, 0.0}, // 24
-    {0.0, 0.0}
+    {0.0, 0.0},
+    {0.0, 0.0}  // 26
 };
 double min_point_fake_sysn_h_err[N_SYSTEMATICS + 1][2] =
 {
@@ -540,7 +541,8 @@ double min_point_fake_sysn_h_err[N_SYSTEMATICS + 1][2] =
     {0.0, 0.0}, // 22
     {0.0, 0.0},
     {0.0, 0.0}, // 24
-    {0.0, 0.0}
+    {0.0, 0.0},
+    {0.0, 0.0}  // 26
 };
 
 double min_point_fake_sysn_h_fval[N_SYSTEMATICS + 1] =
@@ -551,7 +553,7 @@ double min_point_fake_sysn_h_fval[N_SYSTEMATICS + 1] =
     0.0, 0.0, 0.0, 0.0, // 16
     0.0, 0.0, 0.0, 0.0,
     0.0, 0.0, 0.0, 0.0, // 24
-    0.0
+    0.0, 0.0
 };
 
 double min_point_fake_sysn_l[N_SYSTEMATICS + 1][2] =
@@ -580,7 +582,8 @@ double min_point_fake_sysn_l[N_SYSTEMATICS + 1][2] =
     {0.0, 0.0}, // 22
     {0.0, 0.0},
     {0.0, 0.0}, // 24
-    {0.0, 0.0}
+    {0.0, 0.0},
+    {0.0, 0.0}  // 26
 };
 double min_point_fake_sysn_l_err[N_SYSTEMATICS + 1][2] =
 {
@@ -608,7 +611,8 @@ double min_point_fake_sysn_l_err[N_SYSTEMATICS + 1][2] =
     {0.0, 0.0}, // 22
     {0.0, 0.0},
     {0.0, 0.0}, // 24
-    {0.0, 0.0}
+    {0.0, 0.0},
+    {0.0, 0.0}  // 26
 };
 
 double min_point_fake_sysn_l_fval[N_SYSTEMATICS + 1] =
@@ -619,7 +623,7 @@ double min_point_fake_sysn_l_fval[N_SYSTEMATICS + 1] =
     0.0, 0.0, 0.0, 0.0, // 16
     0.0, 0.0, 0.0, 0.0,
     0.0, 0.0, 0.0, 0.0, // 24
-    0.0
+    0.0, 0.0
 };
 
 // TODO: min point BKG
