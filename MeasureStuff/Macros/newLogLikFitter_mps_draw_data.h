@@ -22,7 +22,7 @@ class mpsdrawdata
         , n_param_2{0}, param_2_min{0.0}, param_2_max{0.0}
         //, min_point{0.0, 0.0}
         //, min_point_fake_data{0.0, 0.0}
-        , enable_min_point_sysn(N_SYSTEMATICS, false)
+        , enable_min_point_sysn(N_SYSTEMATICS + 1, false)
         //, min_point_sysn_l(N_SYSTEMATICS, {0.0, 0.0})
         //, min_point_sysn_h(N_SYSTEMATICS, {0.0, 0.0})
         //, min_point_sysn_l(N_SYSTEMATICS)
@@ -30,10 +30,10 @@ class mpsdrawdata
         , file_read_mode_fake_data{true}
         , file_read_enable_sysall{true}
         , min{0.0}, min_x{0.0}, min_y{0.0}
-        , mark_min_point_sysn_l(N_SYSTEMATICS, nullptr)
-        , mark_min_point_sysn_h(N_SYSTEMATICS, nullptr)
-        , line_min_point_sysn_l(N_SYSTEMATICS, nullptr)
-        , line_min_point_sysn_h(N_SYSTEMATICS, nullptr) 
+        , mark_min_point_sysn_l(N_SYSTEMATICS + 1, nullptr)
+        , mark_min_point_sysn_h(N_SYSTEMATICS + 1, nullptr)
+        , line_min_point_sysn_l(N_SYSTEMATICS + 1, nullptr)
+        , line_min_point_sysn_h(N_SYSTEMATICS + 1, nullptr) 
     {
 
     }
@@ -140,7 +140,7 @@ class mpsdrawdata
         got_enable_min_point_sysn = false;
         got_min_point = false;
         got_min_point_fake_data = false;
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             got_min_point_sysn_l[i] = false;
             got_min_point_sysn_h[i] = false;
@@ -165,7 +165,7 @@ class mpsdrawdata
         min_point_load("min_point_data_HSD_CH0", min_point_data_HSD_CH0, min_point_data_HSD_CH0_err, min_point_data_HSD_CH0_fval);  
         min_point_load("min_point_data_HSD", min_point_data_HSD, min_point_data_HSD_err, min_point_data_HSD_fval);  
         min_point_load("min_point_data_SSD", min_point_data_SSD, min_point_data_SSD_err, min_point_data_SSD_fval);  
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             TString fname_l;
             fname_l.Form("min_point_fake_SYS%dL", i);
@@ -182,7 +182,7 @@ class mpsdrawdata
         std::cout << "min_point_data_CH0=" << min_point_data_HSD_CH0[0] << " " << min_point_data_HSD_CH0[1] << std::endl;
         std::cout << "min_point_data_HSD=" << min_point_data_HSD[0] << " " << min_point_data_HSD[1] << std::endl;
         std::cout << "min_point_data_SSD=" << min_point_data_SSD[0] << " " << min_point_data_SSD[1] << std::endl;
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             std::cout << "min_point_fake_SYS" << i << "L=" << min_point_fake_sysn_l[i][0] << " " << min_point_fake_sysn_l[i][1] << std::endl;
             std::cout << "min_point_fake_SYS" << i << "H=" << min_point_fake_sysn_h[i][0] << " " << min_point_fake_sysn_h[i][1] << std::endl;
@@ -358,7 +358,7 @@ class mpsdrawdata
                         if(got_V_ENABLE_SYSALL == false)
                         {
                             ifs_resultsmatrix >> V_ENABLE_SYSALL;
-                            for(int i = 0; i < N_SYSTEMATICS; ++ i)
+                            for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
                             {
                                 ifs_resultsmatrix >> V_ENABLE_SYSn[i];
                             }
@@ -368,7 +368,7 @@ class mpsdrawdata
                         {
                             std::string dummy;
                             ifs_resultsmatrix >> dummy;
-                            for(int i = 0; i < N_SYSTEMATICS; ++ i)
+                            for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
                             {
                                 ifs_resultsmatrix >> dummy;
                             }
@@ -387,7 +387,7 @@ class mpsdrawdata
                         // read min point enable flags
                         if(got_enable_min_point_sysn == false)
                         {
-                            for(int i = 0; i < N_SYSTEMATICS; ++ i)
+                            for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
                             {
                                 bool tmp;
                                 ifs_resultsmatrix >> tmp;
@@ -398,7 +398,7 @@ class mpsdrawdata
                         else
                         {
                             std::string dummy;
-                            for(int i = 0; i < N_SYSTEMATICS; ++ i)
+                            for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
                             {
                                 ifs_resultsmatrix >> dummy;
                             }
@@ -900,7 +900,7 @@ class mpsdrawdata
             kMagenta - 7    //                  // optical
         };
 
-        for(int i = 0; i < N_SYSTEMATICS; ++ i)
+        for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             // SYS n
             min_point_marker_helper(
@@ -947,8 +947,8 @@ class mpsdrawdata
     bool got_enable_min_point_sysn;
     bool got_min_point;
     bool got_min_point_fake_data;
-    bool got_min_point_sysn_l[N_SYSTEMATICS];
-    bool got_min_point_sysn_h[N_SYSTEMATICS];
+    bool got_min_point_sysn_l[N_SYSTEMATICS + 1];
+    bool got_min_point_sysn_h[N_SYSTEMATICS + 1];
     bool got_n_param_1;
     bool got_n_param_2;
 
