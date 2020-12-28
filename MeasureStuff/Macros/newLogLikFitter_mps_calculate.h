@@ -243,7 +243,7 @@ void newloglikfitter_mps_calculate
 
     // before
     ofs_resultsmatrix_before << "[ V_ENABLE_SYSALL ] " << V_ENABLE_SYSALL << " ";
-    for(int i = 0; i < N_SYSTEMATICS; ++ i)
+    for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
     {
         ofs_resultsmatrix_before << V_ENABLE_SYSn[i] << " ";
     }
@@ -251,7 +251,7 @@ void newloglikfitter_mps_calculate
 
     // after
     ofs_resultsmatrix_after << "[ V_ENABLE_SYSALL ] " << V_ENABLE_SYSALL << " ";
-    for(int i = 0; i < N_SYSTEMATICS; ++ i)
+    for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
     {
         ofs_resultsmatrix_after << V_ENABLE_SYSn[i] << " ";
     }
@@ -259,7 +259,7 @@ void newloglikfitter_mps_calculate
 
     // before: save minimum systematic fit points
     ofs_resultsmatrix_before << "[ ENABLE_MIN_POINT_SYSn ] ";
-    for(int i = 0; i < N_SYSTEMATICS; ++ i)
+    for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
     {
         ofs_resultsmatrix_before << ENABLE_MIN_POINT_SYSn[i] << " ";
     }
@@ -268,7 +268,7 @@ void newloglikfitter_mps_calculate
 
     // after: save minimum systematic fit points
     ofs_resultsmatrix_after << "[ ENABLE_MIN_POINT_SYSn ] ";
-    for(int i = 0; i < N_SYSTEMATICS; ++ i)
+    for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
     {
         ofs_resultsmatrix_after << ENABLE_MIN_POINT_SYSn[i] << " ";
     }
