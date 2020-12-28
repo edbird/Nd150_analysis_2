@@ -339,18 +339,18 @@ class MinimizeFCNAxialVector : public ROOT::Minuit2::FCNBase
                 }
 
 
-                for(int ch = 0; ch < number1DHists; ++ ch)
+                for(int ch = 0; ch < number2DHists; ++ ch)
                 {
                     const Int_t NUM_BINS_XY = 12 * 12;
                     for(int i = 0; i < NUM_BINS_XY * NUM_BINS_XY; ++ i)
                     {
                         const double zero = 0.0;
                         #if VECTOR_RANGE_CHECK
-                        V_PHYS_STAT_1D_P1_data[ch]->at(i) = zero;
-                        V_PHYS_STAT_1D_P2_data[ch]->at(i) = zero;
+                        V_PHYS_STAT_2D_P1_data[ch]->at(i) = zero;
+                        V_PHYS_STAT_2D_P2_data[ch]->at(i) = zero;
                         #else
-                        V_PHYS_STAT_1D_P1_data[ch]->operator[](i) = zero;
-                        V_PHYS_STAT_1D_P2_data[ch]->operator[](i) = zero;
+                        V_PHYS_STAT_2D_P1_data[ch]->operator[](i) = zero;
+                        V_PHYS_STAT_2D_P2_data[ch]->operator[](i) = zero;
                         #endif
                     }
                 }
