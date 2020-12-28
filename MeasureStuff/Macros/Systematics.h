@@ -158,6 +158,59 @@ class Systematics
                 }
             }
 
+            // n3-nl-model
+            {
+                std::ifstream ifs("n3-nl-model.txt");
+                if(ifs.is_open())
+                {
+                    std::vector<double> energy;
+                    std::vector<double> correction_nominal;
+                    std::vector<double> correction_high;
+                    std::vector<double> correction_low;
+                    
+                    double e, cl, cn, ch;
+                    while(ifs.good())
+                    {
+                        ifs >> e >> cl >> cn >> ch;
+                        energy.push_back(e);
+                        correction_low.push_back(cl);
+                        correction_nominal.push_back(cn);
+                        correction_high.push_back(ch);
+                    }
+
+                    ifs.close();
+
+                    int np = energy.size();
+                    g_systematic_optical_correction_l = new TGraph(np);
+                    g_systematic_optical_correction_n = new TGraph(np);
+                    g_systematic_optical_correction_h = new TGraph(np);
+
+                    for(int i = 0; i < np; ++ i)
+                    {
+                        double x = energy.at(i);
+                        double cn = correction_nominal.at(i);
+                        double cl = correction_low.at(i);
+                        double ch = correction_high.at(i);
+                        g_systematic_optical_correction_l.SetPoint(i, x, cl);
+                        g_systematic_optical_correction_n.SetPoint(i, x, cn);
+                        g_systematic_optical_correction_h.SetPoint(i, x, ch);
+                    }
+
+                    // debug
+                    new TCanvas;
+                    g_systematic_optical_correction_n->SetMinimum(1.0 - 0.05);
+                    g_systematic_optical_correction_n->SetMaximum(1.0 + 0.05);
+                    g_systematic_optical_correction_n->Draw("al");
+                    g_systematic_optical_correction_l->Draw("al");
+                    g_systematic_optical_correction_h->Draw("al");
+                }
+                else
+                {
+                    std::cout << "ERROR: Could not open file n3-nl-model.txt" << std::endl;
+                    throw "n3-nl-model";
+                }
+            }
+
             aux_data_is_loaded = true;
         }
         
@@ -193,6 +246,7 @@ class Systematics
     double systematic_bkg_external;                 // external (all)
     double systematic_bkg_neighbour;                // neighbour (all)
 
+    // optical correction systematic
     double systematic_optical_correction;           // optical correction systematic
 
 
@@ -212,6 +266,9 @@ class Systematics
     TH2D *h_systematic_brem_nominal_h;
     TH2D *h_systematic_brem_nominal_l;
 
+    TGraph *g_systematic_optical_correction_l;
+    TGraph *g_systematic_optical_correction_n;
+    TGraph *g_systematic_optical_correction_h;
 
 }gSystematics;
 
