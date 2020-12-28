@@ -846,6 +846,50 @@ void loadFiles(int i)
         //}
     }
 
+
+    for(int channel = 0; channel < number2DHists; ++ channel)
+    {
+
+        if(systematic_nominal_2D_P1[channel] == nullptr)
+        {
+            systematic_nominal_2D_P1[channel] = new std::vector<double>;
+            systematic_nominal_2D_P2[channel] = new std::vector<double>;
+
+            for(int i = 0; i < N_SYSTEMATICS; ++ i)
+            {
+                // P1
+                systematic_n_low_2D_P1[i][channel] = new std::vector<double>;
+                systematic_n_high_2D_P1[i][channel] = new std::vector<double>;
+                systematic_n_V_MATRIX_coeff_2D_P1[i][channel] = new std::vector<double>;
+
+                // P2
+                systematic_n_low_2D_P2[i][channel] = new std::vector<double>;
+                systematic_n_high_2D_P2[i][channel] = new std::vector<double>;
+                systematic_n_V_MATRIX_coeff_2D_P2[i][channel] = new std::vector<double>;
+            }
+
+        /*
+            for(int b = 0; b < N_BKG_SYSTEMATICS; ++ b)
+            {
+                // P1
+                systematic_bkg_low_2D_P1[b][channel] = new std::vector<double>;
+                systematic_bkg_high_2D_P1[b][channel] = new std::vector<double>;
+                systematic_bkg_V_MATRIX_coeff_2D_P1[b][channel] = new std::vector<double>;
+
+                // P2
+                systematic_bkg_low_2D_P2[b][channel] = new std::vector<double>;
+                systematic_bkg_high_2D_P2[b][channel] = new std::vector<double>;
+                systematic_bkg_V_MATRIX_coeff_2D_P2[b][channel] = new std::vector<double>;
+            }
+        */
+        }
+        // check channel enabled
+        //if(channel_enable_2D[channel] == 0)
+        //{
+        //    continue;
+        //}
+    }
+
     /*
     // loop over all channels
     for(int channel = 0; channel < number1DHists; ++ channel)
@@ -888,7 +932,10 @@ void loadFiles(int i)
     */
 
     gSystematics.reset();
-    systematic_init_helper(&(systematic_nominal_1D_P1[0]), &(systematic_nominal_1D_P2[0]));
+    systematic_init_helper(&(systematic_nominal_1D_P1[0]),
+                           &(systematic_nominal_1D_P2[0]),
+                           &(systematic_nominal_2D_P1[0]),
+                           &(systematic_nominal_2D_P2[0]));
     gSystematics.reset();
 
 
@@ -903,7 +950,10 @@ void loadFiles(int i)
 //    gSystematics.systematic_energy_offset = +0.1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 0);
-    systematic_init_helper(&(systematic_n_high_1D_P1[0][0]), &(systematic_n_high_1D_P2[0][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[0][0]),
+                           &(systematic_n_high_1D_P2[0][0]),
+                           &(systematic_n_high_2D_P1[0][0]),
+                           &(systematic_n_high_2D_P2[0][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -916,7 +966,10 @@ void loadFiles(int i)
 //    gSystematics.systematic_energy_offset = -0.1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 0);
-    systematic_init_helper(&(systematic_n_low_1D_P1[0][0]), &(systematic_n_low_1D_P2[0][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[0][0]),
+                           &(systematic_n_low_1D_P2[0][0]),
+                           &(systematic_n_low_2D_P1[0][0]),
+                           &(systematic_n_low_2D_P2[0][0]));
     gSystematics.reset();
 
 
@@ -931,7 +984,10 @@ void loadFiles(int i)
 //    gSystematics.systematic_energy_scale = -0.012;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 1);
-    systematic_init_helper(&(systematic_n_low_1D_P1[1][0]), &(systematic_n_low_1D_P2[1][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[1][0]),
+                           &(systematic_n_low_1D_P2[1][0]),
+                           &(systematic_n_low_2D_P1[1][0]),
+                           &(systematic_n_low_2D_P2[1][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -944,7 +1000,10 @@ void loadFiles(int i)
 //    gSystematics.systematic_energy_scale = +0.012;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 1);
-    systematic_init_helper(&(systematic_n_high_1D_P1[1][0]), &(systematic_n_high_1D_P2[1][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[1][0]),
+                           &(systematic_n_high_1D_P2[1][0]),
+                           &(systematic_n_high_2D_P1[1][0]),
+                           &(systematic_n_high_2D_P2[1][0]));
     gSystematics.reset();
 
 
@@ -959,7 +1018,10 @@ void loadFiles(int i)
     gSystematics.systematic_efficiency = -5.55e-02;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 2);
-    systematic_init_helper(&(systematic_n_low_1D_P1[2][0]), &(systematic_n_low_1D_P2[2][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[2][0]),
+                           &(systematic_n_low_1D_P2[2][0]),
+                           &(systematic_n_low_2D_P1[2][0]),
+                           &(systematic_n_low_2D_P2[2][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -972,7 +1034,10 @@ void loadFiles(int i)
     gSystematics.systematic_efficiency = +5.55e-02;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 2);
-    systematic_init_helper(&(systematic_n_high_1D_P1[2][0]), &(systematic_n_high_1D_P2[2][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[2][0]),
+                           &(systematic_n_high_1D_P2[2][0]),
+                           &(systematic_n_high_2D_P1[2][0]),
+                           &(systematic_n_high_2D_P2[2][0]));
     gSystematics.reset();
 
 
@@ -987,7 +1052,10 @@ void loadFiles(int i)
     gSystematics.systematic_enrichment = -0.5e-02;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 3);
-    systematic_init_helper(&(systematic_n_low_1D_P1[3][0]), &(systematic_n_low_1D_P2[3][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[3][0]),
+                           &(systematic_n_low_1D_P2[3][0]),
+                           &(systematic_n_low_2D_P1[3][0]),
+                           &(systematic_n_low_2D_P2[3][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1000,7 +1068,10 @@ void loadFiles(int i)
     gSystematics.systematic_enrichment = +0.5e-02;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 3);
-    systematic_init_helper(&(systematic_n_high_1D_P1[3][0]), &(systematic_n_high_1D_P2[3][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[3][0]),
+                           &(systematic_n_high_1D_P2[3][0]),
+                           &(systematic_n_high_2D_P1[3][0]),
+                           &(systematic_n_high_2D_P2[3][0]));
     gSystematics.reset();
 
 
@@ -1016,7 +1087,10 @@ void loadFiles(int i)
     //gSystematics.systematic_energy_scale = 0.0;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 4);
-    systematic_init_helper(&(systematic_n_high_1D_P1[4][0]), &(systematic_n_high_1D_P2[4][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[4][0]),
+                           &(systematic_n_high_1D_P2[4][0]),
+                           &(systematic_n_high_2D_P1[4][0]),
+                           &(systematic_n_high_2D_P2[4][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1029,7 +1103,10 @@ void loadFiles(int i)
 //    gSystematics.systematic_energy_offsetsmall = -3.0e-3;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 4);
-    systematic_init_helper(&(systematic_n_low_1D_P1[4][0]), &(systematic_n_low_1D_P2[4][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[4][0]),
+                           &(systematic_n_low_1D_P2[4][0]),
+                           &(systematic_n_low_2D_P1[4][0]),
+                           &(systematic_n_low_2D_P2[4][0]));
     gSystematics.reset();
 
 
@@ -1045,7 +1122,10 @@ void loadFiles(int i)
     //gSystematics.systematic_energy_scale = 0.0;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 5);
-    systematic_init_helper(&(systematic_n_high_1D_P1[5][0]), &(systematic_n_high_1D_P2[5][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[5][0]),
+                           &(systematic_n_high_1D_P2[5][0]),
+                           &(systematic_n_high_2D_P1[5][0]),
+                           &(systematic_n_high_2D_P2[5][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1058,7 +1138,10 @@ void loadFiles(int i)
     gSystematics.systematic_foil_thickness_virtual = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 5);
-    systematic_init_helper(&(systematic_n_low_1D_P1[5][0]), &(systematic_n_low_1D_P2[5][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[5][0]),
+                           &(systematic_n_low_1D_P2[5][0]),
+                           &(systematic_n_low_2D_P1[5][0]),
+                           &(systematic_n_low_2D_P2[5][0]));
     gSystematics.reset();
 
 
@@ -1074,7 +1157,10 @@ void loadFiles(int i)
     //gSystematics.systematic_energy_scale = 0.0;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 6);
-    systematic_init_helper(&(systematic_n_high_1D_P1[6][0]), &(systematic_n_high_1D_P2[6][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[6][0]),
+                           &(systematic_n_high_1D_P2[6][0]),
+                           &(systematic_n_high_2D_P1[6][0]),
+                           &(systematic_n_high_2D_P2[6][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1087,7 +1173,10 @@ void loadFiles(int i)
     gSystematics.systematic_dEdX_virtual = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 6);
-    systematic_init_helper(&(systematic_n_low_1D_P1[6][0]), &(systematic_n_low_1D_P2[6][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[6][0]),
+                           &(systematic_n_low_1D_P2[6][0]),
+                           &(systematic_n_low_2D_P1[6][0]),
+                           &(systematic_n_low_2D_P2[6][0]));
     gSystematics.reset();
 
 
@@ -1103,7 +1192,10 @@ void loadFiles(int i)
     //gSystematics.systematic_energy_scale = 0.0;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 7);
-    systematic_init_helper(&(systematic_n_high_1D_P1[7][0]), &(systematic_n_high_1D_P2[7][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[7][0]),
+                           &(systematic_n_high_1D_P2[7][0]),
+                           &(systematic_n_high_2D_P1[7][0]),
+                           &(systematic_n_high_2D_P2[7][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1116,7 +1208,10 @@ void loadFiles(int i)
     gSystematics.systematic_brem_virtual = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 7);
-    systematic_init_helper(&(systematic_n_low_1D_P1[7][0]), &(systematic_n_low_1D_P2[7][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[7][0]),
+                           &(systematic_n_low_1D_P2[7][0]),
+                           &(systematic_n_low_2D_P1[7][0]),
+                           &(systematic_n_low_2D_P2[7][0]));
     gSystematics.reset();
 
 
@@ -1132,7 +1227,10 @@ void loadFiles(int i)
     //gSystematics.systematic_energy_scale = 0.0;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 8);
-    systematic_init_helper(&(systematic_n_high_1D_P1[8][0]), &(systematic_n_high_1D_P2[8][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[8][0]),
+                           &(systematic_n_high_1D_P2[8][0]),
+                           &(systematic_n_high_2D_P1[8][0]),
+                           &(systematic_n_high_2D_P2[8][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1145,7 +1243,10 @@ void loadFiles(int i)
     gSystematics.systematic_foil_thickness_nominal = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 8);
-    systematic_init_helper(&(systematic_n_low_1D_P1[8][0]), &(systematic_n_low_1D_P2[8][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[8][0]),
+                           &(systematic_n_low_1D_P2[8][0]),
+                           &(systematic_n_low_2D_P1[8][0]),
+                           &(systematic_n_low_2D_P2[8][0]));
     gSystematics.reset();
 
 
@@ -1161,7 +1262,10 @@ void loadFiles(int i)
     //gSystematics.systematic_energy_scale = 0.0;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 9);
-    systematic_init_helper(&(systematic_n_high_1D_P1[9][0]), &(systematic_n_high_1D_P2[9][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[9][0]),
+                           &(systematic_n_high_1D_P2[9][0]),
+                           &(systematic_n_high_2D_P1[9][0]),
+                           &(systematic_n_high_2D_P2[9][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1174,7 +1278,10 @@ void loadFiles(int i)
     gSystematics.systematic_dEdX_nominal = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 9);
-    systematic_init_helper(&(systematic_n_low_1D_P1[9][0]), &(systematic_n_low_1D_P2[9][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[9][0]),
+                           &(systematic_n_low_1D_P2[9][0]),
+                           &(systematic_n_low_2D_P1[9][0]),
+                           &(systematic_n_low_2D_P2[9][0]));
     gSystematics.reset();
 
 
@@ -1190,7 +1297,10 @@ void loadFiles(int i)
     //gSystematics.systematic_energy_scale = 0.0;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_high_1D_P1, systematic_n_high_1D_P2, 10);
-    systematic_init_helper(&(systematic_n_high_1D_P1[10][0]), &(systematic_n_high_1D_P2[10][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[10][0]),
+                           &(systematic_n_high_1D_P2[10][0]),
+                           &(systematic_n_high_2D_P1[10][0]),
+                           &(systematic_n_high_2D_P2[10][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1203,7 +1313,10 @@ void loadFiles(int i)
     gSystematics.systematic_brem_nominal = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
     //systematic_n_init_helper(systematic_n_low_1D_P1, systematic_n_low_1D_P2, 10);
-    systematic_init_helper(&(systematic_n_low_1D_P1[10][0]), &(systematic_n_low_1D_P2[10][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[10][0]),
+                           &(systematic_n_low_1D_P2[10][0]),
+                           &(systematic_n_low_2D_P1[10][0]),
+                           &(systematic_n_low_2D_P2[10][0]));
     gSystematics.reset();
 
 
@@ -1217,7 +1330,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_energy_scale_small = +0.2e-2;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[11][0]), &(systematic_n_high_1D_P2[11][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[11][0]),
+                           &(systematic_n_high_1D_P2[11][0]),
+                           &(systematic_n_high_2D_P1[11][0]),
+                           &(systematic_n_high_2D_P2[11][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1229,7 +1345,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_energy_scale_small = -0.2e-2;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[11][0]), &(systematic_n_low_1D_P2[11][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[11][0]),
+                           &(systematic_n_low_1D_P2[11][0]),
+                           &(systematic_n_low_2D_P1[11][0]),
+                           &(systematic_n_low_2D_P2[11][0]));
     gSystematics.reset();
 
 
@@ -1243,7 +1362,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_energy_gaussian_smear = +1.0e-2;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[12][0]), &(systematic_n_high_1D_P2[12][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[12][0]),
+                           &(systematic_n_high_1D_P2[12][0]),
+                           &(systematic_n_high_2D_P1[12][0]),
+                           &(systematic_n_high_2D_P2[12][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1255,7 +1377,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_energy_gaussian_smear = -1.0e-2;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[12][0]), &(systematic_n_low_1D_P2[12][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[12][0]),
+                           &(systematic_n_low_1D_P2[12][0]),
+                           &(systematic_n_low_2D_P1[12][0]),
+                           &(systematic_n_low_2D_P2[12][0]));
     gSystematics.reset();
 
 
@@ -1269,7 +1394,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_int = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[13][0]), &(systematic_n_high_1D_P2[13][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[13][0]),
+                           &(systematic_n_high_1D_P2[13][0]),
+                           &(systematic_n_high_2D_P1[13][0]),
+                           &(systematic_n_high_2D_P2[13][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1281,7 +1409,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_int = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[13][0]), &(systematic_n_low_1D_P2[13][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[13][0]),
+                           &(systematic_n_low_1D_P2[13][0]),
+                           &(systematic_n_low_2D_P1[13][0]),
+                           &(systematic_n_low_2D_P2[13][0]));
     gSystematics.reset();
 
 
@@ -1295,7 +1426,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_bi207_int = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[14][0]), &(systematic_n_high_1D_P2[14][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[14][0]),
+                           &(systematic_n_high_1D_P2[14][0]),
+                           &(systematic_n_high_2D_P1[14][0]),
+                           &(systematic_n_high_2D_P2[14][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1308,7 +1442,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_bi207_int = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[14][0]), &(systematic_n_low_1D_P2[14][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[14][0]),
+                           &(systematic_n_low_1D_P2[14][0]),
+                           &(systematic_n_low_2D_P1[14][0]),
+                           &(systematic_n_low_2D_P2[14][0]));
     gSystematics.reset();
 
 
@@ -1322,7 +1459,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_tl208_int = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[15][0]), &(systematic_n_high_1D_P2[15][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[15][0]),
+                           &(systematic_n_high_1D_P2[15][0]),
+                           &(systematic_n_high_2D_P1[15][0]),
+                           &(systematic_n_high_2D_P2[15][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1334,7 +1474,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_tl208_int = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[15][0]), &(systematic_n_low_1D_P2[15][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[15][0]),
+                           &(systematic_n_low_1D_P2[15][0]),
+                           &(systematic_n_low_2D_P1[15][0]),
+                           &(systematic_n_low_2D_P2[15][0]));
     gSystematics.reset();
 
 
@@ -1348,7 +1491,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_eu152_int = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[16][0]), &(systematic_n_high_1D_P2[16][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[16][0]),
+                           &(systematic_n_high_1D_P2[16][0]),
+                           &(systematic_n_high_2D_P1[16][0]),
+                           &(systematic_n_high_2D_P2[16][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1360,7 +1506,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_eu152_int = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[16][0]), &(systematic_n_low_1D_P2[16][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[16][0]),
+                           &(systematic_n_low_1D_P2[16][0]),
+                           &(systematic_n_low_2D_P1[16][0]),
+                           &(systematic_n_low_2D_P2[16][0]));
     gSystematics.reset();
 
 
@@ -1374,7 +1523,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_k40_int = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[17][0]), &(systematic_n_high_1D_P2[17][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[17][0]),
+                           &(systematic_n_high_1D_P2[17][0]),
+                           &(systematic_n_high_2D_P1[17][0]),
+                           &(systematic_n_high_2D_P2[17][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1387,7 +1539,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_k40_int = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[17][0]), &(systematic_n_low_1D_P2[17][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[17][0]),
+                           &(systematic_n_low_1D_P2[17][0]),
+                           &(systematic_n_low_2D_P1[17][0]),
+                           &(systematic_n_low_2D_P2[17][0]));
     gSystematics.reset();
 
 
@@ -1401,7 +1556,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_mylar = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[18][0]), &(systematic_n_high_1D_P2[18][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[18][0]),
+                           &(systematic_n_high_1D_P2[18][0]),
+                           &(systematic_n_high_2D_P1[18][0]),
+                           &(systematic_n_high_2D_P2[18][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1414,7 +1572,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_mylar = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[18][0]), &(systematic_n_low_1D_P2[18][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[18][0]),
+                           &(systematic_n_low_1D_P2[18][0]),
+                           &(systematic_n_low_2D_P1[18][0]),
+                           &(systematic_n_low_2D_P2[18][0]));
     gSystematics.reset();
 
 
@@ -1428,7 +1589,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_sfoil_swire = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[19][0]), &(systematic_n_high_1D_P2[19][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[19][0]),
+                           &(systematic_n_high_1D_P2[19][0]),
+                           &(systematic_n_high_2D_P1[19][0]),
+                           &(systematic_n_high_2D_P2[19][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1441,7 +1605,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_sfoil_swire = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[19][0]), &(systematic_n_low_1D_P2[19][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[19][0]),
+                           &(systematic_n_low_1D_P2[19][0]),
+                           &(systematic_n_low_2D_P1[19][0]),
+                           &(systematic_n_low_2D_P2[19][0]));
     gSystematics.reset();
 
 
@@ -1455,7 +1622,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_air = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[20][0]), &(systematic_n_high_1D_P2[20][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[20][0]),
+                           &(systematic_n_high_1D_P2[20][0]),
+                           &(systematic_n_high_2D_P1[20][0]),
+                           &(systematic_n_high_2D_P2[20][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1468,7 +1638,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_bi214_air = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[20][0]), &(systematic_n_low_1D_P2[20][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[20][0]),
+                           &(systematic_n_low_1D_P2[20][0]),
+                           &(systematic_n_low_2D_P1[20][0]),
+                           &(systematic_n_low_2D_P2[20][0]));
     gSystematics.reset();
 
 
@@ -1482,7 +1655,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_tl208_air = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[21][0]), &(systematic_n_high_1D_P2[21][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[21][0]),
+                           &(systematic_n_high_1D_P2[21][0]),
+                           &(systematic_n_high_2D_P1[21][0]),
+                           &(systematic_n_high_2D_P2[21][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1495,7 +1671,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_tl208_air = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[21][0]), &(systematic_n_low_1D_P2[21][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[21][0]),
+                           &(systematic_n_low_1D_P2[21][0]),
+                           &(systematic_n_low_2D_P1[21][0]),
+                           &(systematic_n_low_2D_P2[21][0]));
     gSystematics.reset();
 
 
@@ -1509,7 +1688,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_external = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[22][0]), &(systematic_n_high_1D_P2[22][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[22][0]),
+                           &(systematic_n_high_1D_P2[22][0]),
+                           &(systematic_n_high_2D_P1[22][0]),
+                           &(systematic_n_high_2D_P2[22][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1522,7 +1704,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_external = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[22][0]), &(systematic_n_low_1D_P2[22][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[22][0]),
+                           &(systematic_n_low_1D_P2[22][0]),
+                           &(systematic_n_low_2D_P1[22][0]),
+                           &(systematic_n_low_2D_P2[22][0]));
     gSystematics.reset();
 
 
@@ -1536,7 +1721,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_neighbour = +1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[23][0]), &(systematic_n_high_1D_P2[23][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[23][0]),
+                           &(systematic_n_high_1D_P2[23][0]),
+                           &(systematic_n_high_2D_P1[23][0]),
+                           &(systematic_n_high_2D_P2[23][0]));
     gSystematics.reset();
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1549,7 +1737,10 @@ void loadFiles(int i)
     gSystematics.reset();
     gSystematics.systematic_bkg_neighbour = -1;
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_low_1D_P1[23][0]), &(systematic_n_low_1D_P2[23][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[23][0]),
+                           &(systematic_n_low_1D_P2[23][0]),
+                           &(systematic_n_low_2D_P1[23][0]),
+                           &(systematic_n_low_2D_P2[23][0]));
     gSystematics.reset();
 
 
@@ -1558,8 +1749,14 @@ void loadFiles(int i)
 
     gSystematics.reset();
     rebuild_fake_data_systematics(xi_31_covariance_matrix_reweight_value, xi_31_baseline);
-    systematic_init_helper(&(systematic_n_high_1D_P1[24][0]), &(systematic_n_high_1D_P2[24][0]));
-    systematic_init_helper(&(systematic_n_low_1D_P1[24][0]), &(systematic_n_low_1D_P2[24][0]));
+    systematic_init_helper(&(systematic_n_high_1D_P1[24][0]),
+                           &(systematic_n_high_1D_P2[24][0]),
+                           &(systematic_n_high_2D_P1[24][0]),
+                           &(systematic_n_high_2D_P2[24][0]));
+    systematic_init_helper(&(systematic_n_low_1D_P1[24][0]),
+                           &(systematic_n_low_1D_P2[24][0]),
+                           &(systematic_n_low_2D_P1[24][0]),
+                           &(systematic_n_low_2D_P2[24][0]));
     gSystematics.reset();
 
 
@@ -1725,6 +1922,65 @@ void loadFiles(int i)
                 }
 
                 systematic_n_V_MATRIX_coeff_1D_P2[n][channel]->push_back(value);
+            }
+
+        }
+
+    }
+
+
+
+    for(int channel = 0; channel < number2DHists; ++ channel)
+    {
+
+        ///////////////////////////////////////////////////////////////////////
+        // SYSTEMATIC N
+        ///////////////////////////////////////////////////////////////////////
+        
+        for(int n = 0; n < N_SYSTEMATICS; ++ n)
+        {
+
+            // PHASE 1
+            for(std::size_t i = 0; i < systematic_nominal_2D_P1[channel]->size(); ++ i)
+            {
+                double up = systematic_n_high_2D_P1[n][channel]->at(i);
+                double nominal = systematic_nominal_2D_P1[channel]->at(i);
+                double down = systematic_n_low_2D_P1[n][channel]->at(i);
+                double value_up = up - nominal;
+                double value_down = nominal - down;
+
+                double value = 0.0;
+
+                // just do it manually
+                // TODO: choose which values go here
+                value = value_up;
+                if(n == 10)
+                {
+                    value = value_down;
+                }
+
+                systematic_n_V_MATRIX_coeff_2D_P1[n][channel]->push_back(value);
+            }
+
+            // PHASE 2
+            for(std::size_t i = 0; i < systematic_nominal_2D_P2[channel]->size(); ++ i)
+            {
+                double up = systematic_n_high_2D_P2[n][channel]->at(i);
+                double nominal = systematic_nominal_2D_P2[channel]->at(i);
+                double down = systematic_n_low_2D_P2[n][channel]->at(i);
+                double value_up = up - nominal;
+                double value_down = nominal - down;
+
+                double value = 0.0;
+
+                // just do it manually
+                value = value_up;
+                if(n == 10)
+                {
+                    value = value_down;
+                }
+
+                systematic_n_V_MATRIX_coeff_2D_P2[n][channel]->push_back(value);
             }
 
         }
@@ -2069,7 +2325,7 @@ void loadFiles(int i)
     min_point_helper("CH0", false, false, 1, true, 0.0,
         min_point_data_HSD_CH0, min_point_data_HSD_CH0_err, min_point_data_HSD_CH0_fval,
         "min_point_data_HSD_CH0", "HSD_CH0_data", "HSD_CH0",
-        xi_31_systematics_reweight_value);
+        -1.0);
 
     ///////////////////////////////////////////////////////////////////////////
     // HSD fixed xi_31 = HSD fit
@@ -2077,7 +2333,7 @@ void loadFiles(int i)
     min_point_helper("CH1", false, false, 1, true, 0.0,
         min_point_data_HSD, min_point_data_HSD_err, min_point_data_HSD_fval,
         "min_point_data_HSD", "HSD_data", "HSD",
-        xi_31_systematics_reweight_value);
+        -1.0);
 
     ///////////////////////////////////////////////////////////////////////////
     // SSD fixed xi_31 = SSD fit
@@ -2085,7 +2341,7 @@ void loadFiles(int i)
     min_point_helper("CH1", false, false, 1, true, 0.296,
         min_point_data_SSD, min_point_data_SSD_err, min_point_data_SSD_fval,
         "min_point_data_SSD", "SSD_data", "SSD",
-        xi_31_systematics_reweight_value);
+        -1.0);
 
 
 
@@ -3143,7 +3399,7 @@ void loadFiles(int i)
 
 
 
-    return 0;
+    //return 0;
 
 
 

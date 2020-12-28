@@ -545,9 +545,9 @@ MinimizeFCNAxialVector::set_M(const std::vector<double> &param) const
                             Double_t content_output = content_input + content_add;
                             //M_1D_P1[channel]->SetBinContent(bin_x + 1, 1, content_output);
                             #if VECTOR_RANGE_CHECK
-                            M_2D_P1_data[channel]->at(bin_x + 12 * 12 * bin_y) = content_output;
+                            M_2D_P1_data[channel]->at(bin_x + 12 * bin_y) = content_output;
                             #else
-                            M_2D_P1_data[channel]->operator[](bin_x + 12 * 12 bin_y) = content_output;
+                            M_2D_P1_data[channel]->operator[](bin_x + 12 * bin_y) = content_output;
                             #endif
                             //std::cout << "content_input=" << content_input << " content_output=" << content_output << " content_add=" << content_add << std::endl;
                         }
@@ -583,6 +583,7 @@ MinimizeFCNAxialVector::set_M(const std::vector<double> &param) const
                     {
                         for(Int_t bin_x{0}; bin_x < tmpHist2D_P2->GetNbinsX(); ++ bin_x)
                         {
+
                             //Int_t super_index = channel * 2 * 50 + 50 + bin_x;
                             //Double_t content_input = M_1D_P2[channel]->GetBinContent(bin_x + 1, 1);
                             #if VECTOR_RANGE_CHECK
@@ -594,9 +595,9 @@ MinimizeFCNAxialVector::set_M(const std::vector<double> &param) const
                             Double_t content_output = content_input + content_add;
                             //M_1D_P2[channel]->SetBinContent(bin_x + 1, 1, content_output);
                             #if VECTOR_RANGE_CHECK
-                            M_2D_P2_data[channel]->at(bin_x + 12 * 12 * bin_y) = content_output;
+                            M_2D_P2_data[channel]->at(bin_x + 12 * bin_y) = content_output;
                             #else
-                            M_2D_P2_data[channel]->operator[](bin_x + 12 * 12 * bin_y) = content_output;
+                            M_2D_P2_data[channel]->operator[](bin_x + 12 * bin_y) = content_output;
                             #endif
                             //std::cout << "debug: " << "super_index=" << super_index << " content_input=" << content_input << " content_add=" << content_add << " content_output=" << content_output << " M:" << M->GetBinContent(super_index + 1, 1) << std::endl;
 
