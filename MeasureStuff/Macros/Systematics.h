@@ -201,8 +201,8 @@ class Systematics
                     g_systematic_optical_correction_n->SetMinimum(1.0 - 0.05);
                     g_systematic_optical_correction_n->SetMaximum(1.0 + 0.05);
                     g_systematic_optical_correction_n->Draw("al");
-                    g_systematic_optical_correction_l->Draw("al");
-                    g_systematic_optical_correction_h->Draw("al");
+                    g_systematic_optical_correction_l->Draw("lsame");
+                    g_systematic_optical_correction_h->Draw("lsame");
                 }
                 else
                 {
