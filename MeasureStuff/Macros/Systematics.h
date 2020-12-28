@@ -191,9 +191,9 @@ class Systematics
                         double cn = correction_nominal.at(i);
                         double cl = correction_low.at(i);
                         double ch = correction_high.at(i);
-                        g_systematic_optical_correction_l.SetPoint(i, x, cl);
-                        g_systematic_optical_correction_n.SetPoint(i, x, cn);
-                        g_systematic_optical_correction_h.SetPoint(i, x, ch);
+                        g_systematic_optical_correction_l->SetPoint(i, x, cl);
+                        g_systematic_optical_correction_n->SetPoint(i, x, cn);
+                        g_systematic_optical_correction_h->SetPoint(i, x, ch);
                     }
 
                     // debug
