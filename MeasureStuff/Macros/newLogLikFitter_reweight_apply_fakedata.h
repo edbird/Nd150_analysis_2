@@ -695,26 +695,29 @@ void reweight_apply_fakedata(
                 Double_t el_energy_1{electronEnergy[lowE_index]};
 
                 // optical correction
-                if(gSystematics.systematic_optical_correction > 0.0)
+                if(OPTICAL_CORRECTION_ENABLE)
                 {
-                    double cf0 = gSystematics.g_systematic_optical_correction_h->Eval(el_energy_0);
-                    double cf1 = gSystematics.g_systematic_optical_correction_h->Eval(el_energy_1);
-                    el_energy_0 *= (gSystematics.systematic_optical_correction * cf0);
-                    el_energy_1 *= (gSystematics.systematic_optical_correction * cf1);
-                }
-                else if(gSystematics.systematic_optical_correction < 0.0)
-                {
-                    double cf0 = gSystematics.g_systematic_optical_correction_l->Eval(el_energy_0);
-                    double cf1 = gSystematics.g_systematic_optical_correction_l->Eval(el_energy_1);
-                    el_energy_0 *= (std::abs(gSystematics.systematic_optical_correction) * cf0);
-                    el_energy_1 *= (std::abs(gSystematics.systematic_optical_correction) * cf1);
-                }
-                else
-                {
-                    double cf0 = gSystematics.g_systematic_optical_correction_n->Eval(el_energy_0);
-                    double cf1 = gSystematics.g_systematic_optical_correction_n->Eval(el_energy_1);
-                    el_energy_0 *= (cf0);
-                    el_energy_1 *= (cf1); 
+                    if(gSystematics.systematic_optical_correction > 0.0)
+                    {
+                        double cf0 = gSystematics.g_systematic_optical_correction_h->Eval(el_energy_0);
+                        double cf1 = gSystematics.g_systematic_optical_correction_h->Eval(el_energy_1);
+                        el_energy_0 *= (gSystematics.systematic_optical_correction * cf0);
+                        el_energy_1 *= (gSystematics.systematic_optical_correction * cf1);
+                    }
+                    else if(gSystematics.systematic_optical_correction < 0.0)
+                    {
+                        double cf0 = gSystematics.g_systematic_optical_correction_l->Eval(el_energy_0);
+                        double cf1 = gSystematics.g_systematic_optical_correction_l->Eval(el_energy_1);
+                        el_energy_0 *= (std::abs(gSystematics.systematic_optical_correction) * cf0);
+                        el_energy_1 *= (std::abs(gSystematics.systematic_optical_correction) * cf1);
+                    }
+                    else
+                    {
+                        double cf0 = gSystematics.g_systematic_optical_correction_n->Eval(el_energy_0);
+                        double cf1 = gSystematics.g_systematic_optical_correction_n->Eval(el_energy_1);
+                        el_energy_0 *= (cf0);
+                        el_energy_1 *= (cf1); 
+                    }
                 }
 
                 // energy scale factor (multiply)

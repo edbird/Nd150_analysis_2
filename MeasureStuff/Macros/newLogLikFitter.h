@@ -49,9 +49,11 @@ const Int_t BACKGROUND_MODE = BACKGROUND_MODE_B;
 
 const Int_t MODE_PARALLEL = 0;
 
-bool g_mode_fake_data = true;
+bool g_mode_fake_data = false;
 
 bool V_ENABLE_SYSALL = false;
+
+bool OPTICAL_CORRECTION_ENABLE = false;
 
 
 const int N_SYSTEMATICS = 25;
@@ -81,7 +83,7 @@ bool V_ENABLE_SYSn[N_SYSTEMATICS] =
 /* 22 */    true,   // true     // BKG: 208Tl (air)
 /* 23 */    true,   // true     // BKG: EXTERNAL
 /* 24 */    true,   // true     // BKG: NEIGHBOUR
-/* 25 */    true,   // true     // optical correction related systematic
+/* 25 */    false,   // true     // optical correction related systematic
 };
 
 
@@ -157,7 +159,7 @@ const int number2DHists = 1; //number2DHists_perphase * numberPhases;
 int channel_enable_1D[number1DHists] =
 {
 0, // ch  0 = hTotalE        (P1&2)
-0, // ch  1 = hSingleEnergy  (P1&2)
+1, // ch  1 = hSingleEnergy  (P1&2)
 0, // ch  2 = hHighEnergy    (P1&2)
 0, // ch  3 = hLowEnergy     (P1&2)
 0, // ch  4 = hEnergySum     (P1&2)
@@ -166,7 +168,7 @@ int channel_enable_1D[number1DHists] =
 
 int channel_enable_2D[number2DHists] =
 {
-1  // ch  0 = hHighLowEnergy    (P1&2)
+0  // ch  0 = hHighLowEnergy    (P1&2)
 };
 
 
@@ -299,7 +301,7 @@ const bool ENABLE_MIN_POINT_SYSn[N_SYSTEMATICS + 1] =
 /* 10 */    false,  // false    // dE/dX (nominal)
 /* 11 */    true,   // true     // brem (nominal)
 /* 12 */    true,   // true     // 0.2 % energy scale factor m = 0.2 %
-/* 13 */    true,   // true     // 1.0 % Gaussian smear
+/* 13 */    false,  // true     // 1.0 % Gaussian smear
 /* 14 */    false,  // true     // BKG: 214Bi/214Pb (int)
 /* 15 */    false,  // true     // BKG: 207Bi (int)
 /* 16 */    false,  // true     // BKG: 228Ac/212Bi/208Tl (int)

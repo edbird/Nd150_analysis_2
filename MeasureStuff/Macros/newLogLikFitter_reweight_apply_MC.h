@@ -440,6 +440,17 @@ void reweight_apply_MC(
                   << std::endl;
         }
 
+
+        // optical correction
+        if(OPTICAL_CORRECTION_ENABLE)
+        {
+            double cf0 = gSystematics.g_systematic_optical_correction_n->Eval(el_energy_0);
+            double cf1 = gSystematics.g_systematic_optical_correction_n->Eval(el_energy_1);
+            el_energy_0 *= (cf0);
+            el_energy_1 *= (cf1); 
+        }
+
+
         //if(trueT1 > trueT2)
         //{
         //    std::cout << "true electron energy in wrong order" << std::endl;
