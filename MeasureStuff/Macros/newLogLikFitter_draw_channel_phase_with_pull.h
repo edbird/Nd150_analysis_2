@@ -969,6 +969,11 @@ void draw_channel_phase_with_pull(
 
         h_data_fakedata->Draw("Esame");
 
+        //std::cout << "Total background number of events" << std::endl;
+        //double nBKG = h_stack_tl208_int->Integral();
+        //std::cout << nBKG << std::endl;
+        //std::cout << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << std::endl;
+
 
 
     /*

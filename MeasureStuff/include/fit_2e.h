@@ -131,8 +131,8 @@ TString filePath = "/mnt/ecb/unix/nemo3/users/ebirdsall/Nd150Analysis/newAnalysi
 // thePhase of 0 or 1 respectively
 Int_t nocutonphase = 0;
 // delete this comment
-Int_t thePhase = 0;
-TString Phase = "1";
+Int_t thePhase = 1;
+TString Phase = "2";
 //Phase.Form("%i", thePhase);
 
 
