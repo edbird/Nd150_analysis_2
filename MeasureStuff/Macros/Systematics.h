@@ -30,6 +30,10 @@ class Systematics
         h_systematic_brem_nominal_h = nullptr;
         h_systematic_brem_nominal_l = nullptr;
 
+        g_systematic_optical_correction_l = nullptr;
+        g_systematic_optical_correction_n = nullptr;
+        g_systematic_optical_correction_h = nullptr;
+
         load_aux_data();
     }
 
@@ -197,12 +201,14 @@ class Systematics
                     }
 
                     // debug
+                    /*
                     new TCanvas;
                     g_systematic_optical_correction_n->SetMinimum(1.0 - 0.05);
                     g_systematic_optical_correction_n->SetMaximum(1.0 + 0.05);
                     g_systematic_optical_correction_n->Draw("al");
                     g_systematic_optical_correction_l->Draw("lsame");
                     g_systematic_optical_correction_h->Draw("lsame");
+                    */
                 }
                 else
                 {
