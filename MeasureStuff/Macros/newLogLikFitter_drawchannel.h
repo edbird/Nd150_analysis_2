@@ -43,7 +43,7 @@ class draw_input_data
         saveas_filename = "untitled";
 
         saveas_png = true;
-        saveas_pdf = false;
+        saveas_pdf = true;
         saveas_eps = false;
         saveas_C = false;
     }

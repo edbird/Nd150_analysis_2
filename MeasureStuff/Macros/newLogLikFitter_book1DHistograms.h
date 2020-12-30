@@ -394,6 +394,19 @@ void book1DHistograms_helper(
         }
 
 
+
+        /*
+        if(mc_name.find("bi207") != std::string::npos)
+        {
+            std::cout << "LOAD BI207 FROM FILE" << std::endl;
+            std::cout << "scale_factor_P1=" << scale_factor_P1 << std::endl;
+            std::cout << "scale_factor_P2=" << scale_factor_P2 << std::endl;
+            std::cout << "Integral() -> " << tmpHist_P1->Integral() << std::endl;
+            std::cout << "Integral() -> " << tmpHist_P2->Integral() << std::endl;
+            std::cin.get();
+        }
+        */
+
         #if 0
         std::string search_object = MCNameToParamNameMap.at(mc_name);
         if(paramNameToNumberMap.count(search_object) > 0)
@@ -559,8 +572,8 @@ void book1DHistograms(Int_t channel_counter, TString theChannel, TString theHist
         }
         //if(gDirectory->GetListOfKeys()->Contains(fullname.c_str()))
         //TH1D *tmpHist = (TH1D*)gDirectory->Get(fullname.c_str())->Clone();
-        std::string new_name_P1(theHistogram + DataFile + "_P1"); // TODO: probably need a different new_name for P1 and P2
-        std::string new_name_P2(theHistogram + DataFile + "_P2"); // TODO: probably need a different new_name for P1 and P2 check works
+        std::string new_name_P1(theHistogram + DataFile + "_P1"); 
+        std::string new_name_P2(theHistogram + DataFile + "_P2");
         TH1D *tmpHist_P1 = (TH1D*)aFileP1->Get(fullname.c_str())->Clone(new_name_P1.c_str());
         TH1D *tmpHist_P2 = (TH1D*)aFileP2->Get(fullname.c_str())->Clone(new_name_P2.c_str());
                 // TODO: suspect I need to add P1 or P2 to the histograms

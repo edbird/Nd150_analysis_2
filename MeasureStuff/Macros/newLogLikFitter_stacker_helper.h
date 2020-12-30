@@ -34,6 +34,11 @@ void new_stacker_helper
             //hname.Contains("ac228_int") ||
             //hname.Contains("bi212_int"))
     {
+
+        //std::cout << "*** 208Tl ***" << std::endl;
+        //std::cout << "scale_factor=" << scale_factor << std::endl;
+        //std::cout << "integral -> " << tmpHist1D->Integral() << std::endl;
+
         h_stack_tl208_int->Add(tmpHist1D, scale_factor);
         h_stack_2nubb->Add(tmpHist1D, scale_factor);
         h_stack_total_MC->Add(tmpHist1D, scale_factor);
@@ -125,6 +130,8 @@ void new_stacker_helper
     {
         std::cout << "adding " << tmpHist1D->GetName() << " to others TODO: FIX" << std::endl;
     }
+
+    //std::cout << "stacker: " << hname << " -> " << scale_factor * tmpHist1D->Integral() << std::endl;
 
 
     //std::cout << __func__ << " exit" <<std::endl;

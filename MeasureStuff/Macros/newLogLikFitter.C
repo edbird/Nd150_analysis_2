@@ -53,8 +53,9 @@
 #include "newLogLikFitter_reweight_apply_fakedata.h"
 #include "newLogLikFitter_reweight_apply_data.h"
 //#include "newLogLikFitter_buildfakedata.h"
-#include "newLogLikFitter_book1DHistograms.h"
-#include "newLogLikFitter_book2DHistograms.h"
+//#include "newLogLikFitter_book1DHistograms.h"
+//#include "newLogLikFitter_book2DHistograms.h"
+#include "newLogLikFitter_rebuild_background_MC.h"
 #include "newLogLikFitter_stacker_helper.h"
 #include "newLogLikFitter_drawchannel.h"
 #include "newLogLikFitter_draw_channel_phase_with_pull.h"
@@ -696,6 +697,15 @@ void loadFiles(int i)
     allFakeDataSamples1D = new TObjArray();
     allFakeDataSamples2D = new TObjArray();
 
+    // 2020-12-30:
+    for(int channel = 0; channel < number1DHists; ++ channel)
+    {
+        allMCSamples1D[channel]= new TObjArray();
+    }
+    for(int channel = 0; channel < number2DHists; ++ channel)
+    {
+        allMCSamples2D[channel] = new TObjArray();
+    }
 
     gEnablePhase1 = true;
     gEnablePhase2 = true;
@@ -732,6 +742,7 @@ void loadFiles(int i)
 
 
 
+/*
     std::cout << "Loading histograms" << std::endl;
     // 1d: Phase 1 & 2
     for(int channel = 0; channel < number1DHists; ++ channel)
@@ -740,16 +751,25 @@ void loadFiles(int i)
         book1DHistograms(channel, "2e_", channel_histname_1D[channel]);
     }
 
+
+
     // 2d: Phase 1 & 2
     // TODO?
     for(int channel = 0; channel < number2DHists; ++ channel)
     {
         book2DHistograms(channel, "2e_", channel_histname_2D[channel]);
+
     }
     std::cout << "All histograms loaded" << std::endl;
+*/
+
+    std::cout << "Loading histograms" << std::endl;
 
 
+//    load_1D_histogram(channel, "2e_", channel_histname_1D[channel]);
+//    load_2D_histogram(channel, "2e_", channel_histname_2D[channel]);
 
+    reload_background_MC();
 
 
     //gSystematics.systematic_energy_offset = 0.0; //-0.1;
@@ -3436,7 +3456,7 @@ void loadFiles(int i)
 
 
 
-    //return 0;
+    return 0;
 
 
 

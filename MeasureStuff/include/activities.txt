@@ -3,7 +3,7 @@ nd150_rot_2b2n_m4	    0.345e-3	0.345e-3
 
 bi214_int_rot           0.29e-3     0.29e-3
 pb214_int_rot           0.29e-3     0.29e-3
-tl208_int_rot           0.70e-3     0.70e-3
+tl208_int_rot           0.612e-3     0.612e-3
 ac228_int_rot           1.70e-3     1.70e-3
 bi212_int_rot           1.70e-3     1.70e-3
 bi207_int_rot           5.66e-3     5.66e-3
@@ -44,23 +44,23 @@ pb214_swire_OUTL0	    29.9e-3     0.4e-3
 bi214_swire_Lg0	        857.5e-3	101.3e-3
 pb214_swire_Lg0	        857.5e-3	101.3e-3
 
-bi210_swire             9.0         9.0
+bi210_swire             12.0        12.0
 bi210_sfoil             1.3e-3      1.3e-3
-bi210_sscin	            34.0		34.0
+bi210_sscin	            32.0		32.0
 
-bi214_air               557.        0.
-pb214_air               557.        0.
-tl208_air               9.          0.
+bi214_air               573.        0.
+pb214_air               573.        0.
+tl208_air               7.          0.
 
-bi214_pmt	            186.	    186.
-bi214_feShield	        9295.	    9295.
-ac228_pmt	            36.		    36. 
-ac228_feShield	        1090.       1090.
+bi214_pmt	            146.	    146.
+bi214_feShield	        10673.	    10673.
+ac228_pmt	            30.		    30. 
+ac228_feShield	        687.        687.
 tl208_pmt	            36.         36.
 tl208_feShield	        1090.	    1090.
-pa234m_sscin            3.1         3.1
-co60_cuTower	        60.		    60.
-k40_pmt		            1124.	    1124.
+pa234m_sscin            3.0         3.0
+co60_cuTower	        55.		    55.
+k40_pmt		            1141.	    1141.
 k40_scintIN             16.         16.
 k40_scintOUT            16.         16.
 k40_scintPET            16.         16.
