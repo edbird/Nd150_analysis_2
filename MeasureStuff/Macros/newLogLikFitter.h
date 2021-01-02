@@ -656,9 +656,9 @@ void min_point_save(
     const double T12 = std::log(2.0) * (MASS  / N_ISOTOPE) * (N_AVOGADRO_YEARTOSEC / ACTIVITY);
     const double T12_ERR = T12 * ACTIVITY_ERR / ACTIVITY; // all positive
 
-    ofs << "T12= " << T12 << " +- " << T12_ERR << std::endl;
-    ofs << "#xi_{31}= " << min_point[0] << " +- " << min_point_err[0] << std::endl;
-    ofs << "#chi^{2}= " << min_point_fval << std::endl;
+    ofs << "T_{\\frac{1}{2}} = " << T12 << " +- " << T12_ERR << std::endl;
+    ofs << "#xi_{31} = " << min_point[0] << " +- " << min_point_err[0] << std::endl;
+    ofs << "#chi^{2} = " << min_point_fval << std::endl;
 
     ofs.close();
 }

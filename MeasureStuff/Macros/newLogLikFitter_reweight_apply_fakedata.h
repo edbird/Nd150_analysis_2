@@ -727,8 +727,8 @@ void reweight_apply_fakedata(
                 el_energy_0 = el_energy_0 * (1.0 + gSystematics.systematic_energy_scale_small);
                 el_energy_1 = el_energy_1 * (1.0 + gSystematics.systematic_energy_scale_small);
 
-                el_energy_0 = el_energy_0 * (1.0 + gSystematics.systematic_energy_gaussian_smear * gauss[0]);
-                el_energy_1 = el_energy_1 * (1.0 + gSystematics.systematic_energy_gaussian_smear * gauss[1]);
+//                el_energy_0 = el_energy_0 * (1.0 + gSystematics.systematic_energy_gaussian_smear * gauss[0]);
+//                el_energy_1 = el_energy_1 * (1.0 + gSystematics.systematic_energy_gaussian_smear * gauss[1]);
 
                 //std::cout << "gSystematics.systematic_energy_offset=" << gSystematics.systematic_energy_offset << std::endl;
                 //std::cout << "el_energy_0=" << el_energy_0 << std::endl;
@@ -927,6 +927,15 @@ void reweight_apply_fakedata(
                 ///////////////////////////////////////////////////////////////
                 // standard cuts not implemented in preprocessing
                 ///////////////////////////////////////////////////////////////
+
+                // prevent migration from 0.2-0.3 MeV bin
+                //if((el_energy_0 < 0.3) || (el_energy_1 < 0.3))
+                //{
+                //    continue;
+                //}
+
+                el_energy_0 = el_energy_0 * (1.0 + gSystematics.systematic_energy_gaussian_smear * gauss[0]);
+                el_energy_1 = el_energy_1 * (1.0 + gSystematics.systematic_energy_gaussian_smear * gauss[1]);
 
                 if((el_energy_0 < 0.3) || (el_energy_1 < 0.3))
                 {
