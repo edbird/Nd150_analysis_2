@@ -861,10 +861,10 @@ void newloglikfitter_mps_draw_helper
             "Energy Loss dE/dX (N)",
             "Brem (N)"
         };*/
-        double lsizex = 0.30 - 0.03;
-        double lsizey = 0.96 - 0.70;
+        double lsizex = 0.26;
+        double lsizey = 0.26;
         double lposx = 0.7;
-        double lposy = 0.15;
+        double lposy = 0.18;
         TLegend *leg = new TLegend(lposx, lposy, lposx + lsizex, lposy + lsizey);
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
@@ -876,7 +876,7 @@ void newloglikfitter_mps_draw_helper
                               legend_texts[i], "P");
             }
         }
-        leg->SetMargin(0.12);
+        leg->SetMargin(0.15);
         leg->SetBorderSize(5);
         leg->SetShadowColor(kGray + 2);
         leg->SetTextFont(63);
