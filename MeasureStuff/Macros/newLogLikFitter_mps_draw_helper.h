@@ -863,8 +863,8 @@ void newloglikfitter_mps_draw_helper
         };*/
         double lsizex = 0.30 - 0.03;
         double lsizey = 0.96 - 0.70;
-        double lposx = 0.8;
-        double lposy = 0.12;
+        double lposx = 0.7;
+        double lposy = 0.15;
         TLegend *leg = new TLegend(lposx, lposy, lposx + lsizex, lposy + lsizey);
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
