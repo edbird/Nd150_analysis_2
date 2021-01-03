@@ -867,7 +867,7 @@ class mpsdrawdata
             1.0,    // BKG ext
             1.0,    // BKG neighbour
             1.5,    // BKG all
-            1.5     // optical
+            1.2     // optical
         };
         Color_t markercolorn[N_SYSTEMATICS + 1] = 
         {
