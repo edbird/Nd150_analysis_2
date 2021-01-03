@@ -863,8 +863,8 @@ void newloglikfitter_mps_draw_helper
         };*/
         double lsizex = 0.26;
         double lsizey = 0.26;
-        double lposx = 0.7;
-        double lposy = 0.18;
+        double lposx = 0.72;
+        double lposy = 0.17;
         TLegend *leg = new TLegend(lposx, lposy, lposx + lsizex, lposy + lsizey);
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
@@ -876,7 +876,7 @@ void newloglikfitter_mps_draw_helper
                               legend_texts[i], "P");
             }
         }
-        leg->SetMargin(0.15);
+        leg->SetMargin(0.13);
         leg->SetBorderSize(5);
         leg->SetShadowColor(kGray + 2);
         leg->SetTextFont(63);
