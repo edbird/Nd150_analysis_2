@@ -158,7 +158,7 @@ void newloglikfitter_mps_draw_helper_colz
         h_mps_sysall->GetXaxis()->SetTitleFont(43);
         h_mps_sysall->GetYaxis()->SetTitleSize(18.0);
         h_mps_sysall->GetYaxis()->SetTitleFont(43);
-        h_mps_sysall->GetYaxis()->SetTitle("^{150}Nd Amplitude Scale Factor                    ");
+        h_mps_sysall->GetYaxis()->SetTitle("^{150}Nd Amplitude Scale Factor (#times 3.45#times10^{-4} Bq)");
         h_mps_sysall->GetXaxis()->SetTitle("#xi^{2#nu#beta#beta}_{31}");
         h_mps_sysall->GetXaxis()->SetTitleOffset(1.5);
         h_mps_sysall->GetYaxis()->SetTitleOffset(1.2);
@@ -423,7 +423,11 @@ void newloglikfitter_mps_draw_helper_colz
         }
 */
 
-        TLegend *leg = new TLegend(0.03, 0.70, 0.32, 0.96);
+        double lsizex = 0.30 - 0.03;
+        double lsizey = 0.96 - 0.70;
+        double lposx = 0.8;
+        double lposy = 0.12;
+        TLegend *leg = new TLegend(lposx, lposy, lposx + lsizex, lposy + lsizey);
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             if(ENABLE_MIN_POINT_SYSn[i] == true)
@@ -576,7 +580,7 @@ void newloglikfitter_mps_draw_helper
         h_mps_sysall->GetXaxis()->SetTitleFont(43);
         h_mps_sysall->GetYaxis()->SetTitleSize(18.0);
         h_mps_sysall->GetYaxis()->SetTitleFont(43);
-        h_mps_sysall->GetYaxis()->SetTitle("^{150}Nd Amplitude Scale Factor                    ");
+        h_mps_sysall->GetYaxis()->SetTitle("^{150}Nd Amplitude Scale Factor (#times 3.45#times10^{-4} Bq)");
         h_mps_sysall->GetXaxis()->SetTitle("#xi^{2#nu#beta#beta}_{31}");
         h_mps_sysall->GetXaxis()->SetTitleOffset(1.5);
         h_mps_sysall->GetYaxis()->SetTitleOffset(1.2);
@@ -959,7 +963,7 @@ void newloglikfitter_mps_draw_helper_sys_only
         h_mps_sysall->GetXaxis()->SetTitleFont(43);
         h_mps_sysall->GetYaxis()->SetTitleSize(18.0);
         h_mps_sysall->GetYaxis()->SetTitleFont(43);
-        h_mps_sysall->GetYaxis()->SetTitle("^{150}Nd Amplitude Scale Factor                    ");
+        h_mps_sysall->GetYaxis()->SetTitle("^{150}Nd Amplitude Scale Factor (#times 3.45#times10^{-4} Bq)");
         h_mps_sysall->GetXaxis()->SetTitle("#xi^{2#nu#beta#beta}_{31}");
         h_mps_sysall->GetXaxis()->SetTitleOffset(1.5);
         h_mps_sysall->GetYaxis()->SetTitleOffset(1.2);
