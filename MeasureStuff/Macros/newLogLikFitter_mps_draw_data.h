@@ -896,8 +896,8 @@ class mpsdrawdata
             kGreen - 7,     //                  // BKG 208 int
             kMagenta,       //                  // BKG ext
             kMagenta + 2,   //                  // BKG neighbour
-            kGreen + 2,     //                  // BKG all
-            kOrange + 1     //                  // optical
+            kOrange + 1,    //                  // BKG all
+            kGreen + 2      //                  // optical
         };
 
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
