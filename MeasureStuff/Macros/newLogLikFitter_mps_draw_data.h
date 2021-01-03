@@ -825,7 +825,7 @@ class mpsdrawdata
             23, // triangle down    // dEdX (N)
             34, // plus             // brem (N)
             22, // triangle up      // scale factor 0.2 %
-            20, // circle           // 1.0 % gaussian smear
+            22, // triangle up      // 1.0 % gaussian smear
             20, // "+"              // BKG: 214 int
             20, // "+"              // BKG: 207 int
             20, // "+"              // BKG: 208 int
@@ -837,8 +837,8 @@ class mpsdrawdata
             20, // "+"              // BKG: 208 air
             20, // "+"              // BKG: ext
             20, // "+"              // BKG: neighbour
-            20, // "+"              // BKG: ALL
-            50  // "+"              // optical
+            22, // triangle up      // BKG: ALL
+            20  // circle           // optical
         };
         Double_t markersizen[N_SYSTEMATICS + 1] = 
         {
@@ -854,7 +854,7 @@ class mpsdrawdata
             1.5,    // dEdX N
             1.5,    // brem N
             1.5,    // 0.2 %
-            1.0,    // gaussian
+            1.5,    // gaussian
             1.0,    // BKG 214 int
             1.0,    // BKG 207 int
             1.0,    // BKG 208 int
@@ -866,7 +866,7 @@ class mpsdrawdata
             1.0,    // BKG 208 air
             1.0,    // BKG ext
             1.0,    // BKG neighbour
-            1.0,    // BKG all
+            1.5,    // BKG all
             1.0     // optical
         };
         Color_t markercolorn[N_SYSTEMATICS + 1] = 
@@ -874,11 +874,11 @@ class mpsdrawdata
             //kRed, kOrange, kGreen, kBlue, kMagenta, kViolet, kViolet + 10
             kBlack,         // "+"              // 1.0 MeV
             kRed,           // triangle up      // 1.2 %
-            kMagenta,       // star             // 5.55 %
+            kRed,           // star             // 5.55 %
             kBlack,         // "x"              // 0.5 %
             kBlue,          // circle           // 3 keV
             kViolet + 1,    // diamond          // FT V
-            kGreen,         // triangle down    // dEdX V
+            kBlue,          // triangle down    // dEdX V
             kBlack,         // square           // brem V
             kAzure + 1,     // diamond          // FT N
             kViolet + 10,   // triangle down    // dEdX N
@@ -896,8 +896,8 @@ class mpsdrawdata
             kGreen - 7,     //                  // BKG 208 int
             kMagenta,       //                  // BKG ext
             kMagenta + 2,   //                  // BKG neighbour
-            kBlack,         //                  // BKG all
-            kMagenta - 7    //                  // optical
+            kGreen,         //                  // BKG all
+            kMagenta        //                  // optical
         };
 
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
