@@ -861,7 +861,11 @@ void newloglikfitter_mps_draw_helper
             "Energy Loss dE/dX (N)",
             "Brem (N)"
         };*/
-        TLegend *leg = new TLegend(0.03, 0.70, 0.32, 0.96);
+        double lsizex = 0.30 - 0.03;
+        double lsizey = 0.96 - 0.70;
+        double lposx = 0.8;
+        double lposy = 0.12;
+        TLegend *leg = new TLegend(lposx, lposy, lposx + lsizex, lposy + lsizey);
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             if(ENABLE_MIN_POINT_SYSn[i] == true)
@@ -1174,6 +1178,10 @@ void newloglikfitter_mps_draw_helper_sys_only
             "Brem (N)"
         };
         */
+        double lsizex = 0.30 - 0.03;
+        double lsizey = 0.96 - 0.70;
+        double lposx = 0.8;
+        double lposy = 0.12;
         TLegend *leg = new TLegend(0.03, 0.70, 0.32, 0.96);
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
