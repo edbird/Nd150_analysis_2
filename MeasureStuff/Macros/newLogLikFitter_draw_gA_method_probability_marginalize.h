@@ -1,6 +1,11 @@
 #ifndef NEWLOGLIKFITTER_DRAW_GA_METHOD_PROBABILITY_MARGINALIZE_H
 #define NEWLOGLIKFITTER_DRAW_GA_METHOD_PROBABILITY_MARGINALIZE_H
 
+
+// uses interior integral of xi_31 to find CL limits
+// this method is not considered to be valid
+
+
 void draw_gA_method_probability_marginalize()
 {
 
