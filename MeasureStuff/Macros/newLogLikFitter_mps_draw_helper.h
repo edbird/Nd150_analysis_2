@@ -204,9 +204,7 @@ void newloglikfitter_mps_draw_helper_colz
         double clevels_sysall[3] = {min_chi2_sysall + 2.30, min_chi2_sysall + 4.61, min_chi2_sysall + 9.21};
         //double clevels_SYSALL[3] = {min_fval_SYSALL + 2.30, min_fval_SYSALL + 4.61, min_fval_SYSALL + 9.21};
         //double clevels[3] = {2.30, 4.61, 9.21}; // true minimum is 0.0 for HSD
-        //h_mps_contour->SetLineColor(kGreen); //kRed
-        h_mps_sysall_contour->SetLineColor(kCyan); //kRed
-        //h_mps_contour->SetLineColor(kGray + 2); //kRed
+        h_mps_sysall_contour->SetLineColor(kCyan);
         h_mps_sysall_contour->SetLineWidth(2);
 //        h_mps_contour->SetLineStyle(0); // in drawmps.C but not used
         h_mps_sysall_contour->SetContour(3, clevels_sysall);
@@ -235,13 +233,15 @@ void newloglikfitter_mps_draw_helper_colz
         //lineHSD->SetLineColor(kWhite);
         //lineSSD->SetLineColor(kWhite);
         //lineY->SetLineColor(kWhite);
-        lineHSD->SetLineColorAlpha(kBlack, 1.0);
-        lineSSD->SetLineColorAlpha(kBlack, 1.0);
+        lineHSD->SetLineColor(kGray);
+        lineHSD->SetLineWidth(2);
+        lineSSD->SetLineColor(kGray);
+        lineSSD->SetLineWidth(2);
         lineSSD->SetLineStyle(1);
 
-        lineY->SetLineColorAlpha(kBlack, 1.1);
-        //lineXc->SetLineColorAlpha(kMagenta, 1.0);
-        //lineYc->SetLineColorAlpha(kMagenta, 1.0);
+        lineY->SetLineColor(kGray);
+        lineY->SetLineWidth(2);
+
         Int_t min_ix = h_mps_sysall->GetXaxis()->FindBin(min_x);
         Int_t min_iy = h_mps_sysall->GetXaxis()->FindBin(min_y);
         Int_t ix_0 = h_mps_sysall->GetXaxis()->FindBin(0.0);
@@ -262,8 +262,8 @@ void newloglikfitter_mps_draw_helper_colz
         {
             lineXc = new TLine(param_1_min, min_point_data[1], param_1_max, min_point_data[1]);
             lineYc = new TLine(min_point_data[0], param_2_min, min_point_data[0], param_2_max);
-            lineXc->SetLineColorAlpha(kGreen, 1.0);
-            lineYc->SetLineColorAlpha(kGreen, 1.0);
+            lineXc->SetLineColor(kGreen);
+            lineYc->SetLineColor(kGreen);
             lineXc->SetLineWidth(2.0);
             lineYc->SetLineWidth(2.0);
 
@@ -274,8 +274,8 @@ void newloglikfitter_mps_draw_helper_colz
         {
             lineXc = new TLine(param_1_min, min_point_fake[1], param_1_max, min_point_fake[1]);
             lineYc = new TLine(min_point_fake[0], param_2_min, min_point_fake[0], param_2_max);
-            lineXc->SetLineColorAlpha(kGreen, 1.0);
-            lineYc->SetLineColorAlpha(kGreen, 1.0);
+            lineXc->SetLineColor(kGreen);
+            lineYc->SetLineColor(kGreen);
             lineXc->SetLineWidth(2.0);
             lineYc->SetLineWidth(2.0);
 
@@ -286,8 +286,8 @@ void newloglikfitter_mps_draw_helper_colz
         {
             lineXc_SYSALL = new TLine(param_1_min, min_point_data_SYSALL[1], param_1_max, min_point_data_SYSALL[1]);
             lineYc_SYSALL = new TLine(min_point_data_SYSALL[0], param_2_min, min_point_data_SYSALL[0], param_2_max);
-            lineXc_SYSALL->SetLineColorAlpha(kCyan, 1.0);
-            lineYc_SYSALL->SetLineColorAlpha(kCyan, 1.0);
+            lineXc_SYSALL->SetLineColor(kCyan);
+            lineYc_SYSALL->SetLineColor(kCyan);
             lineXc_SYSALL->SetLineWidth(2.0);
             lineYc_SYSALL->SetLineWidth(2.0);
 
@@ -338,7 +338,6 @@ void newloglikfitter_mps_draw_helper_colz
 
         TH2D *h_mps_sysnone_contour = (TH2D*)h_mps_sysnone->Clone("h_mps_1_0_clone_sysnone");
         h_mps_sysnone_contour->SetLineColor(kGreen);
-        //h_mps_sysnone_contour->SetLineColor(kGray);
         h_mps_sysnone_contour->SetLineWidth(2);
         double clevels_sysnone[3] = {min_chi2_sysnone + 2.30, min_chi2_sysnone + 4.61, min_chi2_sysnone + 9.21};
         //double clevels[3] = {min_fval_SYSNONE + 2.30, min_fval_SYSNONE + 4.61, min_fval_SYSNONE + 9.21};
@@ -367,6 +366,12 @@ void newloglikfitter_mps_draw_helper_colz
                               << min_point_fake_sysn_l[i][1]
                               << std::endl;
 //                    mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kRed);
+
+                    if(i == 6) mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kCyan);
+                    else if(i == 10) mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kMagenta);
+                    else if(i == 24) mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kYellow);
+                    else if(i == 25) mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kGreen);
+
                     mps_draw_data_sysall.mark_min_point_sysn_l[i]->Draw();
                     if(false)
                     {
@@ -386,6 +391,12 @@ void newloglikfitter_mps_draw_helper_colz
                               << min_point_fake_sysn_h[i][1]
                               << std::endl;
 //                    mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kRed);
+
+                    if(i == 6) mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kCyan);
+                    else if(i == 10) mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kMagenta);
+                    else if(i == 24) mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kYellow);
+                    else if(i == 25) mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kGreen);
+
                     mps_draw_data_sysall.mark_min_point_sysn_h[i]->Draw();
                     if(false)
                     {
@@ -423,6 +434,7 @@ void newloglikfitter_mps_draw_helper_colz
         }
 */
 
+    #if 0
         double lsizex = 0.30 - 0.03;
         double lsizey = 0.96 - 0.70;
         double lposx = 0.8;
@@ -445,7 +457,7 @@ void newloglikfitter_mps_draw_helper_colz
         leg->SetTextSize(15);
         //leg->Draw("BR");
         // do not draw legend for COLZ
-
+    #endif
 
     }
 }
