@@ -70,4 +70,14 @@ double variance_x_fixed_mean(const TH1D* const hist, const double mean)
     return sum;
 }
 
+
+
+
+#include "newLogLikFitter_draw_gA_method_forward_mapping.h"
+#include "newLogLikFitter_draw_gA_method_reverse_mapping.h"
+#include "newLogLikFitter_draw_gA_method_contour.h"
+#include "newLogLikFitter_draw_gA_method_probability_marginalize.h"
+#include "newLogLikFitter_draw_gA_method_probability_marginalize_2.h"
+#include "newLogLikFitter_draw_gA_method_untitled.h"
+
 #endif // NEWLOGLIKFITTER_DRAW_GA_H
