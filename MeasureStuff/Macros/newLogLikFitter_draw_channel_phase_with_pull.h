@@ -102,6 +102,7 @@ void draw_channel_phase_with_pull(
         TH1D *h_data_fakedata = nullptr;
 
         TH1D *h_ratio = nullptr;
+        TH1D *h_ratio_sys = nullptr;
         TH1D *h_pull = nullptr;
 
         TCanvas *canvas_Px = nullptr;
@@ -156,6 +157,9 @@ void draw_channel_phase_with_pull(
     
         TString name_ratio = the_histname + "_ratio_" + phase_arg_str;
         h_ratio = new TH1D(name_ratio, name_ratio, 50, 0.0, 5.0);
+
+        TString name_ratio_sys = the_histname + "_ratio_sys_" + phase_arg_str;
+        h_ratio_sys = new TH1D(name_ratio_sys, name_ratio_sys, 50, 0.0, 5.0);
     
         TString name_pull = the_histname + "_pull_" + phase_arg_str;
         h_pull = new TH1D(name_pull, name_pull, 50, 0.0, 5.0);
@@ -227,6 +231,11 @@ void draw_channel_phase_with_pull(
         h_ratio->SetLineColor(kBlack);
         h_ratio->SetTitle(0);
         h_ratio->SetStats(0);
+
+        h_ratio_sys->SetFillStyle(3001);
+        h_ratio_sys->SetFillColor(kBlue);
+        h_ratio_sys->SetTitle(0);
+        h_ratio_sys->SetStats(0);
 
         h_pull->SetLineWidth(2);
         h_pull->SetLineColor(kBlack);
@@ -664,6 +673,54 @@ void draw_channel_phase_with_pull(
                 h_ratio->SetBinError(i, std::sqrt(error_sq));
             }
         }
+
+        h_ratio_sys->Add((TH1D*)h_data_fakedata, 1.0);
+        h_ratio_sys->Divide(h_stack_total_MC);
+        for(Int_t i = 1; i <= h_ratio->GetNbinsX(); ++ i)
+        {
+            Double_t content_M = h_stack_total_MC->GetBinContent(i);
+            Double_t content_D = h_data_fakedata->GetBinContent(i);
+
+            if(content_M <= 0.0)
+            {
+                h_ratio_sys->SetBinContent(i, 0.0);
+                h_ratio_sys->SetBinError(i, 0.0);
+            }
+            else
+            {
+                Double_t error_M_stat = std::sqrt(h_stack_total_MC->GetBinContent(i));
+                Double_t error_M_sys = 0.0;
+
+                for(int s = 0; s < N_SYSTEMATICS; ++ s)
+                {
+                    if(DRAWSYS_ENABLE_SYSn[s] == true)
+                    {
+                        for(std::vector<std::string>::iterator it{phase_arg_strs.begin()};
+                            it != phase_arg_strs.end(); ++ it)
+                        {
+                            if(*it == "P1")
+                            {
+                                error_M_sys += std::pow(systematic_n_V_MATRIX_coeff_1D_P1[s][channel]->at(i - 1), 2.0);
+                            }
+                            else if(*it == "P2")
+                            {
+                                error_M_sys += std::pow(systematic_n_V_MATRIX_coeff_1D_P2[s][channel]->at(i - 1), 2.0);
+                            }
+                            // this may not work properly when doing both distribution
+                        }
+                    }
+                }
+
+                error_M_sys = std::sqrt(error_M_sys);
+                std::cout << i << " " << error_M_stat << " " << error_M_sys << std::endl;
+
+                Double_t error_M = std::sqrt(std::pow(error_M_stat, 2.0) + std::pow(error_M_sys, 2.0));
+                Double_t error_sq = std::pow(content_D / (content_M * content_M), 2.0) * std::pow(error_M, 2.0);
+                h_ratio_sys->SetBinError(i, std::sqrt(error_sq));
+            }
+
+        }
+
 //        hRatio_Px->SetTitle("");
         h_pull->Add((TH1D*)h_data_fakedata, 1.0);
         h_pull->Add((TH1D*)h_stack_total_MC, -1.0);
@@ -1420,6 +1477,7 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         //hRatio_Px->SetMarkerSize(1.0);
         h_ratio->SetLineWidth(2);
         h_ratio->Draw("axis");
+        h_ratio_sys->Draw("E2same");
         TLine *linezero = new TLine(0.0, 1.0, 5.0, 1.0);
         linezero->SetLineWidth(2);
         linezero->SetLineColorAlpha(kGray + 2, 0.5);
@@ -1616,6 +1674,7 @@ std::cout << "sigdraw" << std::endl;
                 deltaneg += std::pow(content, 2.0);
             }
         }
+
         TString deltaposlatexstr;
         deltaposlatexstr.Form("#chi^{2}_{+} = %1.1f", deltapos);
         TLatex deltaposlatex;
@@ -1624,6 +1683,7 @@ std::cout << "sigdraw" << std::endl;
         deltaposlatex.SetTextSize(20);
         //deltaposlatex.SetTextAlign(31);
         deltaposlatex.DrawLatex(0.80, 0.75, deltaposlatexstr);
+        
         TString deltaneglatexstr;
         deltaneglatexstr.Form("#chi^{2}_{-} = %1.1f", deltaneg);
         TLatex deltaneglatex;
