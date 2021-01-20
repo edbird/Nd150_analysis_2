@@ -709,8 +709,8 @@ void newloglikfitter_mps_draw_systematics
     }
     */
 
-    const double A_150Nd = min_point_fake[1];
-    const double xi_31 = min_point_fake[0];
+    const double A_150Nd = min_point_fake.A;
+    const double xi_31 = min_point_fake.xi_31;
     const double A0_150Nd = 3.45e-04;
     const double NA = 6.022e+23;
     const double m = 36.6;
@@ -836,7 +836,7 @@ void newloglikfitter_mps_draw_systematics_colz
     std::cout << "c_fname=" << c_fname << std::endl;
     std::cout << "is the filename legal?" << std::endl;
     std::cout << "*****************************************************" << std::endl;
-    std::cin.get();
+    //std::cin.get();
     c_mps_after->SaveAs(c_fname_png);
     c_mps_after->SaveAs(c_fname_pdf);
     c_mps_after->SaveAs(c_fname_eps);
