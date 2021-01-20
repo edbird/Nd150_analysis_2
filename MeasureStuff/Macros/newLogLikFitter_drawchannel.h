@@ -4,14 +4,6 @@
 
 
 
-
-
-
-
-
-
-
-
 // how to choose which histograms are drawn
 // (channel)
 // use channel_enable_draw_1D / channel_enable_draw_2D
