@@ -22,7 +22,7 @@ void draw_gA_method_contour()
     // get phase space object
     ///////////////////////////////////////////////////////////////////////////
 
-    TH2D *h_mps = mps_draw_data_after_sysall.h_mps;
+    TH2D *h_mps_sysall = mps_draw_data_after_sysall.h_mps;
     const double psiN0 = G0_ps_integral_yrinv;
     const double psiN2 = G2_ps_integral_yrinv;
 
@@ -38,15 +38,15 @@ void draw_gA_method_contour()
 
         // workaround for root bug
 
-        TH2D *h_mps_clone = (TH2D*)h_mps->Clone("tmpclone");
+        TH2D *h_mps_clone = (TH2D*)h_mps_sysall->Clone("tmpclone");
         double min_fval_SYSALL = 0.0;
         if(g_mode_fake_data == false)
         {
-            min_fval_SYSALL = min_point_data_SYSALL_fval;
+            min_fval_SYSALL = min_point_data_SYSALL.fval;
         }
         else
         {
-            min_fval_SYSALL = min_point_fake_SYSALL_fval;
+            min_fval_SYSALL = min_point_fake_SYSALL.fval;
         }
 
 
@@ -81,7 +81,7 @@ void draw_gA_method_contour()
 
         //double clevels[3] = {min_fval_SYSALL + 2.30, min_fval_SYSALL + 4.61, min_fval_SYSALL + 9.21};
         double clevels_sysall[3] = {min_chi2_sysall + 2.30, min_chi2_sysall + 4.61, min_chi2_sysall + 9.21};
-        h_mps_clone->SetContour(3, clevels);
+        h_mps_clone->SetContour(3, clevels_sysall);
         TCanvas *ctmp = new TCanvas("ctmp", "ctmp");
         h_mps_clone->Draw("CONTLIST");
         ctmp->Update();
@@ -125,7 +125,7 @@ void draw_gA_method_contour()
         for(Int_t i = 0; i < TotalConts; ++ i)
         {
             contLevel = (TList*)conts->At(i);
-            std::cout << "chi2=" << clevels[i] << std::endl;
+            std::cout << "chi2=" << clevels_sysall[i] << std::endl;
 
             curv = (TGraph*)contLevel->First();
             for(Int_t j = 0; j < contLevel->GetSize(); ++ j) // size is 1
@@ -186,8 +186,8 @@ void draw_gA_method_contour()
         }
 
 
-        double A_150Nd = min_point_data_SYSALL[1];
-        double xi_31 = min_point_data_SYSALL[0];
+        double A_150Nd = min_point_data_SYSALL.A;
+        double xi_31 = min_point_data_SYSALL.xi_31;
 
         const double A0_150Nd = 3.45e-04;
         const double NA = 6.022e+23;
