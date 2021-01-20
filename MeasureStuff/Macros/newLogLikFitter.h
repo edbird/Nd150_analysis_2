@@ -61,7 +61,7 @@ bool V_ENABLE_SYSn[N_SYSTEMATICS] =
 {
 /* 01 */    false,  // false    // constant 1.0 MeV shift
 /* 02 */    false,  // false    // scale factor: m = 1 % + 0.2 %
-/* 03 */    false,  // true     // +- 5.55 % efficiency
+/* 03 */    true,   // true     // +- 5.55 % efficiency
 /* 04 */    true,   // true     // +- 0.50 % enrichment
 /* 05 */    false,  // true     // +- 3 keV
 /* 06 */    true,   // true     // foil thickness
@@ -94,7 +94,7 @@ bool DRAWSYS_ENABLE_SYSn[N_SYSTEMATICS] =
 {
 /* 01 */    false,  // false    // constant 1.0 MeV shift
 /* 02 */    false,  // false    // scale factor: m = 1 % + 0.2 %
-/* 03 */    false,  // true     // +- 5.55 % efficiency
+/* 03 */    true,   // true     // +- 5.55 % efficiency
 /* 04 */    true,   // true     // +- 0.50 % enrichment
 /* 05 */    false,  // true     // +- 3 keV
 /* 06 */    true,   // true     // foil thickness
