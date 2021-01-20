@@ -61,7 +61,7 @@ bool V_ENABLE_SYSn[N_SYSTEMATICS] =
 {
 /* 01 */    false,  // false    // constant 1.0 MeV shift
 /* 02 */    false,  // false    // scale factor: m = 1 % + 0.2 %
-/* 03 */    true,   // true     // +- 5.55 % efficiency
+/* 03 */    false,  // true     // +- 5.55 % efficiency
 /* 04 */    true,   // true     // +- 0.50 % enrichment
 /* 05 */    false,  // true     // +- 3 keV
 /* 06 */    true,   // true     // foil thickness
@@ -83,8 +83,42 @@ bool V_ENABLE_SYSn[N_SYSTEMATICS] =
 /* 22 */    true,   // true     // BKG: 208Tl (air)
 /* 23 */    true,   // true     // BKG: EXTERNAL
 /* 24 */    true,   // true     // BKG: NEIGHBOUR
-/* 25 */    false,   // true     // optical correction related systematic
+/* 25 */    true,   // true     // optical correction related systematic
 };
+
+// TODO: HOW CAN THE MIN POINT HAVE MOVED IF OPTICAL CORRECTION DISABLED?
+// answer: min point depends only on shifted pseduodata not V SYS matrix method
+// however I thought new phase space scans included optical correction?
+
+bool DRAWSYS_ENABLE_SYSn[N_SYSTEMATICS] =
+{
+/* 01 */    false,  // false    // constant 1.0 MeV shift
+/* 02 */    false,  // false    // scale factor: m = 1 % + 0.2 %
+/* 03 */    false,  // true     // +- 5.55 % efficiency
+/* 04 */    true,   // true     // +- 0.50 % enrichment
+/* 05 */    false,  // true     // +- 3 keV
+/* 06 */    true,   // true     // foil thickness
+/* 07 */    true,   // true     // dE/dX
+/* 08 */    false,  // false    // brem
+/* 09 */    false,  // false    // foil thickness (nominal)
+/* 10 */    false,  // false    // dE/dX (nominal)
+/* 11 */    true,   // true     // brem (nominal)
+/* 12 */    true,   // true     // 0.2 % energy scale factor m = 0.2 %
+/* 13 */    true,   // true     // 1.0 % Gaussian smear
+/* 14 */    true,   // true     // BKG: 214Bi/214Pb (int)
+/* 15 */    true,   // true     // BKG: 207Bi (int)
+/* 16 */    true,   // true     // BKG: 228Ac/212Bi/208Tl (int)
+/* 17 */    true,   // true     // BKG: 152Eu/154Eu (int)
+/* 18 */    true,   // true     // BKG: 40K/234mPa (int)
+/* 19 */    true,   // true     // BKG: 214Bi/214Pb (mylar)
+/* 20 */    true,   // true     // BKG: 214Bi/214Pb (sfoil, swire)
+/* 21 */    true,   // true     // BKG: 214Bi/214Pb (air)
+/* 22 */    true,   // true     // BKG: 208Tl (air)
+/* 23 */    true,   // true     // BKG: EXTERNAL
+/* 24 */    true,   // true     // BKG: NEIGHBOUR
+/* 25 */    true,   // true     // optical correction related systematic
+};
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -429,40 +463,69 @@ void V_ENABLE_SYS_stack_pop()
 // h = high
 // l = low
 
+struct MinPoint
+{
+    MinPoint()
+    {
+        A = 0.0;
+        A_err = 0.0;
+        xi_31 = 0.0;
+        xi_31_err = 0.0;
+        eff = 0.0;
+        eff_err = 0.0;
+        fval = 0.0;
+    }
+
+    double A;
+    double A_err;
+    double xi_31;
+    double xi_31_err;
+    double eff;
+    double eff_err;
+    double fval;
+}
+min_point_data,
+min_point_fake,
+min_point_data_SYSALL,
+min_point_fake_SYSALL,
+min_point_data_HSD,
+min_point_data_HSD_CH0,
+min_point_data_SSD;
+
 // min point data, xi free
-double min_point_data[2] = {0.0, 0.0};
-double min_point_data_fval = 0.0;
-double min_point_data_err[2] = {0.0, 0.0};
+//double min_point_data[2] = {0.0, 0.0};
+//double min_point_data_fval = 0.0;
+//double min_point_data_err[2] = {0.0, 0.0};
 
 // min point fake xi free
-double min_point_fake[2] = {0.0, 0.0};
-double min_point_fake_fval = 0.0;
-double min_point_fake_err[2] = {0.0, 0.0};
+//double min_point_fake[2] = {0.0, 0.0};
+//double min_point_fake_fval = 0.0;
+//double min_point_fake_err[2] = {0.0, 0.0};
 
 // min point data with systematics, xi free
-double min_point_data_SYSALL[2] = {0.0, 0.0};
-double min_point_data_SYSALL_fval = 0.0;
-double min_point_data_SYSALL_err[2] = {0.0, 0.0};
+//double min_point_data_SYSALL[2] = {0.0, 0.0};
+//double min_point_data_SYSALL_fval = 0.0;
+//double min_point_data_SYSALL_err[2] = {0.0, 0.0};
 
 // min point fake with systematics, xi free
-double min_point_fake_SYSALL[2] = {0.0, 0.0};
-double min_point_fake_SYSALL_fval = 0.0;
-double min_point_fake_SYSALL_err[2] = {0.0, 0.0};
+//double min_point_fake_SYSALL[2] = {0.0, 0.0};
+//double min_point_fake_SYSALL_fval = 0.0;
+//double min_point_fake_SYSALL_err[2] = {0.0, 0.0};
 
 // min point data, xi=HSD, total electron energy
-double min_point_data_HSD_CH0[2] = {0.0, 0.0};
-double min_point_data_HSD_CH0_fval = 0.0;
-double min_point_data_HSD_CH0_err[2] = {0.0, 0.0};
+//double min_point_data_HSD_CH0[2] = {0.0, 0.0};
+//double min_point_data_HSD_CH0_fval = 0.0;
+//double min_point_data_HSD_CH0_err[2] = {0.0, 0.0};
 
 // min point data, xi=HSD
-double min_point_data_HSD[2] = {0.0, 0.0};
-double min_point_data_HSD_fval = 0.0;
-double min_point_data_HSD_err[2] = {0.0, 0.0};
+//double min_point_data_HSD[2] = {0.0, 0.0};
+//double min_point_data_HSD_fval = 0.0;
+//double min_point_data_HSD_err[2] = {0.0, 0.0};
 
 // min point data, xi=SSD
-double min_point_data_SSD[2] = {0.0, 0.0};
-double min_point_data_SSD_fval = 0.0;
-double min_point_data_SSD_err[2] = {0.0, 0.0};
+//double min_point_data_SSD[2] = {0.0, 0.0};
+//double min_point_data_SSD_fval = 0.0;
+//double min_point_data_SSD_err[2] = {0.0, 0.0};
 
 // +- 0.1 MeV
 // +- 1.2 % scale
@@ -489,6 +552,10 @@ double min_point_data_SSD_err[2] = {0.0, 0.0};
 // BKG: EXTERNAL
 // BKG: NEIGHBOUR
 
+MinPoint min_point_fake_sysn_h[N_SYSTEMATICS + 1];
+MinPoint min_point_fake_sysn_l[N_SYSTEMATICS + 1];
+
+/*
 double min_point_fake_sysn_h[N_SYSTEMATICS + 1][2] =
 {
     {0.0, 0.0},
@@ -628,9 +695,66 @@ double min_point_fake_sysn_l_fval[N_SYSTEMATICS + 1] =
     0.0, 0.0, 0.0, 0.0, // 24
     0.0, 0.0
 };
+*/
 
-// TODO: min point BKG
 
+void min_point_save(
+    const std::string &min_point_fname,
+    MinPoint &min_point)
+{
+    std::ofstream ofs(min_point_fname);
+    ofs << min_point.xi_31 << " " << min_point.A << std::endl;
+    ofs << min_point.fval << std::endl;
+    ofs << min_point.xi_31_err << " " << min_point.A_err << std::endl;
+    ofs << min_point.eff << " " << min_point.eff_err << std::endl;
+
+    const double N_ISOTOPE = 150.0;
+    const double N_AVOGADRO = 6.022e+23;
+    const double MASS = 36.55;
+
+    const double ACTIVITY0 = 3.45e-4;
+    const double ACTIVITY = ACTIVITY0 * min_point.A;
+    const double ACTIVITY_ERR = ACTIVITY0 * min_point.A_err;
+
+    const double YEARTOSEC = 1.0 / 31557600.0;
+    const double N_AVOGADRO_YEARTOSEC = N_AVOGADRO * YEARTOSEC;
+
+    const double T12 = std::log(2.0) * (MASS  / N_ISOTOPE) * (N_AVOGADRO_YEARTOSEC / ACTIVITY);
+    const double T12_ERR = T12 * ACTIVITY_ERR / ACTIVITY; // all positive
+
+    ofs << "T_{\\frac{1}{2}} = " << T12 << " +- " << T12_ERR << std::endl;
+    ofs << "#xi_{31} = " << min_point.xi_31 << " +- " << min_point.xi_31_err << std::endl;
+    ofs << "#chi^{2} = " << min_point.fval << std::endl;
+    ofs << "#varepsilon = " << min_point.eff << " +- " << min_point.eff_err << std::endl;
+
+    ofs.close();
+}
+
+
+
+int min_point_load(
+    const std::string &min_point_fname,
+    MinPoint &min_point)
+{
+    int ret = 0;
+    std::ifstream ifs(min_point_fname);
+    if(ifs.is_open())
+    {
+        ifs >> min_point.xi_31 >> min_point.A;
+        ifs >> min_point.fval;
+        ifs >> min_point.xi_31_err >> min_point.A_err;
+        ifs >> min_point.eff >> min_point.eff_err;
+        ifs.close();
+    }
+    else
+    {
+        ret = -1;
+    }
+    return ret;
+}
+    
+
+/*
 void min_point_save(
     const std::string &min_point_fname,
     double *const min_point,
@@ -685,7 +809,7 @@ int min_point_load(
     }
     return ret;
 }
-
+*/
 
 ///////////////////////////////////////////////////////////////////////////////
 // systematic objects - Phase 1
@@ -820,6 +944,13 @@ std::vector<double> *systematic_n_high_2D_P1[N_SYSTEMATICS][number2DHists] =
     {nullptr}
 };
 
+/* not implemented
+std::vector<double> *sys_V_MATRIX_coeff_1D_P1[number1DHists] = 
+{
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+*/
+
 std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P1[N_SYSTEMATICS][number1DHists] = 
 {
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
@@ -848,6 +979,13 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P1[N_SYSTEMATICS][number1DHi
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, // 24
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
+
+/* not implemented
+std::vector<double> *sys_V_MATRIX_coeff_2D_P1[number2DHists] =
+{
+    nullptr
+};
+*/
 
 std::vector<double> *systematic_n_V_MATRIX_coeff_2D_P1[N_SYSTEMATICS][number2DHists] =
 {
@@ -1012,6 +1150,13 @@ std::vector<double> *systematic_n_high_2D_P2[N_SYSTEMATICS][number2DHists] =
     {nullptr}
 };
 
+/* not implemented
+std::vector<double> *sys_V_MATRIX_coeff_1D_P2[number1DHists] = 
+{
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
+*/
+
 std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P2[N_SYSTEMATICS][number1DHists] = 
 {
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
@@ -1041,6 +1186,14 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_1D_P2[N_SYSTEMATICS][number1DHi
     {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
+// TODO
+/* not implemented
+std::vector<double> *sys_V_MATRIX_coeff_2D_P2[number2DHists] =
+{
+    nullptr
+};
+*/
+
 std::vector<double> *systematic_n_V_MATRIX_coeff_2D_P2[N_SYSTEMATICS][number2DHists] =
 {
     {nullptr},
@@ -1069,6 +1222,7 @@ std::vector<double> *systematic_n_V_MATRIX_coeff_2D_P2[N_SYSTEMATICS][number2DHi
     {nullptr}, // 24
     {nullptr}
 };
+
 
 
 
