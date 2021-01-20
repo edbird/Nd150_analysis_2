@@ -714,9 +714,11 @@ void draw_channel_phase_with_pull(
                 error_M_sys = std::sqrt(error_M_sys);
                 std::cout << i << " " << error_M_stat << " " << error_M_sys << std::endl;
 
-                Double_t error_M = std::sqrt(std::pow(error_M_stat, 2.0) + std::pow(error_M_sys, 2.0));
+                Double_t error_M = std::sqrt(std::pow(0.0 * error_M_stat, 2.0) + std::pow(error_M_sys, 2.0));
                 Double_t error_sq = std::pow(content_D / (content_M * content_M), 2.0) * std::pow(error_M, 2.0);
                 h_ratio_sys->SetBinError(i, std::sqrt(error_sq));
+
+                h_ratio_sys->SetBinContent(i, 1.0);
             }
 
         }
