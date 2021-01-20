@@ -183,10 +183,14 @@ min_point_helper(
         min_point.xi_31_err = param_errs_after.at(1);
         min_point.A_err = param_errs_after.at(0);
         min_point.fval = fval_after;
+        /* not implemented
         min_point.eff = params_after.at(g_pg.get_efficiency_int_param_number());
         min_point.eff_err = param_errs_after.at(g_pg.get_efficiency_int_param_number());
-        std::cout << "efficiency parameter number is " << g_pg.get_efficiency_int_param_number() << std::endl;
-        std::cout << "CHECK,STOP" << std::endl;
+        */
+        min_point.eff = 1.0;
+        min_point.eff_err = -1.0;
+        //std::cout << "efficiency parameter number is " << g_pg.get_efficiency_int_param_number() << std::endl;
+        //std::cout << "CHECK,STOP" << std::endl;
         //std::cin.get();
 
         std::cout << "min_point: " << min_point.xi_31 << " " << min_point.A << std::endl;
