@@ -158,34 +158,34 @@ class mpsdrawdata
         // read min points from file
         ///////////////////////////////////////////////////////////////////////
         
-        min_point_load("min_point_data", min_point_data, min_point_data_err, min_point_data_fval);  
-        min_point_load("min_point_fake", min_point_fake, min_point_fake_err, min_point_fake_fval);  
-        min_point_load("min_point_data_SYSALL", min_point_data_SYSALL, min_point_data_SYSALL_err, min_point_data_SYSALL_fval);  
-        min_point_load("min_point_fake_SYSALL", min_point_fake_SYSALL, min_point_fake_SYSALL_err, min_point_fake_SYSALL_fval);  
-        min_point_load("min_point_data_HSD_CH0", min_point_data_HSD_CH0, min_point_data_HSD_CH0_err, min_point_data_HSD_CH0_fval);  
-        min_point_load("min_point_data_HSD", min_point_data_HSD, min_point_data_HSD_err, min_point_data_HSD_fval);  
-        min_point_load("min_point_data_SSD", min_point_data_SSD, min_point_data_SSD_err, min_point_data_SSD_fval);  
+        min_point_load("min_point_data", min_point_data);  
+        min_point_load("min_point_fake", min_point_fake);  
+        min_point_load("min_point_data_SYSALL", min_point_data_SYSALL);  
+        min_point_load("min_point_fake_SYSALL", min_point_fake_SYSALL);  
+        min_point_load("min_point_data_HSD_CH0", min_point_data_HSD_CH0);  
+        min_point_load("min_point_data_HSD", min_point_data_HSD);  
+        min_point_load("min_point_data_SSD", min_point_data_SSD);  
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
             TString fname_l;
             fname_l.Form("min_point_fake_SYS%dL", i);
-            min_point_load(std::string(fname_l), min_point_fake_sysn_l[i], min_point_fake_sysn_l_err[i], min_point_fake_sysn_l_fval[i]);
+            min_point_load(std::string(fname_l), min_point_fake_sysn_l[i]);
             TString fname_h;
             fname_h.Form("min_point_fake_SYS%dH", i);
-            min_point_load(std::string(fname_h), min_point_fake_sysn_h[i], min_point_fake_sysn_h_err[i], min_point_fake_sysn_h_fval[i]);
+            min_point_load(std::string(fname_h), min_point_fake_sysn_h[i]);
         }
 
-        std::cout << "min_point_data=" << min_point_data[0] << " " << min_point_data[1] << std::endl;
-        std::cout << "min_point_fake=" << min_point_fake[0] << " " << min_point_fake[1] << std::endl;
-        std::cout << "min_point_SYSALL_data=" << min_point_data_SYSALL[0] << " " << min_point_data_SYSALL[1] << std::endl;
-        std::cout << "min_point_SYSALL_fake=" << min_point_fake_SYSALL[0] << " " << min_point_fake_SYSALL[1] << std::endl;
-        std::cout << "min_point_data_CH0=" << min_point_data_HSD_CH0[0] << " " << min_point_data_HSD_CH0[1] << std::endl;
-        std::cout << "min_point_data_HSD=" << min_point_data_HSD[0] << " " << min_point_data_HSD[1] << std::endl;
-        std::cout << "min_point_data_SSD=" << min_point_data_SSD[0] << " " << min_point_data_SSD[1] << std::endl;
+        std::cout << "min_point_data=" << min_point_data.xi_31 << " " << min_point_data.A << std::endl;
+        std::cout << "min_point_fake=" << min_point_fake.xi_31 << " " << min_point_fake.A << std::endl;
+        std::cout << "min_point_SYSALL_data=" << min_point_data_SYSALL.xi_31 << " " << min_point_data_SYSALL.A << std::endl;
+        std::cout << "min_point_SYSALL_fake=" << min_point_fake_SYSALL.xi_31 << " " << min_point_fake_SYSALL.A << std::endl;
+        std::cout << "min_point_data_CH0=" << min_point_data_HSD_CH0.xi_31 << " " << min_point_data_HSD_CH0.A << std::endl;
+        std::cout << "min_point_data_HSD=" << min_point_data_HSD.xi_31 << " " << min_point_data_HSD.A << std::endl;
+        std::cout << "min_point_data_SSD=" << min_point_data_SSD.xi_31 << " " << min_point_data_SSD.A << std::endl;
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
-            std::cout << "min_point_fake_SYS" << i << "L=" << min_point_fake_sysn_l[i][0] << " " << min_point_fake_sysn_l[i][1] << std::endl;
-            std::cout << "min_point_fake_SYS" << i << "H=" << min_point_fake_sysn_h[i][0] << " " << min_point_fake_sysn_h[i][1] << std::endl;
+            std::cout << "min_point_fake_SYS" << i << "L=" << min_point_fake_sysn_l[i].xi_31 << " " << min_point_fake_sysn_l[i].A << std::endl;
+            std::cout << "min_point_fake_SYS" << i << "H=" << min_point_fake_sysn_h[i].xi_31 << " " << min_point_fake_sysn_h[i].A << std::endl;
         }
 
         ///////////////////////////////////////////////////////////////////////
