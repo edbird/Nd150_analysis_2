@@ -1366,7 +1366,7 @@ std::cout << "hALLMC1D->Draw()" << std::endl;
         {
             int xi_31_ext_param_number = g_pg.get_xi_31_ext_param_number();
             /*double*/ xi_31_Px = params.at(xi_31_ext_param_number);
-            xi_31_err_Px = param_errs.at(xi_31_err_Px);
+            xi_31_err_Px = param_errs.at(xi_31_ext_param_number);
         }
         TString xilatexstr;
         {
