@@ -10,7 +10,7 @@ min_point_helper(
     const int numberFreeParams,
     const bool fix_xi_31_param,
     const double xi_31_fixed_value,
-    double *const min_point, double *const min_point_err, double &min_point_fval,
+    MinPoint & min_point,
     const std::string& min_point_fname,
     const std::string& draw_output_fname,
     const std::string& draw_output_fdir,
@@ -75,7 +75,7 @@ min_point_helper(
 
 
 
-    int ret = min_point_load(min_point_fname, min_point, min_point_err, min_point_fval);
+    int ret = min_point_load(min_point_fname, min_point);
     if(ret == 0)
     {
         // min point is loaded, do not calculate
@@ -178,16 +178,21 @@ min_point_helper(
             }
 
         // save min point to memory
-        min_point[0] = params_after.at(1);
-        min_point[1] = params_after.at(0);
-        min_point_err[0] = param_errs_after.at(1);
-        min_point_err[1] = param_errs_after.at(0);
-        min_point_fval = fval_after;
+        min_point.xi_31 = params_after.at(1);
+        min_point.A = params_after.at(0);
+        min_point.xi_31_err = param_errs_after.at(1);
+        min_point.A_err = param_errs_after.at(0);
+        min_point.fval = fval_after;
+        min_point.eff = params_after.at(g_pg.get_efficiency_int_param_number());
+        min_point.eff_err = param_errs_after.at(g_pg.get_efficiency_int_param_number());
+        std::cout << "efficiency parameter number is " << g_pg.get_efficiency_int_param_number() << std::endl;
+        std::cout << "CHECK,STOP" << std::endl;
+        //std::cin.get();
 
-        std::cout << "min_point: " << min_point[0] << " " << min_point[1] << std::endl;
+        std::cout << "min_point: " << min_point.xi_31 << " " << min_point.A << std::endl;
 
         // save min point memory to file
-        min_point_save(min_point_fname, min_point, min_point_err, min_point_fval);
+        min_point_save(min_point_fname, min_point);
 
         std::cout << "??? Fit: NEMO3 ??? (CH?)" << " min_point_fname=" << min_point_fname << std::endl;
         gSystematics_print();
@@ -201,6 +206,81 @@ min_point_helper(
                   << " +- " << param_errs_after[1]
                   << std::endl;
         std::cout << std::endl;
+
+        std::cout << "---- NUMBER OF DECAYS ----" << std::endl;
+        std::string mc_name = "nd150_rot_2n2b_m4";
+        std::string histname = std::string(channel_histname_1D[1]);
+        std::string search_object_P1 = histname + mc_name + "_P1_fit";
+        std::string search_object_P2 = histname + mc_name + "_P2_fit";
+        TH1D *tmpHist1D_P1 = nullptr;
+        TH1D *tmpHist1D_P2 = nullptr;
+
+        std::cout << "search_object_P1=" << search_object_P1
+                  << " search_object_P2=" << search_object_P2 << std::endl;
+
+        double number_of_decays = 0.0;
+        double number_of_decays_err = 0.0;
+
+        int param_number_P1 = -2;
+        int param_number_P2 = -2;
+        double scale_factor_P1 = 0.0;
+        double scale_factor_P2 = 0.0;
+        double scale_factor_P1_err = 0.0;
+        double scale_factor_P2_err = 0.0;
+        bool success = g_pg.convert_MC_name_to_param_number(mc_name, param_number_P1, param_number_P2);
+        if(success == true)
+        {
+            if(param_number_P1 != -1)
+            {
+                scale_factor_P1 = params_after.at(g_pg.ExtToIntParamNumberMap.at(param_number_P1));
+                scale_factor_P1_err = param_errs_after.at(g_pg.ExtToIntParamNumberMap.at(param_number_P1));
+
+                tmpHist1D_P1 = (TH1D*)allMCSamples1D[1]->FindObject(search_object_P1.c_str());
+                if(tmpHist1D_P1 == nullptr)
+                {
+                    std::cout << "ERROR: Could not find object " << search_object_P1 << std::endl;
+                    throw "problem";
+                }
+                number_of_decays += scale_factor_P1 * tmpHist1D_P1->Integral();
+                std::cout << "scale_factor_P1=" << scale_factor_P1 << std::endl;
+                std::cout << "Integral P1: " << tmpHist1D_P1->Integral() << std::endl;
+                std::cout << "P1 number of decays: " << scale_factor_P1 * tmpHist1D_P1->Integral() << std::endl;
+                double error = scale_factor_P1_err * tmpHist1D_P1->Integral();
+                number_of_decays_err = std::sqrt(std::pow(number_of_decays_err, 2.0) + std::pow(error, 2.0));
+            }
+            else
+            { 
+                std::cout << "WARNING: param_number_P1=" << param_number_P1 << std::endl;
+                std::cout << "mc_name=" << mc_name << std::endl;
+            }
+
+            if(param_number_P2 != -1)
+            {
+                scale_factor_P2 = params_after.at(g_pg.ExtToIntParamNumberMap.at(param_number_P2));
+                scale_factor_P2_err = param_errs_after.at(g_pg.ExtToIntParamNumberMap.at(param_number_P2));
+
+                tmpHist1D_P2 = (TH1D*)allMCSamples1D[1]->FindObject(search_object_P2.c_str());
+                if(tmpHist1D_P2 == nullptr)
+                {
+                    std::cout << "ERROR: Could not find object " << search_object_P2 << std::endl;
+                    throw "problem";
+                }
+                number_of_decays += scale_factor_P2 * tmpHist1D_P2->Integral();
+                std::cout << "scale_factor_P2=" << scale_factor_P2 << std::endl;
+                std::cout << "Integral P2: " << tmpHist1D_P2->Integral() << std::endl;
+                std::cout << "P2 number of decays: " << scale_factor_P2 * tmpHist1D_P2->Integral() << std::endl;
+                double error = scale_factor_P2_err * tmpHist1D_P2->Integral();
+                number_of_decays_err = std::sqrt(std::pow(number_of_decays_err, 2.0) + std::pow(error, 2.0));
+            }
+            else
+            { 
+                std::cout << "WARNING: param_number_P2=" << param_number_P2 << std::endl;
+                std::cout << "mc_name=" << mc_name << std::endl;
+            }
+        }
+
+        std::cout << "number_of_decays=" << number_of_decays << " +- " << number_of_decays_err << std::endl;
+
 
         int gNumberFreeParams = restore_gNumberFreeParams;
     }
