@@ -824,7 +824,7 @@ class mpsdrawdata
             33, // diamond          // FT (N)
             23, // triangle down    // dEdX (N)
             34, // plus             // brem (N)
-            22, // triangle up      // scale factor 0.2 %
+            29, // star             // scale factor 0.2 %
             22, // triangle up      // 1.0 % gaussian smear
             20, // "+"              // BKG: 214 int
             20, // "+"              // BKG: 207 int
@@ -883,7 +883,7 @@ class mpsdrawdata
             kAzure + 1,     // diamond          // FT N
             kViolet + 10,   // triangle down    // dEdX N
             kAzure + 1,     // plus             // brem N
-            kRed,           //                  // 0.2 %
+            kGreen + 1,     //                  // 0.2 %
             kRed,           //                  // gaussian
             kBlue,          //                  // BKG 214 int
             kBlue + 2,      //                  // BKG 207 int
