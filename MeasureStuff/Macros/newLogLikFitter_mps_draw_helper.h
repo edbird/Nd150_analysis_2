@@ -876,7 +876,7 @@ void newloglikfitter_mps_draw_helper
             "Brem (N)"
         };*/
         double lsizex = 0.28;
-        double lsizey = 0.25;
+        double lsizey = 0.29;
         double lposx = 0.70;
         double lposy = 0.18;
         TLegend *leg = new TLegend(lposx, lposy, lposx + lsizex, lposy + lsizey);
