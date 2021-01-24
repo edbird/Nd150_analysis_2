@@ -873,13 +873,22 @@ void newloglikfitter_mps_draw_helper
             "Energy Loss dE/dX (N)",
             "Brem (N)"
         };*/
-        double lsizex = 0.26;
+        double lsizex = 0.28;
         double lsizey = 0.25;
         double lposx = 0.72;
         double lposy = 0.18;
         TLegend *leg = new TLegend(lposx, lposy, lposx + lsizex, lposy + lsizey);
+        /*int i = 11;
+        if(ENABLE_MIN_POINT_SYSn[i] == true)
+        {
+            TString text;
+            text.Form("%i", i);
+            leg->AddEntry(mps_draw_data_sysall.mark_min_point_sysn_h[i],
+                          legend_texts[i], "P");
+        }*/
         for(int i = 0; i < N_SYSTEMATICS + 1; ++ i)
         {
+            if(i == 11) continue;
             if(ENABLE_MIN_POINT_SYSn[i] == true)
             {
                 TString text;
