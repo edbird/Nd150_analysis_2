@@ -213,6 +213,7 @@ class parameter_group
         //minuitParamNumberCounter = 0;
 
         xi_31_int_ext_param_number_set = false;
+        efficiency_int_ext_param_number_set = false;
     }
 
 
@@ -233,6 +234,10 @@ class parameter_group
     }
     */
 
+
+    ///////////////////////////////////////////////////////////////////////////
+    // xi_31 internal and external parameter number
+    ///////////////////////////////////////////////////////////////////////////
 
     int get_xi_31_int_param_number()
     {
@@ -307,6 +312,82 @@ class parameter_group
     }
 
 
+    ///////////////////////////////////////////////////////////////////////////
+    // efficiency internal and external parameter number
+    ///////////////////////////////////////////////////////////////////////////
+
+    int get_efficiency_int_param_number()
+    {
+        if(efficiency_int_ext_param_number_set == true)
+        {
+            return efficiency_int_param_number;
+        }
+        else
+        {
+            std::string param_name = "eff";
+
+            efficiency_ext_param_number = ParamNameToExtParamNumberMap.at(param_name);
+            std::map<std::string, int>::iterator it = ParamNameToExtParamNumberMap.find(param_name);
+            if(it != ParamNameToExtParamNumberMap.end())
+            {
+                std::map<int, int>::iterator it = ExtToIntParamNumberMap.find(efficiency_ext_param_number);
+                if(it != ExtToIntParamNumberMap.end())
+                {
+                    efficiency_int_param_number = ExtToIntParamNumberMap.at(efficiency_ext_param_number);
+                }
+                else
+                {
+                    efficiency_int_param_number = -1;
+                }
+                //xi_31_int_param_number = ExtToIntParamNumberMap.at(xi_31_ext_param_number);
+            }
+            else
+            {
+                efficiency_int_param_number = -1;
+            }
+            //xi_31_int_param_number = ExtToIntParamNumberMap.at(xi_31_ext_param_number);
+            efficiency_int_ext_param_number_set = true;
+
+            return efficiency_int_param_number;
+        }
+    }
+
+
+    int get_efficiency_ext_param_number()
+    {
+        if(efficiency_int_ext_param_number_set == true)
+        {
+            return efficiency_ext_param_number;
+        }
+        else
+        {
+            std::string param_name = "efficiency";
+
+            efficiency_ext_param_number = ParamNameToExtParamNumberMap.at(param_name);
+
+            std::map<std::string, int>::iterator it = ParamNameToExtParamNumberMap.find(param_name);
+            if(it != ParamNameToExtParamNumberMap.end())
+            {
+                std::map<int, int>::iterator it = ExtToIntParamNumberMap.find(efficiency_ext_param_number);
+                if(it != ExtToIntParamNumberMap.end())
+                {
+                    efficiency_int_param_number = ExtToIntParamNumberMap.at(efficiency_ext_param_number);
+                }
+                else
+                {
+                    efficiency_int_param_number = -1;
+                }
+            }
+            else
+            {
+                efficiency_int_param_number = -1;
+            }
+            efficiency_int_ext_param_number_set = true;
+
+            return efficiency_ext_param_number;
+        }
+    }
+
     void reset()
     {
         file_params.clear();
@@ -316,6 +397,14 @@ class parameter_group
         IntToExtParamNumberMap.clear();
         numberEnabledParams = 0;
         //minuitParamNumberCounter = 0;
+
+        xi_31_int_param_number = -1;
+        xi_31_ext_param_number = -1;
+        xi_31_int_ext_param_number_set = false;
+
+        efficiency_int_param_number = -1;
+        efficiency_ext_param_number = -1;
+        efficiency_int_ext_param_number_set = false;
     }
 
 
@@ -332,6 +421,11 @@ class parameter_group
         std::cout << "axial_vector_parameter_0_param_number=" << axial_vector_parameter_0_param_number << std::endl;
         //file_params.at(axial_vector_parameter_0_param_number).paramInitValue = 0.0; // HSD, forces reweighting
         file_params.at(axial_vector_parameter_0_param_number).paramLastValue = -std::numeric_limits<double>::infinity(); // HSD, forces reweighting to initial value set in parameter_names.lst
+
+        // TODO
+        //int efficiency_param_number = get_efficiency_ext_param_number();
+        //std::cout << "efficiency_param_number=" << efficiency_param_number << std::endl;
+        //file_params.at(efficiency_param_number).paramLastValue = -std::numeric_limits<double>::infinity();
     }
 
 
@@ -390,13 +484,6 @@ class parameter_group
                     // move that external function to be an internal function of this
                     // class
 
-                    // TODO: introduce a paramName variable to the parameter_names.lst file
-                    // at the moment this is set automatically using a concatinated list of
-                    // the MC values, which does not make sense in the case of xi_31
-                    // parameter
-                    // this is a hack: using the fact that xi_31 has no associated MC
-                    // to set the paramName to "NOMC"
-                    // which is a bit dodgy
                     if(it->second.paramName == "xi_31")
                     {
                         if(xi_31_int_ext_param_number_set == false)
@@ -408,6 +495,20 @@ class parameter_group
                         else
                         {
                             std::cout << "ERROR: xi_31_int_ext_param_number is already set" << std::endl;
+                        }
+                    }
+
+                    if(it->second.paramName == "eff")
+                    {
+                        if(efficiency_int_ext_param_number_set == false)
+                        {
+                            efficiency_int_param_number = minuit_param_number_counter;
+                            efficiency_ext_param_number = paramNumber;
+                            efficiency_int_ext_param_number_set = true;
+                        }
+                        else
+                        {
+                            std::cout << "ERROR: efficiency_int_ext_param_number is already set" << std::endl;
                         }
                     }
 
@@ -623,6 +724,17 @@ class parameter_group
         {
             std::cout << "no" << std::endl;
         }
+        std::cout << "Is the efficiency parameter number set?" << std::endl;
+        if(efficiency_int_ext_param_number_set == true)
+        {
+            std::cout << "yes" << std::endl;
+            std::cout << "efficiency_int_param_number=" << efficiency_int_param_number << std::endl;
+            std::cout << "efficiency_ext_param_number=" << efficiency_ext_param_number << std::endl;
+        }
+        else
+        {
+            std::cout << "no" << std::endl;
+        }
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
     }
 
@@ -662,6 +774,10 @@ class parameter_group
     int xi_31_int_param_number;
     int xi_31_ext_param_number;
     bool xi_31_int_ext_param_number_set;
+
+    int efficiency_int_param_number;
+    int efficiency_ext_param_number;
+    bool efficiency_int_ext_param_number_set;
 };
 
 #endif // PARAMETERGROUP_H

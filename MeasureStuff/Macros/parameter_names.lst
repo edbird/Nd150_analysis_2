@@ -179,6 +179,8 @@ BREAK
 43  enabled     P1_enabled  P2_disabled 573.0	    36.0        9.0         useinit     useinit     hard    RN222       bi214_pb214_air_P1          bi214_air   pb214_air                           END     # 4 events
 44  enabled     P1_enabled  P2_disabled 7.0  	    4.0         2.2         useinit     useinit     hard    RN220       tl208_air_P1                tl208_air   	                                END     # 0 events
 BREAK
+45  enabled     P1_enabled  P2_enabled  1.0         0.1         0.0         1.0         5.55e-2     soft    NA          eff                         NOMC                                            END
+BREAK
 BREAK
 BREAK
 # I could have added these values as a new column in the above, but I chose not to
@@ -244,6 +246,8 @@ NAME    42      ^{214}Bi ^{214}Bi SWire L>0 P2
 # Air (Radon)
 NAME    43      ^{214}Bi ^{214}Pb Air
 NAME    44      ^{208}Tl Air
+#
+NAME    45      Efficiency
 #
 BREAK
 #

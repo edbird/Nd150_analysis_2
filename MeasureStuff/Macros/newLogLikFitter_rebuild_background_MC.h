@@ -601,8 +601,8 @@ void reload_background_MC_helper(TString sample_name, TString sample_dir)
 
     double scale_factor_P1 = 0.0;
     double scale_factor_P2 = 0.0;
-    int param_number_P1 = 0;
-    int param_number_P2 = 0;
+    int param_number_P1 = -2;
+    int param_number_P2 = -2;
 
     std::string mc_name = std::string(sample_name);
 
