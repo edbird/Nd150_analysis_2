@@ -1,0 +1,7 @@
+*.png
+*.eps
+*.pdf
+*.swp
+of_cutcount*
+min_point_data*
+min_point_fake*
