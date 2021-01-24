@@ -369,6 +369,7 @@ void newloglikfitter_mps_draw_helper_colz
 
                     if(i == 6) mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kCyan);
                     else if(i == 10) mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kMagenta);
+                    else if(i == 11) mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kGreen);
                     else if(i == 24) mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kYellow);
                     else if(i == 25) mps_draw_data_sysall.mark_min_point_sysn_l[i]->SetMarkerColor(kGreen);
 
@@ -394,6 +395,7 @@ void newloglikfitter_mps_draw_helper_colz
 
                     if(i == 6) mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kCyan);
                     else if(i == 10) mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kMagenta);
+                    else if(i == 11) mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kGreen);
                     else if(i == 24) mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kYellow);
                     else if(i == 25) mps_draw_data_sysall.mark_min_point_sysn_h[i]->SetMarkerColor(kGreen);
 
